@@ -1,0 +1,13 @@
+
+
+.container {
+    width: 100%;
+    text-align: center;
+    /* border: 3px solid green; */
+    position: relative;
+}
+
+.center {
+    /* border: 3px solid red; */
+    width: 100%;
+}
