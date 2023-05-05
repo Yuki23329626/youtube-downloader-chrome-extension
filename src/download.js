@@ -16,6 +16,7 @@ function start_download() {
         saveAs: false
       });
 
+    // Cannot download files via fetch as a chrome extension through fetch()
     // fetch('http://localhost:5000/api/file?url=' + current_url, {cache:"no-store"})
     //     .then(function (response) {
     //         console.log(response)
