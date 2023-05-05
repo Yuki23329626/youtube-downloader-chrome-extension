@@ -5,7 +5,7 @@ import os
 
 filename = ''
 SAVE_PATH = os.getcwd() + '/cache'
-print(SAVE_PATH)
+# print(SAVE_PATH)
 
 def my_hook(d):
     if d['status'] == 'finished':

@@ -1,4 +1,6 @@
 current_url = ''
+host = 'https://michaelshen.csie.io'
+
 chrome.tabs.query({ active: true, lastFocusedWindow: true }, tabs => {
     current_url = tabs[0].url;
     // console.log(current_url)
@@ -12,7 +14,7 @@ function start_download() {
     document.getElementById("p1").innerHTML = current_url;
 
     chrome.downloads.download({
-        url: 'http://localhost:5000/api/file?url=' + current_url,
+        url: host +':5000/api/file?url=' + current_url,
         saveAs: false
       });
 
