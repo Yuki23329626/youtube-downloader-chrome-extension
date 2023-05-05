@@ -4,6 +4,8 @@ import logging
 import os
 
 filename = ''
+SAVE_PATH = os.getcwd() + '/cache'
+print(SAVE_PATH)
 
 def my_hook(d):
     if d['status'] == 'finished':
@@ -13,13 +15,15 @@ def my_hook(d):
 ydl_opts = {
     'skip_download': False,
     'writesubtitles': True,
-    'progress_hooks': [my_hook]
+    'progress_hooks': [my_hook],
+    'outtmpl': SAVE_PATH + '/%(title)s.%(ext)s'
 }
 
 app = Flask(__name__)
 
 @app.route('/api/file')
 def get_file():
+
     try:
         link = request.args.get('url')
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
@@ -36,4 +40,4 @@ def get_file():
 #     return response
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True,host="0.0.0.0")
