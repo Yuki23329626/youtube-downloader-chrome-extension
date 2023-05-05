@@ -5,7 +5,7 @@ then
   exit 0
 fi
 
-gunicorn \
+gunicorn -D\
 	--workers=4 \
 	--threads=4 \
 	wsgi:app \
