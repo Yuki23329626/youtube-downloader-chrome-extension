@@ -1,0 +1,4 @@
+WARNING  23yyy-05-09 13:42:06  * Debugger is active!
+INFO     23yyy-05-09 13:42:06  * Debugger PIN: 875-386-222
+INFO     23yyy-05-09 13:42:13 127.0.0.1 - - [09/May/2023 13:42:13] "[36mGET /api/file?url=https://www.youtube.com/watch?v=NL4M3rqwmrk HTTP/1.1[0m" 304 -
+INFO     23yyy-05-09 13:42:32 127.0.0.1 - - [09/May/2023 13:42:32] "[36mGET /api/file?url=https://www.youtube.com/watch?v=NL4M3rqwmrk HTTP/1.1[0m" 304 -
