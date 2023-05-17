@@ -27,7 +27,7 @@ if ($headers && strpos($headers[0], '200') !== false) {
     header($headers[4]); // Set the appropriate content type for your video file
     
     // Print the content
-    echo $content;
+    // echo $content;
 } else {
     echo 'Error: Failed to retrieve file.';
 }
