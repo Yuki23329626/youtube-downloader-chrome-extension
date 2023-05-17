@@ -13,21 +13,32 @@ $url = 'http://localhost:5000/api/file?url=https://www.youtube.com/watch?v=yLp9x
 // // Output the file contents
 // echo $fileContents;
 
-// Make an HTTP request to get the response headers
-$headers = get_headers($url, 1);
+// Create a stream context to include headers in the request
+$options = array(
+    'http' => array(
+        'header' => 'Content-Type: application/x-www-form-urlencoded\r\n' .
+                    'Custom-Header: value\r\n'
+    )
+);
 
-if ($headers !== false && isset($headers['Content-Disposition'])) {
-    $contentDisposition = $headers['Content-Disposition'];
+$context = stream_context_create($options);
 
-    // Extract the filename from the Content-Disposition header
-    if (preg_match('/attachment_filename=(.*)/', $contentDisposition, $matches)) {
-        $filename = trim($matches[1]);
-        echo 'File name: ' . $filename;
-    } else {
-        echo 'Unable to extract the file name';
-    }
+// Retrieve the file contents along with the headers
+$response = file_get_contents($url, false, $context);
+
+if ($response !== false) {
+    // Split the response into headers and content
+    list($headers, $content) = explode("\r\n\r\n", $response, 2);
+
+    // Output the headers
+    echo "Headers:\n";
+    echo $headers;
+
+    // Output the content
+    echo "Content:\n";
+    echo $content;
 } else {
-    echo 'Failed to retrieve response headers';
+    echo 'Failed to retrieve the file';
 }
 
 
