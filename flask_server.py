@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, send_file, request, after_this_request
+from flask import Flask, jsonify, send_file, request, after_this_request, make_response
 import yt_dlp
 import logging
 import glob, os
@@ -73,7 +73,13 @@ def get_file():
             t = Thread(target=remove_file, args=(list_files[0],))
             t.start()
             return response
-        return send_file(list_files[0], as_attachment=True)
+        
+        # Create a response object
+        response = make_response(send_file(list_files[0], as_attachment=True))
+        # Add custom attributes to the response headers
+        response.headers['Content-Disposition'] = f'attachment; filename="{list_files[0]}"'
+
+        return response
     
     except Exception as e:
         logging.error(e)
