@@ -1,5 +1,4 @@
 
-
 .container {
     width: 100%;
     text-align: center;
@@ -10,4 +9,17 @@
 .center {
     /* border: 3px solid red; */
     width: 100%;
+    text-align: center;
+    /* border: 3px solid green; */
+    position: relative;
+    display: flex;
+    height: 200px;
+    justify-content: center;
+    align-items: center;
+}
+
+hr{
+    /* border: dashed; */
+    border-top: 2px solid #dc5d5d;
+    /* margin: 20px 0; */
 }
