@@ -21,10 +21,10 @@ if ($headers && strpos($headers[0], '200') !== false) {
 
     echo $headers[3];
     
-    // Print the headers
-    // foreach ($headers as $name => $value) {
-    //     echo $name . ': ' . $value . "<BR>";
-    // }
+    Print the headers
+    foreach ($headers as $name => $value) {
+        echo $name . ': ' . $value . "<BR>";
+    }
     
     // Print the content
     echo $fileContents;
