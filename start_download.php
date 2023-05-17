@@ -23,11 +23,10 @@ if ($headers && strpos($headers[0], '200') !== false) {
     foreach ($headers as $name => $value) {
         echo $name . ': ' . $value . "<BR>";
     }
-    header($headers[3]); // Set the desired file name for the downloaded video
-    header($headers[4]); // Set the appropriate content type for your video file
+    header($headers); // Set the desired file name for the downloaded video
     
     // Print the content
-    // echo $content;
+    echo $content;
 } else {
     echo 'Error: Failed to retrieve file.';
 }
