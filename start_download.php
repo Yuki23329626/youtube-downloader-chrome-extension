@@ -20,7 +20,7 @@ if ($headers !== false && isset($headers['Content-Disposition'])) {
     $contentDisposition = $headers['Content-Disposition'];
 
     // Extract the filename from the Content-Disposition header
-    if (preg_match('/filename=(.*)/', $contentDisposition, $matches)) {
+    if (preg_match('/attachment_filename=(.*)/', $contentDisposition, $matches)) {
         $filename = trim($matches[1]);
         echo 'File name: ' . $filename;
     } else {
