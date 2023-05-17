@@ -6,8 +6,6 @@ $url = 'http://localhost:5000/api/file?url=https://www.youtube.com/watch?v=yLp9x
 $fileContents = file_get_contents($url);
 
 $filename = $_SERVER['HTTP_CONTENT_DISPOSITION'];
-$filename = substr($filename, strpos($filename, 'filename=') + 9);
-$filename = trim($filename, '"');
 
 echo $filename
 
