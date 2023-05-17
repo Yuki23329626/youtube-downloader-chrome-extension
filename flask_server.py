@@ -77,7 +77,7 @@ def get_file():
         # Create a response object
         response = make_response(send_file(list_files[0], as_attachment=True))
         # Add custom attributes to the response headers
-        response.headers['Content-Disposition'] = f'attachment; filename="{list_files[0].split("/")[1:]}"'
+        response.headers['Content-Disposition'] = f'attachment; filename="{list_files[0].split("/")[1]}"'
 
         return response
     
