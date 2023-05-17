@@ -72,7 +72,7 @@ def get_file():
             t = Thread(target=remove_file, args=(list_files[0],))
             t.start()
             return response
-        return send_file(list_files[0], as_attachment=True, attachment_filename=list_files[0])
+        return send_file(list_files[0], as_attachment=True)
     
     except Exception as e:
         logging.error(e)
