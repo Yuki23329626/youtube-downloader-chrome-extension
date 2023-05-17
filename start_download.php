@@ -17,7 +17,7 @@ $headers = get_headers($url, 1);
 
 // Check if the request was successful (HTTP 200 OK)
 if ($headers && strpos($headers[0], '200') !== false) {
-    $content = file_get_contents($url);
+    // $content = file_get_contents($url); 
     
     // Print the headers
     foreach ($headers as $name => $value) {
