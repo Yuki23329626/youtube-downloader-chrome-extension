@@ -7,7 +7,7 @@ $format = $_GET['format'];
 
 $fianl_request = $host . '&url=' . $url . '&format=' . $format;
 
-echo 'test:' . $fianl_request
+echo 'test:' . $fianl_request;
 
 // Get the file contents
 $fileContents = file_get_contents($fianl_request);
