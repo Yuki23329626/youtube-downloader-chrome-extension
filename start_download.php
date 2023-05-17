@@ -19,7 +19,7 @@ $headers = get_headers($url, 1);
 if ($headers && strpos($headers[0], '200') !== false) {
     // $content = file_get_contents($url); 
 
-    echo $headers[3];
+    echo $headers[0]['Content-Type'];
     
     // Print the headers
     // foreach ($headers as $name => $value) {
