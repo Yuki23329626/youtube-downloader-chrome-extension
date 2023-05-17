@@ -30,7 +30,7 @@ if ($headers && strpos($headers[0], '200') !== false) {
     header($headers[4]); // Set the appropriate content type for your video file
     header($headers[5]);
 
-    Get the file contents
+    // Get the file contents
     $fileContents = file_get_contents($url);
 
     echo $fileContents;
