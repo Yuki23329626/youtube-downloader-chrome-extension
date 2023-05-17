@@ -27,7 +27,7 @@ if ($headers && strpos($headers[0], '200') !== false) {
     }
     
     // Print the content
-    echo $fileContents;
+    // echo $fileContents;
 } else {
     echo 'Error: Failed to retrieve file.';
 }
