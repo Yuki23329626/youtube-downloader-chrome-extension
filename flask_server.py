@@ -11,15 +11,17 @@ SAVE_PATH = 'cache/'
 
 logging.basicConfig(level=logging.ERROR,
                     format='%(levelname)-8s %(asctime)s %(message)s',
-                    datefmt='%yyyy-%m-%d %H:%M:%S',
+                    datefmt='%Y-%m-%d %H:%M:%S',
                     handlers = [logging.FileHandler(SAVE_PATH + 'ytdlp_lite.log', 'w', 'utf-8'),])
 
+# get the final filename after downloading the file
 def my_hook(d):
     if d['status'] == 'finished':
         global filename
         # filename = d['info_dict']['title']
         filename = d['filename'].split('.')[0]
 
+# options for the yt-dlp(github project)
 ydl_opts = {
     # 'format': 'bestaudio/best',
     # 'postprocessors': [{
@@ -35,28 +37,46 @@ ydl_opts = {
 
 app = Flask(__name__)
 
+# Remove downloaded file after serve the target file to the client
 def remove_file(file):
-    time.sleep(2)
-    try:
-        os.remove(file)
-    except Exception as e:
-        print(e)
+    while True:
+        time.sleep(2)
+        try:
+            os.remove(file)
+            break
+        except Exception as e:
+            print(e)
 
 @app.route('/api/file')
 def get_file():
     try:
+        # pop the parameters from the url
         parameters = request.args.to_dict()
         link = parameters.pop('url')
+        print('link',link)
+        file_format = parameters.pop('format')
+
+        # choose the file format you want
+        match file_format:
+            case 'mp4-1920*1080':
+                ydl_opts['format'] = 'bestvideo[height<=1080][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best'
+            case 'bestaudio':
+                ydl_opts['format'] = 'bestaudio/best'
+            case _:
+                pass
+
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             ydl.download(link)
         list_files = glob.glob(filename + '*')
         # print('filename: ', filename)
+
         @after_this_request
         def after_request(response):
             t = Thread(target=remove_file, args=(list_files[0],))
             t.start()
             return response
-        return send_file(list_files[0], as_attachment=True)
+        return send_file(list_files[0], as_attachment=True, attachment_filename=list_files[0])
+    
     except Exception as e:
         logging.error(e)
         template = "An exception of type {0} occurred."
