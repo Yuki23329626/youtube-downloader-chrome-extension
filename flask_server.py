@@ -56,14 +56,11 @@ def get_file():
         print('link',link)
         file_format = parameters.pop('format')
 
-        # choose the file format you want
-        match file_format:
-            case 'mp4-1920*1080':
-                ydl_opts['format'] = 'bestvideo[height<=1080][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best'
-            case 'bestaudio':
-                ydl_opts['format'] = 'bestaudio/best'
-            case _:
-                pass
+        # choose the file format you want, some version of python3 cannot use match function
+        if file_format == 'mp4-1920*1080':
+            ydl_opts['format'] = 'bestvideo[height<=1080][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best'
+        elif file_format == 'bestaudio':
+            ydl_opts['format'] = 'bestaudio/best'
 
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             ydl.download(link)
