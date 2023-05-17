@@ -5,7 +5,7 @@ $host = 'http://localhost:5000/api/file'; // The URL to send the GET request to
 $url = $_GET['url'];
 $format = $_GET['format'];
 
-$fianl_request = $host . '&url=' . $url . '&format=' . $format;
+$fianl_request = $host . '?url=' . $url . '&format=' . $format;
 
 echo 'test:' . $fianl_request;
 
