@@ -19,12 +19,12 @@ $headers = get_headers($url, 1);
 if ($headers && strpos($headers[0], '200') !== false) {
     // $content = file_get_contents($url); 
 
-    error_log($headers)
+    echo $headers
     
     // Print the headers
-    foreach ($headers as $name => $value) {
-        echo $name . ': ' . $value . "<BR>";
-    }
+    // foreach ($headers as $name => $value) {
+    //     echo $name . ': ' . $value . "<BR>";
+    // }
     
     // Print the content
     echo $fileContents;
