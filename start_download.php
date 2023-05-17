@@ -21,7 +21,7 @@ if ($headers && strpos($headers[0], '200') !== false) {
     
     // Print the headers
     foreach ($headers as $name => $value) {
-        echo $name . ': ' . $value . "\n";
+        echo $name . ': ' . $value . "<BR>";
     }
     
     // Print the content
