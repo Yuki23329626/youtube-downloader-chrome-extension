@@ -79,6 +79,7 @@ def get_file():
         response = make_response(send_file(list_files[0], as_attachment=True))
         # Add custom attributes to the response headers
         response.headers['Content-Disposition'] = f'attachment; filename="{list_files[0]}"'
+        # response.headers['Content-Type'] = f'attachment; filename="{list_files[0]}"'
 
         return response
     
