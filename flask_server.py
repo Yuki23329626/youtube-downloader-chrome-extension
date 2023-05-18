@@ -98,17 +98,20 @@ def get_file():
             t.start()
             return response
 
-        # Create a response object
-        response = make_response(send_file(list_files[0], as_attachment=True))
-        
-        # Add custom attributes to the response headers
+        # send file with attachment_filename
         filename_ = re.split(r"[/\\]",list_files[0])[-1]
-        response.headers['Content-Disposition'] = f'attachment; filename="{filename_}"'
-
-        if file_format == 'bestaudio':
-            response.headers['Content-Type'] = f'audio/mpeg'
+        send_file(list_files[0], as_attachment=True, attachment_filename=filename_)
             
+        # # Create a response object
+        # response = make_response(send_file(list_files[0], as_attachment=True))
+        
+        # # Add custom attributes to the response headers
+        # filename_ = re.split(r"[/\\]",list_files[0])[-1]
+        # response.headers['Content-Disposition'] = f'attachment; filename="{filename_}"'
 
+        # if file_format == 'bestaudio':
+        #     response.headers['Content-Type'] = f'audio/mpeg'
+            
         return response
         
 
