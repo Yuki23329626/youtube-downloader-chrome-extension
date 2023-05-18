@@ -6,7 +6,6 @@ import os
 import time
 from threading import Thread
 import re
-import fcntl
 
 filename = ''
 SAVE_PATH = 'cache/'
@@ -97,28 +96,6 @@ def get_file():
             t = Thread(target=remove_file, args=(list_files[0],))
             t.start()
             return response
-        
-        
-        # Acquire a file lock
-        with open(list_files[0], 'rb') as file:
-            fcntl.flock(file.fileno(), fcntl.LOCK_EX)
-
-            # Perform additional processing, if needed
-
-            # Create a response object
-            response = make_response(send_file(list_files[0], as_attachment=True))
-            
-            # Add custom attributes to the response headers
-            filename_ = re.split(r"[/\\]",list_files[0])[-1]
-            response.headers['Content-Disposition'] = f'attachment; filename="{filename_}"'
-
-            if file_format == 'bestaudio':
-                response.headers['Content-Type'] = f'audio/mpeg'
-
-            # Release the file lock
-            fcntl.flock(file.fileno(), fcntl.LOCK_UN)
-
-        return response
 
         # Create a response object
         response = make_response(send_file(list_files[0], as_attachment=True))
