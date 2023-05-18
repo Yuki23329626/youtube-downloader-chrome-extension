@@ -87,8 +87,8 @@ def get_file():
         # Add custom attributes to the response headers
         response.headers['Content-Disposition'] = f'attachment; filename="{list_files[0]}"'
 
-        # if file_format == 'bestaudio':
-        #     response.headers['Content-Type'] = f'audio/wav'
+        if file_format == 'bestaudio':
+            response.headers['Content-Type'] = f'audio/m4a'
 
         return response
 
