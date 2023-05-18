@@ -69,7 +69,7 @@ def get_file():
             print('file_format', file_format)
             ydl_opts['format'] = 'bestvideo[height<=1080][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best'
         elif file_format == 'bestaudio':
-            ydl_opts['format'] = 'bestaudio/best'
+            ydl_opts['format'] = 'bestaudioo[ext=mp3]'
             # ydl_opts['postprocessors'] = [{
             #     'key': 'FFmpegExtractAudio',
             #     'preferredcodec': 'wav',
@@ -92,8 +92,8 @@ def get_file():
         # Add custom attributes to the response headers
         response.headers['Content-Disposition'] = f'attachment; filename="{list_files[0]}"'
 
-        # if file_format == 'bestaudio':
-        #     response.headers['Content-Type'] = f'audio/webm'
+        if file_format == 'bestaudio':
+            response.headers['Content-Type'] = f'audio/mpeg'
 
         return response
 
