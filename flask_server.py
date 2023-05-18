@@ -66,6 +66,12 @@ def remove_file(file):
 
 @app.route('/api/file')
 def get_file():
+    @after_this_request
+    def after_request(response):
+        time.sleep(2)
+        t = Thread(target=remove_file, args=(list_files[0],))
+        t.start()
+        return response
     try:
         # pop the parameters from the url
         parameters = request.args.to_dict()
@@ -100,12 +106,6 @@ def get_file():
         if file_format == 'bestaudio':
             response.headers['Content-Type'] = f'audio/mpeg'
             
-        @after_this_request
-        def after_request(response):
-            time.sleep(2)
-            t = Thread(target=remove_file, args=(list_files[0],))
-            t.start()
-            return response
 
         return response
         
