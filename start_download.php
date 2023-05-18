@@ -37,7 +37,7 @@ if ($headers && strpos($headers[0], '200') !== false) {
     header($headers[5]);
     header($headers[3]); // Set the desired file name for the downloaded video
 
-    echo $fileContents;
+    readfile($fileContents)
 } else {
     echo 'Error: Failed to retrieve file.';
 }
