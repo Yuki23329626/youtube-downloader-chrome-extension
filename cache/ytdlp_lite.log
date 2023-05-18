@@ -1,4 +1,0 @@
-WARNING  2023-05-17 17:11:58  * Debugger is active!
-INFO     2023-05-17 17:11:58  * Debugger PIN: 875-386-222
-INFO     2023-05-17 17:12:00 127.0.0.1 - - [17/May/2023 17:12:00] "[33mGET /api/file&url=https://www.youtube.com/watch?v=yLp9x7Dh2jo&format=mp4-1920*1080 HTTP/1.1[0m" 404 -
-INFO     2023-05-17 17:12:00 127.0.0.1 - - [17/May/2023 17:12:00] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
