@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, send_file, request, after_this_request, make_response
+from flask import Flask, jsonify, send_file, request, after_this_request, make_response, send_from_directory
 import yt_dlp
 import logging
 import glob
@@ -96,18 +96,21 @@ def get_file():
             t = Thread(target=remove_file, args=(list_files[0],))
             t.start()
             return response
-
-        # Create a response object
-        response = make_response(send_file(list_files[0], as_attachment=True))
         
-        # Add custom attributes to the response headers
         filename_ = re.split(r"[/\\]",list_files[0])[-1]
-        response.headers['Content-Disposition'] = f'attachment; filename="{filename_}"'
+        return send_from_directory(directory=SAVE_PATH, filename=filename_)
 
-        if file_format == 'bestaudio':
-            response.headers['Content-Type'] = f'audio/mpeg'
+        # # Create a response object
+        # response = make_response(send_file(list_files[0], as_attachment=True))
+        
+        # # Add custom attributes to the response headers
+        # filename_ = re.split(r"[/\\]",list_files[0])[-1]
+        # response.headers['Content-Disposition'] = f'attachment; filename="{filename_}"'
+
+        # if file_format == 'bestaudio':
+        #     response.headers['Content-Type'] = f'audio/mpeg'
             
-        return response
+        # return response
         
 
     except Exception as e:
