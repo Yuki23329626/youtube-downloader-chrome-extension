@@ -57,18 +57,12 @@ def get_file():
         print('link',link)
         file_format = parameters.pop('format')
 
-        # Create a response object
-        response = make_response(send_file(list_files[0], as_attachment=True))
-        # Add custom attributes to the response headers
-        response.headers['Content-Disposition'] = f'attachment; filename="{list_files[0]}"'
-
         # choose the file format you want, some version of python3 cannot use match function
         if file_format == 'mp4-1920*1080':
             print('file_format', file_format)
             ydl_opts['format'] = 'bestvideo[height<=1080][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best'
         elif file_format == 'bestaudio':
             ydl_opts['format'] = 'bestaudio/best'
-            response.headers['Content-Type'] = f'audio/webm'
 
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             ydl.download(link)
@@ -76,10 +70,19 @@ def get_file():
         # print('filename: ', filename)
 
         # @after_this_request
-        def after_request(res):
+        def after_request(response):
             t = Thread(target=remove_file, args=(list_files[0],))
             t.start()
-            return res
+            return response
+        
+        # Create a response object
+        response = make_response(send_file(list_files[0], as_attachment=True))
+        # Add custom attributes to the response headers
+        response.headers['Content-Disposition'] = f'attachment; filename="{list_files[0]}"'
+        response.headers['Content-Type'] = f'audio/webm'
+
+        if file_format == 'bestaudio':
+            response.headers['Content-Type'] = f'audio/webm'
 
         return response
     
