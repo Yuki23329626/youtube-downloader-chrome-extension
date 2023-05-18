@@ -91,16 +91,14 @@ def get_file():
         list_files = glob.glob(filename + '*')
         # print('list_files: ', list_files)
         
-        @after_this_request
-        def after_request(response):
-            time.sleep(2)
-            t = Thread(target=remove_file, args=(list_files[0],))
-            t.start()
-            return response
+        # @after_this_request
+        # def after_request(response):
+        #     t = Thread(target=remove_file, args=(list_files[0],))
+        #     t.start()
+        #     return response
 
         # send file with attachment_filename
         filename_ = re.split(r"[/\\]",list_files[0])[-1]
-        print("DFLDLLKSJLKSJDHKSJHFKFJHKSHF")
         return send_file(list_files[0], as_attachment=True, attachment_filename=filename_)
             
         # # Create a response object
