@@ -38,7 +38,7 @@ ydl_opts = {
     'writesubtitles': False,
     'progress_hooks': [my_hook],
     'outtmpl': SAVE_PATH + '%(title)s.%(ext)s',
-    'force_overwrites': True
+    'force-overwrites': True
 }
 
 app = Flask(__name__)
