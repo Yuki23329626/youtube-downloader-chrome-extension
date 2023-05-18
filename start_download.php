@@ -32,10 +32,10 @@ if ($headers && strpos($headers[0], '200') !== false) {
     header($headers[4]); // Set the appropriate content type for your video file
     header($headers[5]);
 
-    Print the headers
-    foreach ($headers as $name => $value) {
-        echo $name . ': ' . $value . "<BR>";
-    }
+    // Print the headers
+    // foreach ($headers as $name => $value) {
+    //     echo $name . ': ' . $value . "<BR>";
+    // }
 
     echo $fileContents;
 } else {
