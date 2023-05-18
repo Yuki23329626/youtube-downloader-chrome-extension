@@ -99,11 +99,12 @@ def get_file():
 
         if file_format == 'bestaudio':
             response.headers['Content-Type'] = f'audio/mpeg'
-            
+
         @after_this_request
         def after_request(response):
-            t = Thread(target=remove_file, args=(list_files[0],))
-            t.start()
+            # t = Thread(target=remove_file, args=(list_files[0]))
+            # t.start()
+            remove_file(list_files[0])
             return response
 
         return response
