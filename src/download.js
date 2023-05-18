@@ -1,6 +1,6 @@
 current_url = ''
-// host = 'http://localhost:5000/api/file'
-host = 'http://tux.cs.ccu.edu.tw/~snx108m/start_download.php'
+host = 'http://localhost:5000/api/file'
+// host = 'http://tux.cs.ccu.edu.tw/~snx108m/start_download.php'
 
 // chrome.tabs.query({ active: true, lastFocusedWindow: true }, tabs => {
 //     current_url = tabs[0].url;
