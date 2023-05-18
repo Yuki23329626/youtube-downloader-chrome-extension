@@ -64,12 +64,6 @@ def remove_file(file):
 #                 break
 #             print(e)
 
-@app.after_request
-def after_request(response):
-    print('test removing file:y')
-    remove_file(filename)
-    return response
-
 @app.route('/api/file')
 def get_file():
     try:
@@ -96,24 +90,25 @@ def get_file():
         list_files = glob.glob(filename + '*')
         # print('list_files: ', list_files)
 
-        # Create a response object
-        response = make_response(send_file(list_files[0], as_attachment=True))
+        @after_this_request
+        def after_request(response):
+            time.sleep(2)
+            t = Thread(target=remove_file, args=(list_files[0],))
+            t.start()
+            return response
         
-        # Add custom attributes to the response headers
-        filename_ = re.split(r"[/\\]",list_files[0])[-1]
-        response.headers['Content-Disposition'] = f'attachment; filename="{filename_}"'
-
-        if file_format == 'bestaudio':
-            response.headers['Content-Type'] = f'audio/mpeg'
+        with open(list_files[0], 'r') as fp:
+            # Create a response object
+            response = make_response(send_file(list_files[0], as_attachment=True))
             
-        # @after_this_request
-        # def after_request(response):
-        #     time.sleep(2)
-        #     t = Thread(target=remove_file, args=(list_files[0],))
-        #     t.start()
-        #     return response
+            # Add custom attributes to the response headers
+            filename_ = re.split(r"[/\\]",list_files[0])[-1]
+            response.headers['Content-Disposition'] = f'attachment; filename="{filename_}"'
 
-        return response
+            if file_format == 'bestaudio':
+                response.headers['Content-Type'] = f'audio/mpeg'
+                
+            return response
         
 
     except Exception as e:
