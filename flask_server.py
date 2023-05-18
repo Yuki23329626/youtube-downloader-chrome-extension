@@ -5,9 +5,10 @@ import glob
 import os
 import time
 from threading import Thread
+import re
 
 filename = ''
-SAVE_PATH = ''
+SAVE_PATH = 'cache/'
 # print('SAVE_PATH', SAVE_PATH)
 
 logging.basicConfig(level=logging.ERROR,
@@ -43,18 +44,25 @@ app = Flask(__name__)
 
 # Remove downloaded file after serve the target file to the client
 
-
 def remove_file(file):
-    while True:
-        time.sleep(2)
+    time.sleep(2)
+    while glob.glob(file):
         try:
-            print('try remove file:', file)
-            os.remove(file)
+            print('removing files:', file)
+            os.remove(glob.glob(file)[0])
         except Exception as e:
-            if not os.path.exists(file):
-                break
             print(e)
 
+# def remove_file(file):
+#     while True:
+#         time.sleep(2)
+#         try:
+#             print('try remove file:', file)
+#             os.remove(file)
+#         except Exception as e:
+#             if not os.path.exists(file):
+#                 break
+#             print(e)
 
 @app.route('/api/file')
 def get_file():
@@ -80,21 +88,22 @@ def get_file():
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             ydl.download(link)
         list_files = glob.glob(filename + '*')
-        print('list_files: ', list_files)
-
-        # @after_this_request
-        def after_request(response):
-            t = Thread(target=remove_file, args=(list_files[0],))
-            t.start()
-            return response
+        # print('list_files: ', list_files)
 
         # Create a response object
         response = make_response(send_file(list_files[0], as_attachment=True))
         # Add custom attributes to the response headers
-        response.headers['Content-Disposition'] = f'attachment; filename="{list_files[0]}"'
+        filename_ = re.split(r"[/\\]",list_files[0])[-1]
+        response.headers['Content-Disposition'] = f'attachment; filename="{filename_}"'
 
         if file_format == 'bestaudio':
             response.headers['Content-Type'] = f'audio/mpeg'
+            
+        @after_this_request
+        def after_request(response):
+            t = Thread(target=remove_file, args=(list_files[0],))
+            t.start()
+            return response
 
         return response
 
