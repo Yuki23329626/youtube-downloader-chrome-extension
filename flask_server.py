@@ -34,11 +34,10 @@ ydl_opts = {
     #     'preferredcodec': 'mp3',
     #     'preferredquality': '192',
     # }],
-    # 'skip_download': False,
+    'skip_download': False,
     'writesubtitles': False,
     'progress_hooks': [my_hook],
-    'outtmpl': SAVE_PATH + '%(title)s.%(ext)s',
-    'force-overwrites': True
+    'outtmpl': SAVE_PATH + '%(title)s.%(ext)s'
 }
 
 app = Flask(__name__)
