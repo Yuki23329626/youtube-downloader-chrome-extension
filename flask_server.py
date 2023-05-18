@@ -100,6 +100,7 @@ def get_file():
 
         # send file with attachment_filename
         filename_ = re.split(r"[/\\]",list_files[0])[-1]
+        print("DFLDLLKSJLKSJDHKSJHFKFJHKSHF")
         return send_file(list_files[0], as_attachment=True, attachment_filename=filename_)
             
         # # Create a response object
@@ -114,7 +115,6 @@ def get_file():
             
         # return response
         
-
     except Exception as e:
         logging.error(e)
         template = "An exception of type {0} occurred."
