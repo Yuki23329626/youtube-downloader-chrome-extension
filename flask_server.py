@@ -40,7 +40,7 @@ app = Flask(__name__)
 # Remove downloaded file after serve the target file to the client
 def remove_file(file):
     while True:
-        time.sleep(20)
+        time.sleep(2)
         try:
             if os.path.exists(file):
                 os.remove(file)
