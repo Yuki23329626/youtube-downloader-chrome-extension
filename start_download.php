@@ -27,7 +27,7 @@ if ($headers && strpos($headers[0], '200') !== false) {
     // $content = file_get_contents($fianl_request); 
 
     // echo $headers[0];
-
+    
     // // Print the headers
     // foreach ($headers as $name => $value) {
     //     echo $name . ': ' . $value . "<BR>";
@@ -37,7 +37,7 @@ if ($headers && strpos($headers[0], '200') !== false) {
     header($headers[5]);
     header($headers[3]); // Set the desired file name for the downloaded video
 
-    readfile($fileContents);
+    echo $fileContents;
 } else {
     echo 'Error: Failed to retrieve file.';
 }
