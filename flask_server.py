@@ -34,7 +34,7 @@ ydl_opts = {
     #     'preferredcodec': 'mp3',
     #     'preferredquality': '192',
     # }],
-    # 'skip_download': False,
+    'skip_download': False,
     'writesubtitles': False,
     'progress_hooks': [my_hook],
     'outtmpl': SAVE_PATH + '%(title)s.%(ext)s'
@@ -63,6 +63,12 @@ def remove_file(file):
 #             if not os.path.exists(file):
 #                 break
 #             print(e)
+
+@app.after_request
+def after_request(response):
+    print('test removing file:y')
+    remove_file(filename)
+    return response
 
 @app.route('/api/file')
 def get_file():
@@ -100,12 +106,12 @@ def get_file():
         if file_format == 'bestaudio':
             response.headers['Content-Type'] = f'audio/mpeg'
             
-        @after_this_request
-        def after_request(response):
-            time.sleep(2)
-            t = Thread(target=remove_file, args=(list_files[0],))
-            t.start()
-            return response
+        # @after_this_request
+        # def after_request(response):
+        #     time.sleep(2)
+        #     t = Thread(target=remove_file, args=(list_files[0],))
+        #     t.start()
+        #     return response
 
         return response
         
