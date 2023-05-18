@@ -54,6 +54,17 @@ def remove_file(file):
         except Exception as e:
             print(e)
 
+# def remove_file(file):
+#     while True:
+#         time.sleep(2)
+#         try:
+#             print('try remove file:', file)
+#             os.remove(file)
+#         except Exception as e:
+#             if not os.path.exists(file):
+#                 break
+#             print(e)
+
 @app.route('/api/file')
 def get_file():
     try:
@@ -80,7 +91,7 @@ def get_file():
         list_files = glob.glob(filename + '*')
         # print('list_files: ', list_files)
         
-        @app.after_request
+        @after_this_request
         def after_request(response):
             t = Thread(target=remove_file, args=(list_files[0],))
             t.start()
