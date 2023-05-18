@@ -76,11 +76,10 @@ def get_file():
         # print('filename: ', filename)
 
         # @after_this_request
-        def after_request(response):
+        def after_request(res):
             t = Thread(target=remove_file, args=(list_files[0],))
             t.start()
-            return response
-        
+            return res
 
         return response
     
