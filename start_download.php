@@ -10,7 +10,7 @@ $fianl_request = $host . '?url=' . $url . '&format=' . $format;
 echo 'test:' . $fianl_request;
 
 // Get the file contents
-$fileContents = file_get_contents($fianl_request);
+// $fileContents = file_get_contents($fianl_request);
 
 // Set the HTTP headers
 // header('Content-Type: video/mp4'); // Set the appropriate content type for your video file
