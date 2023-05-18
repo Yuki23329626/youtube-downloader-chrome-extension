@@ -6,7 +6,7 @@ import time
 from threading import Thread
 
 filename = ''
-SAVE_PATH = 'cache/'
+SAVE_PATH = ''
 # print('SAVE_PATH', SAVE_PATH)
 
 logging.basicConfig(level=logging.ERROR,
@@ -59,6 +59,7 @@ def get_file():
 
         # choose the file format you want, some version of python3 cannot use match function
         if file_format == 'mp4-1920*1080':
+            print('file_format', file_format)
             ydl_opts['format'] = 'bestvideo[height<=1080][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best'
         elif file_format == 'bestaudio':
             ydl_opts['format'] = 'bestaudio/best'
@@ -77,7 +78,7 @@ def get_file():
         # Create a response object
         response = make_response(send_file(list_files[0], as_attachment=True))
         # Add custom attributes to the response headers
-        response.headers['Content-Disposition'] = f'attachment; filename="{list_files[0].split("/")[1]}"'
+        response.headers['Content-Disposition'] = f'attachment; filename="{list_files[0]}"'
 
         return response
     
@@ -116,4 +117,4 @@ def get_file():
 #     return response
 
 if __name__ == '__main__':
-    app.run(debug=True, host="0.0.0.0")
+    app.run(debug=True, host="0.0.0.0", port=5000)
