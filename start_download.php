@@ -32,7 +32,7 @@ if ($headers && strpos($headers[0], '200') !== false) {
     header($headers[5]);
     header($headers[3]); // Set the desired file name for the downloaded video
 
-    // // Print the headers
+    // Print the headers
     // foreach ($headers as $name => $value) {
     //     echo $name . ': ' . $value . "<BR>";
     // }
