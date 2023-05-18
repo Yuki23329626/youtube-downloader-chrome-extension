@@ -37,7 +37,7 @@ if ($headers && strpos($headers[0], '200') !== false) {
     //     echo $name . ': ' . $value . "<BR>";
     // }
 
-    // echo $fileContents;
+    echo $fileContents;
 } else {
     echo 'Error: Failed to retrieve file.';
 }
