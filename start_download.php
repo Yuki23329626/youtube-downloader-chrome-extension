@@ -28,16 +28,16 @@ if ($headers && strpos($headers[0], '200') !== false) {
 
     // echo $headers[0];
 
-    header($headers[4]); // Set the appropriate content type for your video file
-    header($headers[5]);
-    header($headers[3]); // Set the desired file name for the downloaded video
+    // header($headers[4]); // Set the appropriate content type for your video file
+    // header($headers[5]);
+    // header($headers[3]); // Set the desired file name for the downloaded video
 
-    // // Print the headers
-    // foreach ($headers as $name => $value) {
-    //     echo $name . ': ' . $value . "<BR>";
-    // }
+    // Print the headers
+    foreach ($headers as $name => $value) {
+        echo $name . ': ' . $value . "<BR>";
+    }
 
-    echo $fileContents;
+    // echo $fileContents;
 } else {
     echo 'Error: Failed to retrieve file.';
 }
