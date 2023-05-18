@@ -34,10 +34,11 @@ ydl_opts = {
     #     'preferredcodec': 'mp3',
     #     'preferredquality': '192',
     # }],
-    'skip_download': False,
+    # 'skip_download': False,
     'writesubtitles': False,
     'progress_hooks': [my_hook],
-    'outtmpl': SAVE_PATH + '%(title)s.%(ext)s'
+    'outtmpl': SAVE_PATH + '%(title)s.%(ext)s',
+    'nooverwrites': False
 }
 
 app = Flask(__name__)
@@ -89,26 +90,26 @@ def get_file():
             ydl.download(link)
         list_files = glob.glob(filename + '*')
         # print('list_files: ', list_files)
-
+        
         @after_this_request
         def after_request(response):
             time.sleep(2)
             t = Thread(target=remove_file, args=(list_files[0],))
             t.start()
             return response
-        
-        with open(list_files[0], 'r') as fp:
-            # Create a response object
-            response = make_response(send_file(list_files[0], as_attachment=True))
-            
-            # Add custom attributes to the response headers
-            filename_ = re.split(r"[/\\]",list_files[0])[-1]
-            response.headers['Content-Disposition'] = f'attachment; filename="{filename_}"'
 
-            if file_format == 'bestaudio':
-                response.headers['Content-Type'] = f'audio/mpeg'
-                
-            return response
+        # Create a response object
+        response = make_response(send_file(list_files[0], as_attachment=True))
+        
+        # Add custom attributes to the response headers
+        filename_ = re.split(r"[/\\]",list_files[0])[-1]
+        response.headers['Content-Disposition'] = f'attachment; filename="{filename_}"'
+
+        if file_format == 'bestaudio':
+            response.headers['Content-Type'] = f'audio/mpeg'
+            
+
+        return response
         
 
     except Exception as e:
