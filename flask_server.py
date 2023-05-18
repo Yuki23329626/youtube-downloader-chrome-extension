@@ -69,12 +69,12 @@ def get_file():
             print('file_format', file_format)
             ydl_opts['format'] = 'bestvideo[height<=1080][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best'
         elif file_format == 'bestaudio':
-            ydl_opts['format'] = 'bestaudioo[ext=mp3]'
-            # ydl_opts['postprocessors'] = [{
-            #     'key': 'FFmpegExtractAudio',
-            #     'preferredcodec': 'wav',
-            #     'preferredquality': '192'
-            # }]
+            ydl_opts['format'] = 'bestaudioo/best'
+            ydl_opts['postprocessors'] = [{
+                'key': 'FFmpegExtractAudio',
+                'preferredcodec': 'mp3',
+                'preferredquality': '192'
+            }]
 
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             ydl.download(link)
