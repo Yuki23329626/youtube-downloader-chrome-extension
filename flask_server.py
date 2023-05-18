@@ -93,7 +93,7 @@ def get_file():
         response.headers['Content-Disposition'] = f'attachment; filename="{list_files[0]}"'
 
         if file_format == 'bestaudio':
-            response.headers['Content-Type'] = f'audio/webm'
+            response.headers['Content-Type'] = f'audio/wav'
 
         return response
 
