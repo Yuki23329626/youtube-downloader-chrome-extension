@@ -79,7 +79,7 @@ def get_file():
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             ydl.download(link)
         list_files = glob.glob(filename + '*')
-        # print('filename: ', filename)
+        print('filename: ', filename)
 
         # @after_this_request
         def after_request(response):
