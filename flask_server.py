@@ -93,26 +93,24 @@ def get_file():
         
         # @after_this_request
         # def after_request(response):
+        #     time.sleep(2)
         #     t = Thread(target=remove_file, args=(list_files[0],))
         #     t.start()
         #     return response
 
-        # send file with attachment_filename
+        # Create a response object
+        response = make_response(send_file(list_files[0], as_attachment=True))
+        
+        # Add custom attributes to the response headers
         filename_ = re.split(r"[/\\]",list_files[0])[-1]
-        return send_file(list_files[0], as_attachment=True, attachment_filename=filename_)
-            
-        # # Create a response object
-        # response = make_response(send_file(list_files[0], as_attachment=True))
-        
-        # # Add custom attributes to the response headers
-        # filename_ = re.split(r"[/\\]",list_files[0])[-1]
-        # response.headers['Content-Disposition'] = f'attachment; filename="{filename_}"'
+        response.headers['Content-Disposition'] = f'attachment; filename="{filename_}"'
 
-        # if file_format == 'bestaudio':
-        #     response.headers['Content-Type'] = f'audio/mpeg'
+        if file_format == 'bestaudio':
+            response.headers['Content-Type'] = f'audio/mpeg'
             
-        # return response
+        return response
         
+
     except Exception as e:
         logging.error(e)
         template = "An exception of type {0} occurred."
