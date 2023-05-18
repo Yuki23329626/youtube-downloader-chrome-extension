@@ -10,7 +10,7 @@ $fianl_request = $host . '?url=' . $url . '&format=' . $format;
 echo 'test:' . $fianl_request;
 
 // Get the file contents
-// $fileContents = file_get_contents($fianl_request);
+$fileContents = file_get_contents($fianl_request);
 
 // Set the HTTP headers
 // header('Content-Type: video/mp4'); // Set the appropriate content type for your video file
@@ -28,14 +28,14 @@ if ($headers && strpos($headers[0], '200') !== false) {
 
     // echo $headers[0];
 
-    // header($headers[3]); // Set the desired file name for the downloaded video
-    // header($headers[4]); // Set the appropriate content type for your video file
-    // header($headers[5]);
+    header($headers[4]); // Set the appropriate content type for your video file
+    header($headers[5]);
+    header($headers[3]); // Set the desired file name for the downloaded video
 
-    // Print the headers
-    foreach ($headers as $name => $value) {
-        echo $name . ': ' . $value . "<BR>";
-    }
+    // // Print the headers
+    // foreach ($headers as $name => $value) {
+    //     echo $name . ': ' . $value . "<BR>";
+    // }
 
     echo $fileContents;
 } else {
