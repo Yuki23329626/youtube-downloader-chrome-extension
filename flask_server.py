@@ -48,10 +48,11 @@ def remove_file(file):
     while True:
         time.sleep(2)
         try:
-            if os.path.exists(file):
-                os.remove(file)
-            break
+            print('try remove file:', file)
+            os.remove(file)
         except Exception as e:
+            if not os.path.exists(file):
+                break
             print(e)
 
 
