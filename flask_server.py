@@ -100,7 +100,7 @@ def get_file():
 
         # send file with attachment_filename
         filename_ = re.split(r"[/\\]",list_files[0])[-1]
-        send_file(list_files[0], as_attachment=True, attachment_filename=filename_)
+        return send_file(list_files[0], as_attachment=True, attachment_filename=filename_)
             
         # # Create a response object
         # response = make_response(send_file(list_files[0], as_attachment=True))
@@ -112,7 +112,7 @@ def get_file():
         # if file_format == 'bestaudio':
         #     response.headers['Content-Type'] = f'audio/mpeg'
             
-        return response
+        # return response
         
 
     except Exception as e:
