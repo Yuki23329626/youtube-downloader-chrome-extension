@@ -87,7 +87,7 @@ def get_file():
             }]
 
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-            ydl.download(link)
+            print('test:',ydl.download(link))
         list_files = glob.glob(filename + '*')
         # print('list_files: ', list_files)
 
