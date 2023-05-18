@@ -37,8 +37,8 @@ ydl_opts = {
     # 'skip_download': False,
     'writesubtitles': False,
     'progress_hooks': [my_hook],
-    'overwrite': True,
-    'outtmpl': SAVE_PATH + '%(title)s.%(ext)s'
+    'outtmpl': SAVE_PATH + '%(title)s.%(ext)s',
+    'force_overwrites': True
 }
 
 app = Flask(__name__)
@@ -87,7 +87,7 @@ def get_file():
             }]
 
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-            print('test:',ydl.download(link))
+            ydl.download(link)
         list_files = glob.glob(filename + '*')
         # print('list_files: ', list_files)
 
