@@ -1,7 +1,8 @@
 from flask import Flask, jsonify, send_file, request, after_this_request, make_response
 import yt_dlp
 import logging
-import glob, os
+import glob
+import os
 import time
 from threading import Thread
 
@@ -12,14 +13,17 @@ SAVE_PATH = ''
 logging.basicConfig(level=logging.ERROR,
                     format='%(levelname)-8s %(asctime)s %(message)s',
                     datefmt='%Y-%m-%d %H:%M:%S',
-                    handlers = [logging.FileHandler(SAVE_PATH + 'ytdlp_lite.log', 'w', 'utf-8'),])
+                    handlers=[logging.FileHandler(SAVE_PATH + 'ytdlp_lite.log', 'w', 'utf-8'),])
 
 # get the final filename after downloading the file
+
+
 def my_hook(d):
     if d['status'] == 'finished':
         global filename
         # filename = d['info_dict']['title']
         filename = d['filename'].split('.')[0]
+
 
 # options for the yt-dlp(github project)
 ydl_opts = {
@@ -38,6 +42,8 @@ ydl_opts = {
 app = Flask(__name__)
 
 # Remove downloaded file after serve the target file to the client
+
+
 def remove_file(file):
     while True:
         time.sleep(2)
@@ -48,13 +54,14 @@ def remove_file(file):
         except Exception as e:
             print(e)
 
+
 @app.route('/api/file')
 def get_file():
     try:
         # pop the parameters from the url
         parameters = request.args.to_dict()
         link = parameters.pop('url')
-        print('link',link)
+        print('link', link)
         file_format = parameters.pop('format')
 
         # choose the file format you want, some version of python3 cannot use match function
@@ -63,6 +70,11 @@ def get_file():
             ydl_opts['format'] = 'bestvideo[height<=1080][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best'
         elif file_format == 'bestaudio':
             ydl_opts['format'] = 'bestaudio/best'
+            ydl_opts['postprocessors'] = [{
+                'key': 'FFmpegExtractAudio',
+                'preferredcodec': 'wav',
+                'preferredquality': '192'
+            }]
 
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             ydl.download(link)
@@ -74,7 +86,7 @@ def get_file():
             t = Thread(target=remove_file, args=(list_files[0],))
             t.start()
             return response
-        
+
         # Create a response object
         response = make_response(send_file(list_files[0], as_attachment=True))
         # Add custom attributes to the response headers
@@ -84,7 +96,7 @@ def get_file():
             response.headers['Content-Type'] = f'audio/webm'
 
         return response
-    
+
     except Exception as e:
         logging.error(e)
         template = "An exception of type {0} occurred."
@@ -105,7 +117,7 @@ def get_file():
 #         os.remove(SAVE_PATH + '\\' + list_files[0])
 #         return response
 #     return response
-    
+
 # @app.after_request
 # def after_request_func(response):
 #     # Do something after the request has been processed
@@ -118,6 +130,7 @@ def get_file():
 #         except:
 #             pass
 #     return response
+
 
 if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0")
