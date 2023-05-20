@@ -54,17 +54,6 @@ def remove_file(file):
         except Exception as e:
             print(e)
 
-# def remove_file(file):
-#     while True:
-#         time.sleep(2)
-#         try:
-#             print('try remove file:', file)
-#             os.remove(file)
-#         except Exception as e:
-#             if not os.path.exists(file):
-#                 break
-#             print(e)
-
 @app.route('/api/file')
 def get_file():
     try:
@@ -74,7 +63,7 @@ def get_file():
         print('link', link)
         file_format = parameters.pop('format')
 
-        # choose the file format you want, some version of python3 cannot use match function
+        # choose the file format you want, some versions of python3 cannot use match function
         if file_format == 'mp4-1920*1080':
             print('file_format', file_format)
             ydl_opts['format'] = 'bestvideo[height<=1080][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best'
