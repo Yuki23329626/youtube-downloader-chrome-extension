@@ -56,57 +56,57 @@ def remove_file(file):
 
 @app.route('/api/file')
 def get_file():
-    try:
-        # pop the parameters from the url
-        parameters = request.args.to_dict()
-        link = parameters.pop('url')
-        print('link', link)
-        file_format = parameters.pop('format')
+    # try:
+    # pop the parameters from the url
+    parameters = request.args.to_dict()
+    link = parameters.pop('url')
+    print('link', link)
+    file_format = parameters.pop('format')
 
-        # choose the file format you want, some versions of python3 cannot use match function
-        if file_format == 'mp4-1920*1080':
-            print('file_format', file_format)
-            ydl_opts['format'] = 'bestvideo[height<=1080][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best'
-        elif file_format == 'bestaudio':
-            ydl_opts['format'] = 'bestaudioo/best'
-            ydl_opts['postprocessors'] = [{
-                'key': 'FFmpegExtractAudio',
-                'preferredcodec': 'mp3',
-                'preferredquality': '192'
-            }]
+    # choose the file format you want, some versions of python3 cannot use match function
+    if file_format == 'mp4-1920*1080':
+        print('file_format', file_format)
+        ydl_opts['format'] = 'bestvideo[height<=1080][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best'
+    elif file_format == 'bestaudio':
+        ydl_opts['format'] = 'bestaudioo/best'
+        ydl_opts['postprocessors'] = [{
+            'key': 'FFmpegExtractAudio',
+            'preferredcodec': 'mp3',
+            'preferredquality': '192'
+        }]
 
-        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-            ydl.download(link)
-        list_files = glob.glob(filename + '*')
-        # print('list_files: ', list_files)
-        
-        @after_this_request
-        def after_request(response):
-            t = Thread(target=remove_file, args=(list_files[0],))
-            t.start()
-            return response
-        
-        # filename_ = re.split(r"[/\\]",list_files[0])[-1]
-        # return send_from_directory(directory=SAVE_PATH, filename=filename_)
-
-        # Create a response object
-        response = make_response(send_file(list_files[0], as_attachment=True))
-        
-        # Add custom attributes to the response headers
-        filename_ = re.split(r"[/\\]",list_files[0])[-1]
-        response.headers['Content-Disposition'] = f'attachment; filename="{filename_}"'
-
-        if file_format == 'bestaudio':
-            response.headers['Content-Type'] = f'audio/mpeg'
-            
+    with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+        ydl.download(link)
+    list_files = glob.glob(filename + '*')
+    print('list_files: ', list_files)
+    
+    @after_this_request
+    def after_request(response):
+        t = Thread(target=remove_file, args=(list_files[0],))
+        t.start()
         return response
+    
+    filename_ = re.split(r"[/\\]",list_files[0])[-1]
+    return send_file(list_files[0], as_attachment=True, download_name=filename_)
+
+    # # Create a response object
+    # response = make_response(send_file(list_files[0], as_attachment=True, download_name=filename_))
+
+    # # Add custom attributes to the response headers
+    # print('filename_:', filename_)
+    # response.headers['Content-Disposition'] = f'attachment; filename="{filename_}"'
+
+    # if file_format == 'bestaudio':
+    #     response.headers['Content-Type'] = f'audio/mpeg'
+        
+    # return response
         
 
-    except Exception as e:
-        logging.error(e)
-        template = "An exception of type {0} occurred."
-        message = template.format(type(e).__name__)
-        return message
+    # except Exception as e:
+    #     logging.error(e)
+    #     template = "An exception of type {0} occurred."
+    #     message = template.format(type(e).__name__)
+    #     return message
 
 # @app.route('/api/file')
 # def get_file():
