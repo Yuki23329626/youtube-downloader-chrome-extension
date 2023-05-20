@@ -80,11 +80,11 @@ def get_file():
         list_files = glob.glob(filename + '*')
         # print('list_files: ', list_files)
         
-        # @after_this_request
-        # def after_request(response):
-        #     t = Thread(target=remove_file, args=(list_files[0],))
-        #     t.start()
-        #     return response
+        @after_this_request
+        def after_request(response):
+            t = Thread(target=remove_file, args=(list_files[0],))
+            t.start()
+            return response
         
         # filename_ = re.split(r"[/\\]",list_files[0])[-1]
         # return send_from_directory(directory=SAVE_PATH, filename=filename_)
