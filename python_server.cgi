@@ -1,3 +1,5 @@
+#!/usr/bin/python3.8 python
+import cgi
 from flask import Flask, jsonify, send_file, request, after_this_request, make_response
 import yt_dlp
 import logging
@@ -6,7 +8,6 @@ import os
 import time
 from threading import Thread
 import re
-import cgi
 
 filename = ''
 SAVE_PATH = 'cache/'
