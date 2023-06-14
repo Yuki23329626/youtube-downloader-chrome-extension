@@ -11,7 +11,7 @@ filename = ''
 SAVE_PATH = 'cache/'
 # print('SAVE_PATH', SAVE_PATH)
 
-logging.basicConfig(level=logging.INFO,
+logging.basicConfig(level=logging.DEBUG,
                     format='%(levelname)-8s %(asctime)s %(message)s',
                     datefmt='%Y-%m-%d %H:%M:%S',
                     handlers=[logging.FileHandler(SAVE_PATH + 'ytdlp_lite.log', 'w', 'utf-8'),])
