@@ -60,6 +60,8 @@ def get_file():
     # pop the parameters from the url
     parameters = request.args.to_dict()
     # link = parameters.pop('url')
+    request_string = request.url
+    print('request_string', request_string)
     url = parameters.get('url')
     print('url', url)
     v = parameters.get('v')
