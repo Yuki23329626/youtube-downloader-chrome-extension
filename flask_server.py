@@ -62,10 +62,9 @@ def get_file():
     # link = parameters.pop('url')
     request_string = request.url
     print('request_string', request_string)
+    logging.info('\nrequest_string', request_string, '\n')
     url = parameters.get('url')
     print('url', url)
-    v = parameters.get('v')
-    print('v', v)
     file_format = parameters.get('format')
 
     # choose the file format you want, some versions of python3 cannot use match function
@@ -81,7 +80,7 @@ def get_file():
         }]
 
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-        ydl.download(pure_link)
+        ydl.download(url)
     list_files = glob.glob(filename + '*')
     print('list_files: ', list_files)
     
