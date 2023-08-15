@@ -60,6 +60,8 @@ def get_file():
     # pop the parameters from the url
     parameters = request.args.to_dict()
     link = parameters.pop('url')
+    pure_link = "https://www.youtube.com/watch?v=" + parameters.pop('v')
+    logging.info(link)
     print('link', link)
     file_format = parameters.pop('format')
 
@@ -76,7 +78,7 @@ def get_file():
         }]
 
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-        ydl.download(link)
+        ydl.download(pure_link)
     list_files = glob.glob(filename + '*')
     print('list_files: ', list_files)
     
