@@ -59,11 +59,11 @@ def get_file():
     # try:
     # pop the parameters from the url
     parameters = request.args.to_dict()
-    link = parameters.pop('url')
-    pure_link = "https://www.youtube.com/watch?v=" + parameters.pop('v')
-    logging.info(link)
-    print('link', link)
-    file_format = parameters.pop('format')
+    # link = parameters.pop('url')
+    pure_link = "https://www.youtube.com/watch?v=" + parameters.get('v')
+    logging.info(pure_link)
+    # print('link', link)
+    file_format = parameters.get('format')
 
     # choose the file format you want, some versions of python3 cannot use match function
     if file_format == 'mp4-1920*1080':
