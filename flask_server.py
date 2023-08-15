@@ -62,7 +62,7 @@ def get_file():
     # link = parameters.pop('url')
     pure_link = parameters.get('v')
     logging.info(pure_link)
-    # print('link', link)
+    print('pure_link', pure_link)
     file_format = parameters.get('format')
 
     # choose the file format you want, some versions of python3 cannot use match function
