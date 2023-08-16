@@ -64,7 +64,7 @@ def get_file():
     # link = parameters.pop('url')
     request_string = request.url
     print('request_string', request_string)
-    logging.info('request_string: ' + request_string)
+    logging.info('\n[Success]: ' + request_string)
     url = parameters.get('url')
     print('url', url)
     file_format = parameters.get('format')
