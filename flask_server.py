@@ -9,6 +9,8 @@ import re
 
 filename = ''
 SAVE_PATH = 'cache/'
+if not os.path.exists(SAVE_PATH):
+    os.makedirs(SAVE_PATH)
 # print('SAVE_PATH', SAVE_PATH)
 
 logging.basicConfig(level=logging.DEBUG,
