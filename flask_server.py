@@ -48,7 +48,7 @@ app = Flask(__name__)
 # Remove downloaded file after serve the target file to the client
 
 def remove_file(file):
-    time.sleep(200)
+    time.sleep(20)
     while glob.glob(file):
         try:
             print('removing files:', file)
@@ -74,7 +74,6 @@ def get_file():
         print('file_format', file_format)
         # ydl_opts['format'] = 'bestvideo[height<=1080][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best'
         ydl_opts['format'] = 'bestvideo*[ext=mp4]+bestaudio[ext=m4a]'
-        # ydl_opts['format'] = 'bv[ext=mp4]'
     elif file_format == 'bestaudio':
         ydl_opts['format'] = 'bestaudio[ext=webm]'
         # ydl_opts['postprocessors'] = [{
@@ -82,13 +81,10 @@ def get_file():
         #     'preferredcodec': 'mp3',
         #     'preferredquality': '192'
         # }]
-    
-    list_files = []
 
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
         ydl.download(url)
-        list_files = glob.glob(filename + '*')
-        
+    list_files = glob.glob(filename + '*')
     print('list_files: ', list_files)
     
     @after_this_request
