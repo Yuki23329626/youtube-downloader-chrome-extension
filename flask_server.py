@@ -48,7 +48,7 @@ app = Flask(__name__)
 # Remove downloaded file after serve the target file to the client
 
 def remove_file(file):
-    time.sleep(20)
+    time.sleep(200)
     while glob.glob(file):
         try:
             print('removing files:', file)
@@ -74,7 +74,7 @@ def get_file():
         print('file_format', file_format)
         # ydl_opts['format'] = 'bestvideo[height<=1080][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best'
         # ydl_opts['format'] = 'bestvideo*[ext=mp4]+bestaudio[ext=m4a]'
-        ydl_opts['format'] = 'bv*[ext=mp4]+ba[ext=m4a]/b[ext=mp4]'
+        ydl_opts['format'] = 'b[ext=mp4]'
     elif file_format == 'bestaudio':
         ydl_opts['format'] = 'bestaudio[ext=webm]'
         # ydl_opts['postprocessors'] = [{
