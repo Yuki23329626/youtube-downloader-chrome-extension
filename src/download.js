@@ -40,7 +40,7 @@ async function start_download(format) {
     }).then((result) => {
         document.getElementById("p1").innerHTML = "Finshed";
     }).catch((err) => {
-        return err
+        document.getElementById("p1").innerHTML = err;
     });
 
     // Cannot download files via fetch as a chrome extension through fetch()
