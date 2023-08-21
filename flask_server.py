@@ -82,10 +82,13 @@ def get_file():
         #     'preferredcodec': 'mp3',
         #     'preferredquality': '192'
         # }]
+    
+    list_files = []
 
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
         ydl.download(url)
-    list_files = glob.glob(filename + '*')
+        list_files = glob.glob(filename + '*')
+        
     print('list_files: ', list_files)
     
     @after_this_request
