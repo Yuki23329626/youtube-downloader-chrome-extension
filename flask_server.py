@@ -72,9 +72,9 @@ def get_file():
     # choose the file format you want, some versions of python3 cannot use match function
     if file_format == 'mp4-1920*1080':
         print('file_format', file_format)
-        ydl_opts['format'] = 'bestvideo[height<=1080][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best'
+        # ydl_opts['format'] = 'bestvideo[height<=1080][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best'
         # ydl_opts['format'] = 'bestvideo*[ext=mp4]+bestaudio[ext=m4a]'
-        # ydl_opts['format'] = 'best[ext=mp4]'
+        ydl_opts['format'] = 'bv*[ext=mp4]+ba[ext=m4a]/b[ext=mp4]'
     elif file_format == 'bestaudio':
         ydl_opts['format'] = 'bestaudio[ext=webm]'
         # ydl_opts['postprocessors'] = [{
