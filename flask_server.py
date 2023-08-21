@@ -81,20 +81,24 @@ def get_file():
         #     'preferredcodec': 'mp3',
         #     'preferredquality': '192'
         # }]
-
-    with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-        ydl.download(url)
-    list_files = glob.glob(filename + '*')
-    print('list_files: ', list_files)
-    
+        
     @after_this_request
     def after_request(response):
         t = Thread(target=remove_file, args=(list_files[0],))
         t.start()
         return response
-    
-    filename_ = re.split(r"[/\\]",list_files[0])[-1]
-    return send_file(list_files[0], as_attachment=True, download_name=filename_)
+
+    with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+        ydl.download(url)
+
+        list_files = glob.glob(filename + '*')
+        print('list_files: ', list_files)
+
+        filename_ = re.split(r"[/\\]",list_files[0])[-1]
+        return send_file(list_files[0], as_attachment=True, download_name=filename_)
+        
+
+        
 
     # # Create a response object
     # response = make_response(send_file(list_files[0], as_attachment=True, download_name=filename_))
