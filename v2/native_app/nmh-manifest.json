@@ -1,0 +1,7 @@
+{
+  "name": "com.ytdlite.nativeapp",
+  "description": "Light Youtube Downloader - native app",
+  "path": "C:\\Users\\mishen\\Documents\\youtube-downloader-chrome-extension\\v2\native_app\\dist\native_app.exe",
+  "type": "stdio",
+  "allowed_origins": ["chrome-extension://opecghombbhnhcmnkiobdoffmfhibgbk/"]
+}

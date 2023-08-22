@@ -1,0 +1,1 @@
+REG ADD "HKLM\SOFTWARE\Google\Chrome\NativeMessagingHosts\com.ytdlite.nativeapp" /ve /t REG_SZ /d "C:\Users\mishen\Documents\youtube-downloader-chrome-extension\v2\native_app\nmh-manifest.json" /f
