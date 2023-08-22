@@ -18,7 +18,7 @@ async function getCurrentTab() {
 
 document.getElementById("btn_download_mp4_FHD").addEventListener(
     "click",
-    function () { start_download('mp4-1920*1080') },
+    function () { start_download('mp4') },
     false
 );
 
