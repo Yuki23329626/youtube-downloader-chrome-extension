@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, send_file, request, after_this_request, make_response
+import asyncio
 import yt_dlp
 import logging
 import glob
@@ -47,7 +48,7 @@ app = Flask(__name__)
 
 # Remove downloaded file after serve the target file to the client
 
-def remove_file(file):
+async def remove_file(file):
     time.sleep(200)
     while glob.glob(file):
         try:
@@ -55,6 +56,10 @@ def remove_file(file):
             os.remove(glob.glob(file)[0])
         except Exception as e:
             print(e)
+
+async def ytdlp_download(ydl_opts, url):
+    with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+        await ydl.download(url)
 
 @app.route('/api/file')
 async def get_file():
@@ -82,8 +87,8 @@ async def get_file():
         #     'preferredquality': '192'
         # }]
 
-    with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-        ydl.download(url)
+    ytdlp_download(ydl_opts, url)
+    
     list_files = glob.glob(filename + '*')
     print('list_files: ', list_files)
     
@@ -94,7 +99,7 @@ async def get_file():
         return response
     
     filename_ = re.split(r"[/\\]",list_files[0])[-1]
-    return send_file(list_files[0], as_attachment=True, download_name=filename_)
+    return await send_file(list_files[0], as_attachment=True, download_name=filename_)
 
     # # Create a response object
     # response = make_response(send_file(list_files[0], as_attachment=True, download_name=filename_))
