@@ -99,7 +99,7 @@ async def get_file():
         return response
     
     filename_ = re.split(r"[/\\]",list_files[0])[-1]
-    return await send_file(list_files[0], as_attachment=True, download_name=filename_)
+    return send_file(list_files[0], as_attachment=True, download_name=filename_)
 
     # # Create a response object
     # response = make_response(send_file(list_files[0], as_attachment=True, download_name=filename_))
