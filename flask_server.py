@@ -73,9 +73,9 @@ async def get_file():
     if file_format == 'mp4':
         print('file_format', file_format)
         # ydl_opts['format'] = 'bestvideo[height<=1080][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best'
-        ydl_opts['format'] = 'bestvideo*[ext=mp4]+bestaudio[ext=mp4]/bestvideo+bestaudio'
+        ydl_opts['format'] = 'bestvideo*[ext=mp4]+bestaudio[ext=mp4]'
     elif file_format == 'bestaudio':
-        ydl_opts['format'] = 'bestaudio[ext=mp4]/bestaudio'
+        ydl_opts['format'] = 'bestaudio[ext=mp4]'
         # ydl_opts['postprocessors'] = [{
         #     'key': 'FFmpegExtractAudio',
         #     'preferredcodec': 'mp3',
