@@ -57,7 +57,7 @@ def remove_file(file):
             print(e)
 
 @app.route('/api/file')
-def get_file():
+async def get_file():
     # try:
     # pop the parameters from the url
     parameters = request.args.to_dict()
