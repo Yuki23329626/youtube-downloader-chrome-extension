@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, send_file, request, after_this_request, make_response
+import asyncio
 import yt_dlp
 import logging
 import glob
@@ -73,7 +74,7 @@ async def get_file():
     if file_format == 'mp4':
         print('file_format', file_format)
         # ydl_opts['format'] = 'bestvideo[height<=1080][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best'
-        ydl_opts['format'] = 'bestvideo*[ext=mp4]+bestaudio[ext=mp4]'
+        ydl_opts['format'] = 'bestvideo*[ext=webm]+bestaudio[ext=webm]'
     elif file_format == 'bestaudio':
         ydl_opts['format'] = 'bestaudio[ext=mp4]'
         # ydl_opts['postprocessors'] = [{
@@ -94,6 +95,7 @@ async def get_file():
         return response
     
     filename_ = re.split(r"[/\\]",list_files[0])[-1]
+    asyncio.sleep(1)
     return send_file(list_files[0], as_attachment=True, download_name=filename_)
 
     # # Create a response object
