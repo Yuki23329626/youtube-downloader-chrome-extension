@@ -95,7 +95,6 @@ async def get_file():
         return response
     
     filename_ = re.split(r"[/\\]",list_files[0])[-1]
-    asyncio.sleep(1)
     return send_file(list_files[0], as_attachment=True, download_name=filename_)
 
     # # Create a response object
