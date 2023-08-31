@@ -95,7 +95,13 @@ async def get_file():
         t = Thread(target=remove_file, args=(list_files[0],))
         t.start()
         return response
-    filename_ = os.path.basename(Path(list_files[0]))
+    
+    # Create a Path object
+    path_obj = Path(list_files[0])
+
+    # Extract the file name using Path.name
+    filename_ = path_obj.name
+    
     return send_file(list_files[0], as_attachment=True, download_name=filename_)
 
     # # Create a response object
