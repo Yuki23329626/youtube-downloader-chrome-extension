@@ -27,7 +27,7 @@ def my_hook(d):
         global filename
         # filename = d['info_dict']['title']
         filename = d['filename'].split('.')[0]
-        print("filename=", filename)
+        print("\nfilename=", filename)
 
 
 # options for the yt-dlp(github project)
@@ -94,7 +94,7 @@ async def get_file():
         t = Thread(target=remove_file, args=(list_files[0],))
         t.start()
         return response
-    filename_ = re.split(r"[/\\]",list_files[0])[-1]
+    filename_ = os.path.basename(list_files[0])
     return send_file(list_files[0], as_attachment=True, download_name=filename_)
 
     # # Create a response object
