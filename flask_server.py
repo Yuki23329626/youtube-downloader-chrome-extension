@@ -93,7 +93,7 @@ async def get_file():
         t = Thread(target=remove_file, args=(list_files[0],))
         t.start()
         return response
-    
+    print("list_files[0]: ", list_files[0])
     filename_ = re.split(r"[/\\]",list_files[0])[-1]
     return send_file(list_files[0], as_attachment=True, download_name=filename_)
 
