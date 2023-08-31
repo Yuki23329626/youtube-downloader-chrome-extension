@@ -1,7 +1,7 @@
 {
-  "name": "Light Youtube Downloder",
+  "name": "Lite Youtube Downloder",
   "description": "Base Level Extension",
-  "version": "1.0",
+  "version": "1.1",
   "manifest_version": 3,
   "action": {
     "default_popup": "index.html",
@@ -10,9 +10,22 @@
   "permissions": [
     "tabs",
     "notifications",
-    "downloads"
+    "downloads",
+    "webRequest",
+    "webNavigation",
+    "activeTab"
   ],
   "host_permissions": [
     "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "service-worker.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.youtube.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_start"
+    }
   ]
 }
