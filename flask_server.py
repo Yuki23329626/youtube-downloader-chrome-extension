@@ -27,6 +27,7 @@ def my_hook(d):
         global filename
         # filename = d['info_dict']['title']
         filename = d['filename'].split('.')[0]
+        print("filename=", filename)
 
 
 # options for the yt-dlp(github project)
