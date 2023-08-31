@@ -7,6 +7,7 @@ import os
 import time
 from threading import Thread
 import re
+from pathlib import Path
 
 filename = ''
 SAVE_PATH = 'cache/'
@@ -94,7 +95,7 @@ async def get_file():
         t = Thread(target=remove_file, args=(list_files[0],))
         t.start()
         return response
-    filename_ = os.path.basename(list_files[0])
+    filename_ = os.path.basename(Path(list_files[0]))
     return send_file(list_files[0], as_attachment=True, download_name=filename_)
 
     # # Create a response object
