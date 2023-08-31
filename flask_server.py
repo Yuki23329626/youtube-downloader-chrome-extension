@@ -22,8 +22,9 @@ logging.basicConfig(level=logging.DEBUG,
 # get the final filename after downloading the file
 
 
-def my_hook(d):
+async def my_hook(d):
     if d['status'] == 'finished':
+        time.sleep(1)
         global filename
         # filename = d['info_dict']['title']
         filename = d['filename'].split('.')[0]
