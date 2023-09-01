@@ -111,8 +111,12 @@ async def get_file():
 
     # Extract the file name using Path.name
     filename_ = path_obj.name
+
+    if True:
+        error_message = "An error occurred."
+        return jsonify({'error': error_message}), 400  # HTTP 400 Bad Request
     
-    return send_file(SAVE_PATH+list_files[0], as_attachment=False, download_name=filename_)
+    return send_file(SAVE_PATH+list_files[0], as_attachment=True, download_name=filename_)
 
     # # Create a response object
     # response = make_response(send_file(list_files[0], as_attachment=True, download_name=filename_))
