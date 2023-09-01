@@ -86,7 +86,8 @@ async def get_file():
         # }]
 
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-        ydl.download(url)
+        if(not ydl.download(url)):
+           return 'error'
     # print('filename2:', filename)
     # list_files = glob.glob(filename + '*')
 

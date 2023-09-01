@@ -11,10 +11,11 @@ host = 'http://nxshen.csie.io:5000/api/file'
 // });
 
 async function getCurrentTab() {
-    let queryOptions = { active: true, lastFocusedWindow: true };
+    let queryOptions = { active: true };
     // `tab` will either be a `tabs.Tab` instance or `undefined`.
     let [tab] = await chrome.tabs.query(queryOptions);
     console.log('tab', tab)
+    
     return tab.url;
 }
 
