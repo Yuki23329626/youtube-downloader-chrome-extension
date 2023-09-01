@@ -5,7 +5,7 @@
   "manifest_version": 3,
   "action": {
     "default_popup": "index.html",
-    "default_icon": "youtube-downloader.png"
+    "default_icon": "youtube-downloader-v2.png"
   },
   "permissions": [
     "tabs",
