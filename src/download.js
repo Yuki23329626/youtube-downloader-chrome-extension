@@ -42,6 +42,7 @@ async function start_download(format) {
         saveAs: false
     }).then((result) => {
         document.getElementById("p1").innerHTML = "Finshed";
+        document.getElementById("p1").innerHTML = result;
     }).catch((err) => {
         document.getElementById("p1").innerHTML = err;
     });
