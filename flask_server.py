@@ -87,8 +87,17 @@ async def get_file():
 
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
         ydl.download(url)
-    print('filename2:', filename)
-    list_files = glob.glob(filename + '*')
+    # print('filename2:', filename)
+    # list_files = glob.glob(filename + '*')
+
+    
+    relative_path = SAVE_PATH
+    prefix = filename.split('/')[-1].split('\\')[-1]
+    print("prefix:", prefix)
+
+    absolute_path = os.path.abspath(relative_path)
+    list_files = [file for file in os.listdir(absolute_path) if file.startswith(prefix)]
+
     print('list_files:', list_files)
     
     @after_this_request
