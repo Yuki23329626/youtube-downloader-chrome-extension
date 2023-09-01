@@ -15,7 +15,7 @@ async function getCurrentTab() {
     // `tab` will either be a `tabs.Tab` instance or `undefined`.
     let [tab] = await chrome.tabs.query(queryOptions);
     console.log('tab', tab)
-    
+
     return tab.url;
 }
 
@@ -43,7 +43,7 @@ async function start_download(format) {
     }).then((result) => {
         document.getElementById("p1").innerHTML = "Finshed";
     }).catch((err) => {
-        // document.getElementById("p1").innerHTML = err;
+        document.getElementById("p1").innerHTML = err;
         return err
     });
 
