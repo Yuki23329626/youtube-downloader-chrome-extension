@@ -112,7 +112,7 @@ async def get_file():
     # Extract the file name using Path.name
     filename_ = path_obj.name
     
-    return send_file(SAVE_PATH+list_files[0], as_attachment=False, download_name=filename_)
+    return send_file(SAVE_PATH+list_files[0], as_attachment=True, download_name=filename_)
 
     # # Create a response object
     # response = make_response(send_file(list_files[0], as_attachment=True, download_name=filename_))
