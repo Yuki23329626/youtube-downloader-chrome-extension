@@ -3,6 +3,9 @@
   "description": "Base Level Extension",
   "version": "1.1",
   "manifest_version": 3,
+  "icon":{
+    "128": "youtube-downloader-v2.png"
+  },
   "action": {
     "default_popup": "index.html",
     "default_icon": "youtube-downloader-v2.png"
