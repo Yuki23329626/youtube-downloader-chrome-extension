@@ -28,7 +28,7 @@ def my_hook(d):
         global filename
         # filename = d['info_dict']['title']
         filename = d['filename'].split('.')[0]
-        print("\nfilename=", filename)
+        print("\nfilename1:", filename)
 
 
 # options for the yt-dlp(github project)
@@ -87,9 +87,9 @@ async def get_file():
 
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
         ydl.download(url)
-    print('filename: ', filename)
+    print('filename2:', filename)
     list_files = glob.glob(filename + '*')
-    print('list_files: ', list_files)
+    print('list_files:', list_files)
     
     @after_this_request
     def after_request(response):
