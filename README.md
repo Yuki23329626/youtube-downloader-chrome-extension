@@ -1,4 +1,4 @@
-# Youtube-Download
+# Lite Youtube Downloader - Chrome Extension
 
 ## Compile
 
