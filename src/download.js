@@ -11,7 +11,7 @@ host = 'http://nxshen.csie.io:5000/api/file'
 // });
 
 async function getCurrentTab() {
-    let queryOptions = { active: true , pinned: ture};
+    let queryOptions = { active: true, currentWindow: true};
     // `tab` will either be a `tabs.Tab` instance or `undefined`.
     let [tab] = await chrome.tabs.query(queryOptions);
     console.log('tab', tab)
