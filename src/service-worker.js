@@ -1,13 +1,13 @@
 // Listen for navigation events
 chrome.webNavigation.onBeforeNavigate.addListener(details => {
   // Check if the navigation is happening on a specific URL
-  if (details.url.startsWith("https://www.youtube.com/shorts/")) {
+  // String to replace
+  const startingString = "https://www.youtube.com/shorts/";
+  if (details.url.startsWith(startingString)) {
     // Modify the URL to redirect
     // Original string
     const originalString = details.url;
 
-    // String to replace
-    const startingString = "https://www.youtube.com/shorts/";
     const replacementString = "https://www.youtube.com/watch?v=";
 
     // Use regular expression to replace startingString with replacementString
