@@ -40,10 +40,10 @@ async function start_download(format) {
     chrome.downloads.download({
         url: host + '?url=' + current_url + format,
         saveAs: false
-    }).then((result) => {
-        document.getElementById("p1").innerHTML = "Finshed";
     }).catch((err) => {
         document.getElementById("p1").innerHTML = err;
+    }).then((result) => {
+        document.getElementById("p1").innerHTML = "Finshed";
     });
 
     // Cannot download files via fetch as a chrome extension through fetch()
