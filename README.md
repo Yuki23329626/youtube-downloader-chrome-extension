@@ -1,4 +1,5 @@
 # Lite Youtube Downloader - Chrome Extension
+Based on the GitHub project yt-dlp  
 
 ## Compile
 
