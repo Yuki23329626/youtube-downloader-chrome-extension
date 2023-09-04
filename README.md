@@ -45,7 +45,7 @@ Feel free to report them.
 
 To obtain a standalone pyinstaller for a project which contains yt-dlp,  
 You can follow the instructions of the origin GitHub project(yt-dlp)   
-in order to compile your own project.  
+to compile your own project.  
 
 > PyInstaller is a popular Python packaging tool  
 > that allows you to convert Python applications into standalone executables (or standalone apps) 
