@@ -32,7 +32,7 @@ Based on the GitHub project yt-dlp
 ## Compile
 
 To obtain a standalone pyinstaller for a project which contains yt-dlp,  
-You can follow the instructions of the origin project(yt-dlp)   
+You can follow the instructions of the origin GitHub project(yt-dlp)   
 in order to compile your own project.  
 
 > PyInstaller is a popular Python packaging tool  
