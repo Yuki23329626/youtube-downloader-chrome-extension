@@ -23,9 +23,9 @@ Feel free to report them.
 4. Run a Python server on your host with the script:  
    Make sure your device has Python3 and pip3 installed
    ```bash
-   admin@host:~$ python --version
+   admin@host:~$ python3 --version
    Python 3.8.10
-   admin@host:~$ pip --version
+   admin@host:~$ pip3 --version
    pip 20.0.2 from /usr/lib/python3/dist-packages/pip (python 3.8)
    ```
    This script will start the server and make sure the other Python packages are installed:  
