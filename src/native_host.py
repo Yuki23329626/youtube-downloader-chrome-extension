@@ -3,10 +3,11 @@ import json
 import logging
 import os
 import struct
-import yt_dlp
+# import yt_dlp
 import logging
 import time
 from pathlib import Path
+import nativemessaging
 
 
 filename = ''
@@ -51,55 +52,10 @@ def process_message(message):
     return response
 
 def main():
-    # # 1.windows：\r\n -> \n
-    # if sys.platform == "win32":
-    #     import msvcrt
-    #     msvcrt.setmode(sys.stdin.fileno(), os.O_BINARY)
-    #     msvcrt.setmode(sys.stdout.fileno(), os.O_BINARY)
-
     while True:
-        try:
-            ctl = CrxToLocal()
-            ctl.read_message()
-            logging.info("Receiving message...")
-            ctl.handle_message()
-            logging.info("Processing...")
-            ctl.send_message()
-            logging.info("Returning result...")
-        except Exception as e:
-            logging.exception(e)
-
-
-class CrxToLocal:
-    def __init__(self):
-        self._input_body = None
-        self._output_body = None
-
-    def read_message(self):
-        # reading stdin msg-header(first 4 bytes).
-        text_length_bytes = sys.stdin.buffer.read(4)
-
-        # Unpack message length as 4 byte integer, tuple = struct.unpack(fmt, buffer).
-        text_length = struct.unpack("I", text_length_bytes)[0]
-
-        # reading stdin msg-body bytes
-        self._input_body = sys.stdin.buffer.read(text_length)
-
-    def handle_message(self):
-        # with open("./local_file.json", "a", encoding="utf-8") as f:
-        #     json.dump(json.loads(self._input_body, encoding="utf-8"), f, ensure_ascii=False, indent=2)
-        json_message = json.loads(self._input_body)
-        logging.info("message: " + json.dumps(json_message))
-
-        # _output_body need to be JSON utf-8 bytes
-        self._output_body = json.dumps({"response": "Nice to meet you."}).encode("utf-8")
-
-    def send_message(self):
-        # write msg-header to stdout, I means int type which contians 4 bytes，reference: python-doc/library/struct
-        sys.stdout.buffer.write(struct.pack("I", len(self._output_body)))
-        # write msg-body to stdout
-        sys.stdout.buffer.write(self._output_body)
-        sys.stdout.flush()
+        message = nativemessaging.get_message()
+        if message == "hello":
+            nativemessaging.send_message(nativemessaging.encode_message("world"))
 
 
 if __name__ == "__main__":

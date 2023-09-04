@@ -35,24 +35,33 @@ document.getElementById("btn_download_audio").addEventListener(
     false
 );
 
+function onReceived(response) {
+    console.log("response:", response);
+}
+
 async function start_download(format) {
     format = '&format=' + format
     current_url = await getCurrentTab()
-    console.log('current_url=', current_url)
+    // console.log('current_url=', current_url)
     document.getElementById("p1").innerHTML = "Processing, please wait...";
 
     target_url = host + '?url=' + current_url + format
-    chrome.runtime.sendMessage({ action: 'DOWNLOAD', request_url: target_url });
+    console.log('target_url=', target_url)
+    // chrome.runtime.sendNativeMessage({ action: 'DOWNLOAD', request_url: target_url });
+    // runtime.connectNative
+    // var port = chrome.runtime.connectNative("com.example.nativeapp");
+    // port.onMessage.addListener(onReceived);
+    // port.postMessage("hello");
 
-    // chrome.downloads.download({
-    //     url: target_url,
-    //     saveAs: false
-    // }).then((result) => {
-    //     document.getElementById("p1").innerHTML = "Finshed";
-    //     // document.getElementById("p1").innerHTML = result;
-    // }).catch((err) => {
-    //     document.getElementById("p1").innerHTML = err;
-    // });
+    chrome.downloads.download({
+        url: target_url,
+        saveAs: false
+    }).then((result) => {
+        document.getElementById("p1").innerHTML = "Finshed";
+        // document.getElementById("p1").innerHTML = result;
+    }).catch((err) => {
+        document.getElementById("p1").innerHTML = err;
+    });
 
     // Cannot download files via fetch as a chrome extension through fetch()
     // fetch('http://localhost:5000/api/file?url=' + current_url, {cache:"no-store"})

@@ -68,9 +68,9 @@ async def get_file():
     request_string = request.url
     print('request_string', request_string)
     logging.info('\n[Success]: ' + request_string)
+    file_format = parameters.get('format')
     url = parameters.get('url')
     print('url', url)
-    file_format = parameters.get('format')
 
     # choose the file format you want, some versions of python3 cannot use match function
     if file_format == 'mp4':
