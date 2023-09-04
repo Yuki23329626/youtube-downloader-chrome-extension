@@ -54,7 +54,7 @@ def remove_file(list_files):
     # time.sleep(20)
     for file in list_files:
         try:
-            logging.info('removing files:', SAVE_PATH+file)
+            logging.info('removing files: ' + SAVE_PATH+file)
             os.remove(SAVE_PATH+file)
         except Exception as e:
             logging.error(e)
@@ -98,7 +98,7 @@ async def get_file():
     absolute_path = os.path.abspath(relative_path)
     list_files = [file for file in os.listdir(absolute_path) if file.startswith(prefix)]
 
-    logging.info('list_files:', list_files)
+    logging.info('list_files: '+ list_files)
     
     @after_this_request
     def after_request(response):
