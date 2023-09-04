@@ -10,7 +10,7 @@ Based on the GitHub project yt-dlp
    For example, host = 'http://the.host.url.you.want:5000/api/file'  
    We are going the run the server on this device with port 5000  
 
-3. Run the script on your host:
+3. Run the script on your host:  
    Make sure your device has Python3 and pip3 installed  
    ```bash
    sh run_wsgi_ws.sh
