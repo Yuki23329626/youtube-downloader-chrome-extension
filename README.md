@@ -17,7 +17,7 @@ Based on the GitHub project yt-dlp
 
 4. Run the script on your host:  
    Make sure your device has Python3 and pip3 installed  
-   This script will make sure the other Python packages are installed:  
+   This script will start the server and make sure the other Python packages are installed:  
    ```bash
    sh run_wsgi_ws.sh
    ```
