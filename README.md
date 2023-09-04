@@ -10,6 +10,8 @@ Based on the GitHub project yt-dlp
    For example:
    ```javascript
    host = 'http://the.host.url.you.want:5000/api/file'
+   # Such as
+   # host = 'http://localhost:5000/api/file'
    ``` 
    We are going the run the server on this device with port 5000  
 
