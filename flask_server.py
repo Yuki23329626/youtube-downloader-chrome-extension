@@ -17,9 +17,8 @@ if not os.path.exists(SAVE_PATH):
 
 logging.basicConfig(level=logging.INFO,
                     format='%(levelname)-8s %(asctime)s %(message)s',
-                    mode='a',
                     datefmt='%Y-%m-%d %H:%M:%S',
-                    handlers=[logging.FileHandler(SAVE_PATH + 'log.ytdlp_lite', 'w', 'utf-8'),])
+                    handlers=[logging.FileHandler(SAVE_PATH + 'log.ytdlp_lite', 'w', 'utf-8',mode='a'),])
 
 # get the final filename after downloading the file
 
