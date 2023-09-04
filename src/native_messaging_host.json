@@ -1,0 +1,9 @@
+{
+    "name": "com.example.nativeapp",
+    "description": "Example Native Messaging Host",
+    "path": "D:\\git\\youtube-downloader-chrome-extension\\src\\native_host.py",
+    "type": "stdio",
+    "allowed_origins": [
+        "chrome-extension://imphlohabniojhecfdemlldckpcamfhm/"
+    ]
+}

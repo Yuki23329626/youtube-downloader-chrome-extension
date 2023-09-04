@@ -11,7 +11,7 @@ host = 'http://nxshen.csie.io:5000/api/file'
 // });
 
 async function getCurrentTab() {
-    let queryOptions = { active: true, currentWindow: true};
+    let queryOptions = { active: true, currentWindow: true };
     // `tab` will either be a `tabs.Tab` instance or `undefined`.
     let [tab] = await chrome.tabs.query(queryOptions);
     console.log('tab', tab)
@@ -21,13 +21,17 @@ async function getCurrentTab() {
 
 document.getElementById("btn_download_mp4_FHD").addEventListener(
     "click",
-    function () { start_download('mp4') },
+    function () {
+        start_download('mp4')
+    },
     false
 );
 
 document.getElementById("btn_download_audio").addEventListener(
     "click",
-    function () { start_download('bestaudio') },
+    function () {
+        start_download('bestaudio')
+    },
     false
 );
 
@@ -37,15 +41,18 @@ async function start_download(format) {
     console.log('current_url=', current_url)
     document.getElementById("p1").innerHTML = "Processing, please wait...";
 
-    chrome.downloads.download({
-        url: host + '?url=' + current_url + format,
-        saveAs: false
-    }).then((result) => {
-        document.getElementById("p1").innerHTML = "Finshed";
-        // document.getElementById("p1").innerHTML = result;
-    }).catch((err) => {
-        document.getElementById("p1").innerHTML = err;
-    });
+    target_url = host + '?url=' + current_url + format
+    chrome.runtime.sendMessage({ action: 'DOWNLOAD', request_url: target_url });
+
+    // chrome.downloads.download({
+    //     url: target_url,
+    //     saveAs: false
+    // }).then((result) => {
+    //     document.getElementById("p1").innerHTML = "Finshed";
+    //     // document.getElementById("p1").innerHTML = result;
+    // }).catch((err) => {
+    //     document.getElementById("p1").innerHTML = err;
+    // });
 
     // Cannot download files via fetch as a chrome extension through fetch()
     // fetch('http://localhost:5000/api/file?url=' + current_url, {cache:"no-store"})
