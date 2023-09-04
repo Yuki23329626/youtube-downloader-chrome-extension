@@ -57,7 +57,7 @@ def remove_file(file):
             print('removing files:', file)
             os.remove(glob.glob(file)[0])
         except Exception as e:
-            print(e)
+            logging.error(e)
 
 @app.route('/api/file')
 async def get_file():
