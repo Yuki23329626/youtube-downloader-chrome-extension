@@ -31,6 +31,10 @@ Based on the GitHub project yt-dlp
    # bash of your device
    sh run_wsgi_ws.sh
    ```
+   If you want to stop the server, run the following bash command:
+   ```bash
+   sh kill_gunicorn.sh
+   ```
 6. Open the page of the YouTube video you want to download,  
    Click the icon of the loaded Chrome extension to download the video or audio you want  
 
