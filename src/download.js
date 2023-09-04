@@ -49,9 +49,10 @@ async function start_download(format) {
     console.log('target_url=', target_url)
     // chrome.runtime.sendNativeMessage({ action: 'DOWNLOAD', request_url: target_url });
     // runtime.connectNative
-    // var port = chrome.runtime.connectNative("com.example.nativeapp");
-    // port.onMessage.addListener(onReceived);
-    // port.postMessage("hello");
+
+    var port = chrome.runtime.connectNative("com.example.nativeapp");
+    port.onMessage.addListener(onReceived);
+    port.postMessage("hello");
 
     chrome.downloads.download({
         url: target_url,

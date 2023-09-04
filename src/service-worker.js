@@ -19,19 +19,19 @@ chrome.webNavigation.onBeforeNavigate.addListener(details => {
   }
 });
 
-// Listen for messages from the popup script.
-chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
-  if (message.action === 'DOWNLOAD') {
-    // Perform the desired action in response to the message.
-    console.log('Action DOWNLOAD triggered in the service-worker script');
-    // download
-    var port = chrome.runtime.connectNative('com.example.nativeapp');
-    port.onMessage.addListener(function (msg) {
-      console.log('NativeApp - Received:', msg);
-    });
-    port.onDisconnect.addListener(function () {
-      console.log('NativeApp - Disconnected');
-    });
-    port.postMessage({ text: 'Hello, my_application' });
-  }
-});
+// // Listen for messages from the popup script.
+// chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
+//   if (message.action === 'DOWNLOAD') {
+//     // Perform the desired action in response to the message.
+//     console.log('Action DOWNLOAD triggered in the service-worker script');
+//     // download
+//     var port = chrome.runtime.connectNative('com.example.nativeapp');
+//     port.onMessage.addListener(function (msg) {
+//       console.log('NativeApp - Received:', msg);
+//     });
+//     port.onDisconnect.addListener(function () {
+//       console.log('NativeApp - Disconnected');
+//     });
+//     port.postMessage({ text: 'Hello, my_application' });
+//   }
+// });

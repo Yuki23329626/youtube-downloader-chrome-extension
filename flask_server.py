@@ -10,7 +10,7 @@ from threading import Thread
 from pathlib import Path
 
 filename = ''
-SAVE_PATH = 'cache/' # may replace by random number
+SAVE_PATH = 'cache/' # may replace by random number in future
 if not os.path.exists(SAVE_PATH):
     os.makedirs(SAVE_PATH)
 # print('SAVE_PATH', SAVE_PATH)

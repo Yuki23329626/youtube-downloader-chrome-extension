@@ -3,7 +3,7 @@ import json
 import logging
 import os
 import struct
-# import yt_dlp
+import yt_dlp
 import logging
 import time
 from pathlib import Path
@@ -46,17 +46,15 @@ ydl_opts = {
     'nooverwrites': False
 }
 
-def process_message(message):
-    # Process the message and prepare a response.
-    response = {'message': f'Received message from extension: {message["text"]}'}
-    return response
-
 def main():
     while True:
-        message = nativemessaging.get_message()
-        if message == "hello":
-            nativemessaging.send_message(nativemessaging.encode_message("world"))
-
+        try:
+            message = nativemessaging.get_message()
+            if message == "hello":
+                nativemessaging.send_message(nativemessaging.encode_message("world"))
+        except Exception as e:
+            logging.exception(e)
+            break
 
 if __name__ == "__main__":
     main()
