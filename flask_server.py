@@ -15,7 +15,7 @@ if not os.path.exists(SAVE_PATH):
     os.makedirs(SAVE_PATH)
 # print('SAVE_PATH', SAVE_PATH)
 
-logging.basicConfig(level=logging.DEBUG,
+logging.basicConfig(level=logging.INFO,
                     format='%(levelname)-8s %(asctime)s %(message)s',
                     datefmt='%Y-%m-%d %H:%M:%S',
                     handlers=[logging.FileHandler(SAVE_PATH + 'log.ytdlp_lite', 'w', 'utf-8'),])
