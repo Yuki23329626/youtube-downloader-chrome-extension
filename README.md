@@ -28,12 +28,10 @@ Based on the GitHub project yt-dlp
    ```
    This script will start the server and make sure the other Python packages are installed:  
    ```bash
-   # bash
    sh run_wsgi_ws.sh
    ```
    If you want to stop the server, run the following bash command:
    ```bash
-   # bash
    sh kill_gunicorn.sh
    ```
 6. Open the page of the YouTube video you want to download,  
