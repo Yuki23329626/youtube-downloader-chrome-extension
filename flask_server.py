@@ -50,12 +50,12 @@ app = Flask(__name__)
 
 # Remove downloaded file after serve the target file to the client
 
-def remove_file(file):
+def remove_file(list_files):
     # time.sleep(20)
-    while glob.glob(file):
+    for file in list_files:
         try:
-            logging.info('removing files:', file)
-            os.remove(glob.glob(file)[0])
+            logging.info('removing files:', SAVE_PATH+file)
+            os.remove(SAVE_PATH+file)
         except Exception as e:
             logging.error(e)
 
@@ -98,11 +98,11 @@ async def get_file():
     absolute_path = os.path.abspath(relative_path)
     list_files = [file for file in os.listdir(absolute_path) if file.startswith(prefix)]
 
-    print('list_files:', list_files)
+    logging.debug('list_files:', list_files)
     
     @after_this_request
     def after_request(response):
-        t = Thread(target=remove_file, args=(list_files[0],))
+        t = Thread(target=remove_file, args=(list_files,))
         t.start()
         return response
     
