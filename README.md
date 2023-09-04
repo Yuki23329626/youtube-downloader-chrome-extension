@@ -14,6 +14,7 @@ Based on the GitHub project yt-dlp
    host = 'http://the.host.url.you.want:5000/api/file'
    // Such as
    // host = 'http://localhost:5000/api/file'
+   // host = 'http://127.0.0.1:5000/api/file'
    ``` 
    We are going the run the Python server on this device with port 5000  
 
