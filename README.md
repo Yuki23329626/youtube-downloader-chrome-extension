@@ -17,10 +17,11 @@ Based on the GitHub project yt-dlp
 
 4. Run the script on your host:  
    Make sure your device has Python3 and pip3 installed  
+   This script will make sure the other python packages installed:  
    ```bash
    sh run_wsgi_ws.sh
    ```
-5. Open the page of the YouTube video you want to download,  
+6. Open the page of the YouTube video you want to download,  
    Click the icon of the loaded Chrome extension to download the video or audio you want  
 
 ## Compile
