@@ -51,10 +51,10 @@ app = Flask(__name__)
 # Remove downloaded file after serve the target file to the client
 
 def remove_file(file):
-    time.sleep(20)
+    # time.sleep(20)
     while glob.glob(file):
         try:
-            print('removing files:', file)
+            logging.info('removing files:', file)
             os.remove(glob.glob(file)[0])
         except Exception as e:
             logging.error(e)
