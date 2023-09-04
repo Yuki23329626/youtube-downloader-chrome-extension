@@ -19,6 +19,7 @@ Based on the GitHub project yt-dlp
    Make sure your device has Python3 and pip3 installed  
    This script will start the server and make sure the other Python packages are installed:  
    ```bash
+   # bash of your device
    sh run_wsgi_ws.sh
    ```
 6. Open the page of the YouTube video you want to download,  
