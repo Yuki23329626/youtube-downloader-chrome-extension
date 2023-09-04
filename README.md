@@ -31,7 +31,8 @@ Based on the GitHub project yt-dlp
 
 ## Compile
 
-You can follow the instructions of the origin project(yt-dlp) to install the standalone pyinstaller  
+To install a standalone pyinstaller for yt-dlp,  
+You can follow the instructions of the origin project(yt-dlp)   
 in order to compile your own project.  
 
 See [description_about_yt-dlp](https://github.com/yt-dlp/yt-dlp#compile)  
