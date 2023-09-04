@@ -19,7 +19,13 @@ Based on the GitHub project yt-dlp
    We are going the run the Python server on this device with port 5000  
 
 4. Run a Python server on your host with the script:  
-   Make sure your device has Python3 and pip3 installed  
+   Make sure your device has Python3 and pip3 installed
+   ```bash
+   admin@host:~$ python --version
+   Python 3.8.10
+   admin@host:~$ pip --version
+   pip 20.0.2 from /usr/lib/python3/dist-packages/pip (python 3.8)
+   ```
    This script will start the server and make sure the other Python packages are installed:  
    ```bash
    # bash of your device
