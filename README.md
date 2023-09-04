@@ -4,7 +4,7 @@ Based on the GitHub project yt-dlp
 ## How to use
 
 1. Load the unpacked Chrome extension on your Chrome browser  
-   The Location of the source code is under the directory src/
+   The path of the source code is under the directory src/
 
 2. Modify the host URL under the file src/download.js  
    For example:
