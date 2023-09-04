@@ -15,6 +15,8 @@ Based on the GitHub project yt-dlp
    ```bash
    sh run_wsgi_ws.sh
    ```
+4. Open the page of the Youtube video you want to download,  
+   click the icon to download the video or audio you want  
 
 ## Compile
 
