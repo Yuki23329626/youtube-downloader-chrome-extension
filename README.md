@@ -32,7 +32,7 @@ Feel free to report them.
    ```bash
    sh run_wsgi_ws.sh
    ```
-   If you want to stop the server, run the following bash command:
+   If you want to stop the server, run the following bash script:
    ```bash
    sh kill_gunicorn.sh
    ```
