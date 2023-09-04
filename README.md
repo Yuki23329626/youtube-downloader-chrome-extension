@@ -13,11 +13,11 @@ Based on the GitHub project yt-dlp
    // Such as
    // host = 'http://localhost:5000/api/file'
    ``` 
-   We are going the run the server on this device with port 5000  
+   We are going the run the Python server on this device with port 5000  
 
 4. Run the script on your host:  
    Make sure your device has Python3 and pip3 installed  
-   This script will make sure the other Python packages installed:  
+   This script will make sure the other Python packages are installed:  
    ```bash
    sh run_wsgi_ws.sh
    ```
