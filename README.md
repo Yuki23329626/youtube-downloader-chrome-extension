@@ -26,11 +26,11 @@ Based on the GitHub project yt-dlp
 6. Open the page of the YouTube video you want to download,  
    Click the icon of the loaded Chrome extension to download the video or audio you want  
 
-# Note(Optional)
+# Note
 
 ## Compile
 
-You should follow the instructions of the origin project(yt-dlp) to install the standalone pyinstaller  
+You can follow the instructions of the origin project(yt-dlp) to install the standalone pyinstaller  
 in order to compile your own project.  
 
 See [description_about_yt-dlp](https://github.com/yt-dlp/yt-dlp#compile)  
