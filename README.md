@@ -3,7 +3,7 @@ Based on the GitHub project [yt-dlp](https://github.com/yt-dlp/yt-dlp)
 Note that this project is under development, so you may encounter several bugs.  
 Feel free to report them.  
 
-## How to use
+## How to use - Client-Server version
 
 1. Load the unpacked Chrome extension(directory) on your Chrome browser  
    The path of the source code is under the directory src/  
