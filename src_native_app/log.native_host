@@ -1,16 +1,38 @@
-[INFO][2023-09-04 15:03:51,240] Start
-[INFO][2023-09-04 15:10:35,621] Start
-[INFO][2023-09-04 15:10:49,700] Start
-[INFO][2023-09-04 15:13:05,985] Start
-[INFO][2023-09-04 15:57:42,281] Start
-[INFO][2023-09-04 16:39:46,743] Start
-[INFO][2023-09-05 11:18:50,006] Start
-[ERROR][2023-09-05 11:18:50,006] 'str' object has no attribute 'startwith'
-Traceback (most recent call last):
-  File "C:\Users\mishen\Documents\youtube-downloader-chrome-extension\src\native_host.py", line 53, in main
-    if message.startwith("hello"):
-       ^^^^^^^^^^^^^^^^^
-AttributeError: 'str' object has no attribute 'startwith'
-[INFO][2023-09-05 11:20:28,601] Start
-[INFO][2023-09-05 11:23:46,326] Start
-[INFO][2023-09-05 11:24:39,421] Start
+[INFO][2023-09-05 21:08:21,226] [youtube] Extracting URL: https://www.youtube.com/watch?v=9n1aOSXX180
+SAVE_PATH:  C:\Users\micha\Downloads\
+[youtube] 9n1aOSXX180: Downloading webpage
+[youtube] 9n1aOSXX180: Downloading ios player API JSON
+[youtube] 9n1aOSXX180: Downloading android player API JSON
+[youtube] 9n1aOSXX180: Downloading m3u8 information
+[info] 9n1aOSXX180: Downloading 1 format(s): 140
+Deleting existing file C:\Users\micha\Downloads\Watame definitely did nothing wrong.m4a
+[download] Destination: C:\Users\micha\Downloads\Watame definitely did nothing wrong.m4a
+
+[download]   0.2% of  531.01KiB at   16.94KiB/s ETA 00:31
+[download]   0.6% of  531.01KiB at   49.97KiB/s ETA 00:10
+[download]   1.3% of  531.01KiB at  116.61KiB/s ETA 00:04
+[download]   2.8% of  531.01KiB at  249.87KiB/s ETA 00:02
+[download]   5.8% of  531.01KiB at  507.94KiB/s ETA 00:00
+[download]  11.9% of  531.01KiB at  433.37KiB/s ETA 00:01
+[download]  23.9% of  531.01KiB at  548.21KiB/s ETA 00:00
+[download]  48.0% of  531.01KiB at  575.93KiB/s ETA 00:00
+[download]  96.2% of  531.01KiB at  495.98KiB/s ETA 00:00
+[download] 100.0% of  531.01KiB at  514.90KiB/s ETA 00:00
+[download] 100% of  531.01KiB in 00:00:02 at 261.90KiB/s 
+[FixupM4a] Correcting container of "C:\Users\micha\Downloads\Watame definitely did nothing wrong.m4a"
+Success: https://www.youtube.com/watch?v=9n1aOSXX180&format=bestaudio
+[INFO][2023-09-05 21:08:21,226] Success: https://www.youtube.com/watch?v=9n1aOSXX180&format=bestaudio
+[INFO][2023-09-05 21:34:04] Processing: https://www.youtube.com/watch?v=9n1aOSXX180&format=bestaudio
+[INFO][2023-09-05 21:34:06] Success: https://www.youtube.com/watch?v=9n1aOSXX180&format=bestaudio
+[INFO][2023-09-05 21:36:58] Processing: https://www.youtube.com/watch?v=9n1aOSXX180&format=bestaudio
+[INFO][2023-09-05 21:37:00] Success: https://www.youtube.com/watch?v=9n1aOSXX180&format=bestaudio
+[INFO][2023-09-05 21:39:09] Processing: https://www.youtube.com/watch?v=9n1aOSXX180&format=bestaudio
+[INFO][2023-09-05 21:39:12] Success: https://www.youtube.com/watch?v=9n1aOSXX180&format=bestaudio
+[INFO][2023-09-05 22:30:02] Processing: https://www.youtube.com/watch?v=id3JORLgN9I&list=RDid3JORLgN9I&start_radio=1&format=bestaudio
+[INFO][2023-09-05 22:30:05] Success: https://www.youtube.com/watch?v=id3JORLgN9I&list=RDid3JORLgN9I&start_radio=1&format=bestaudio
+[INFO][2023-09-05 22:31:58] Processing: https://www.youtube.com/watch?v=id3JORLgN9I&list=RDid3JORLgN9I&start_radio=1&format=bestaudio
+[INFO][2023-09-05 22:32:00] Success: https://www.youtube.com/watch?v=id3JORLgN9I&list=RDid3JORLgN9I&start_radio=1&format=bestaudio
+[INFO][2023-09-05 22:32:57] Processing: https://www.youtube.com/watch?v=id3JORLgN9I&list=RDid3JORLgN9I&start_radio=1&format=bestaudio
+[INFO][2023-09-05 22:32:59] Success: https://www.youtube.com/watch?v=id3JORLgN9I&list=RDid3JORLgN9I&start_radio=1&format=bestaudio
+[INFO][2023-09-05 22:42:46] Processing: https://www.youtube.com/watch?v=sMseGNG54sw&format=bestaudio
+[INFO][2023-09-05 22:42:49] Success: https://www.youtube.com/watch?v=sMseGNG54sw&format=bestaudio

@@ -27,6 +27,7 @@ document.getElementById("btn_download_audio").addEventListener(
 
 function onReceived(response) {
     console.log("response:", response);
+    document.getElementById("p1").innerHTML = response;
 }
 
 async function start_download(format) {

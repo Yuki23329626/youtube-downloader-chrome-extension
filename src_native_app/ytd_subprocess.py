@@ -7,13 +7,8 @@ import yt_dlp
 import logging
 import time
 from pathlib import Path
-import nativemessaging
 from urllib.parse import urlparse, parse_qs
 import subprocess
-
-FORMAT = '[%(levelname)s][%(asctime)s] %(message)s'
-logging.basicConfig(handlers=[logging.FileHandler(filename='log.ytd_subprocess', encoding='utf-8')], format=FORMAT, level=logging.INFO)
-logging.info("Start")
 
 filename = ''
 filepath = ''
@@ -28,16 +23,15 @@ if not os.path.exists(SAVE_PATH):
 script_path = os.path.dirname(os.path.abspath(__file__))
 os.chdir(script_path)
 
+FORMAT = '[%(levelname)s][%(asctime)s] %(message)s'
+logging.basicConfig(handlers=[logging.FileHandler(filename='log.ytd_subprocess', encoding='utf-8')], format=FORMAT, level=logging.INFO, datefmt = '%Y-%m-%d %H:%M:%S')
+
 def my_hook(d):
     if d['status'] == 'finished':
         global filename, filepath
         # filename = d['info_dict']['title']
         filename = d['filename'].split('.')[0]
         filepath = d['filename']
-        # print("\nfilename1:" + filename)
-        # with open("log.filename", 'w') as file:
-        #     file.write(json.dumps(d, indent=4))
-        nativemessaging.send_message(nativemessaging.encode_message("Successfully Downloaded"))
 
 # options for the yt-dlp(github project)
 ydl_opts = {
@@ -56,8 +50,9 @@ ydl_opts = {
 
 def main():
     # Read input from the main process
-    # input_data = sys.stdin.readline()
-    input_data = "https://www.youtube.com/watch?v=dZbU19tD0qA&format=bestaudio"
+    input_data = sys.stdin.readline().split('\n')[0]
+    logging.info("Input_data: " + input_data)
+    # input_data = "https://www.youtube.com/watch?v=9n1aOSXX180&format=bestaudio"
 
     # Parse the URL
     parsed_url = urlparse(input_data)
@@ -79,8 +74,9 @@ def main():
         ydl_opts['format'] = 'bestaudio[ext=m4a]/bestaudio'
 
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+        # logging.info("YDL")
         ydl.download([request_url])
-    
+
     if os.path.exists(filepath):
         # Get the current time
         current_time = time.time()
@@ -88,6 +84,7 @@ def main():
         os.utime(filepath, (current_time, current_time))
         # Process the input and produce output
         output_data = f"Success: {input_data}"
+        logging.info("Finished: " + request_url)
     else:
         # Process the input and produce output
         output_data = f"Failed: {input_data}"
