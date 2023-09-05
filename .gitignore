@@ -18,3 +18,4 @@ src_native_app/log.ytd_subprocess
 log.native_host
 src_native_app/log.native_host
 src_native_app/ytd_subprocess.py
+src_native_app/log.native_host
