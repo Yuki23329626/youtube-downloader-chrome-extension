@@ -5,6 +5,8 @@ import yt_dlp
 import time
 from urllib.parse import urlparse, parse_qs
 import json
+# import unicodedata
+from plyer import notification
 
 filename = ''
 filepath = ''
@@ -28,8 +30,8 @@ def my_hook(d):
         # filename = d['info_dict']['title']
         filename = d['filename'].split('.')[0]
         filepath = d['info_dict']['filename']
-        # with open('log.d','w') as f:
-        #     f.write(json.dumps(d, indent=4))
+        with open('log.d','w') as f:
+            f.write(json.dumps(d, indent=4))
 
 # options for the yt-dlp(github project)
 ydl_opts = {
@@ -47,53 +49,69 @@ ydl_opts = {
 }
 
 def main():
-    # Read input from the main process
-    input_data = sys.stdin.readline().split('\n')[0]
-    logging.info("Input_data: " + input_data)
-    # input_data = "https://www.youtube.com/watch?v=9n1aOSXX180&format=bestaudio"
+    try:
+        # Read input from the main process
+        input_data = sys.stdin.readline().split('\n')[0]
+        logging.info("Input_data: " + input_data)
+        # input_data = "https://www.youtube.com/watch?v=9n1aOSXX180&format=bestaudio"
 
-    # Parse the URL
-    parsed_url = urlparse(input_data)
+        # Parse the URL
+        parsed_url = urlparse(input_data)
 
-    # Extract the query parameters as a dictionary using parse_qs
-    query_parameters = parse_qs(parsed_url.query)
-    # logging.info(query_parameters['v'])
+        # Extract the query parameters as a dictionary using parse_qs
+        query_parameters = parse_qs(parsed_url.query)
+        # logging.info(query_parameters['v'])
 
-    # Get the value of a specific parameter
-    format_value = query_parameters['format'][0]
-    # v_value = query_parameters.get('v', None)
-    request_url = "https://www.youtube.com/watch?v=" + query_parameters['v'][0]
-    logging.info("request_url: " + request_url)
+        # Get the value of a specific parameter
+        format_value = query_parameters['format'][0]
+        # v_value = query_parameters.get('v', None)
+        request_url = "https://www.youtube.com/watch?v=" + query_parameters['v'][0]
+        logging.info("request_url: " + request_url)
 
-    # choose the file format you want, some versions of python3 cannot use match function
-    if format_value == 'mp4':
-        ydl_opts['format'] = 'bestvideo*[ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio'
-    elif format_value == 'bestaudio':
-        ydl_opts['format'] = 'bestaudio[ext=m4a]/bestaudio'
+        # choose the file format you want, some versions of python3 cannot use match function
+        if format_value == 'mp4':
+            ydl_opts['format'] = 'bestvideo*[ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio'
+        elif format_value == 'bestaudio':
+            ydl_opts['format'] = 'bestaudio[ext=m4a]/bestaudio'
 
-    with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-        ydl.download([request_url])
-
-    if os.path.exists(filepath):
-        # Get the current time
-        current_time = time.time()
-        # Update the file's access and modification timestamps to the current time
-        os.utime(filepath, (current_time, current_time))
-        # Process the input and produce output
+        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+            ydl.download([request_url])
         
-        output_data = f"Success: {filepath}"
-        logging.info("Finished: " + request_url)
-    else:
-        # Process the input and produce output
-        output_data = f"Failed: {input_data}"
+        if os.path.exists(filepath):
+            # Get the current time
+            current_time = time.time()
+            # Update the file's access and modification timestamps to the current time
+            os.utime(filepath, (current_time, current_time))
+            # Process the input and produce output
+            
+            output_data = "Success: " + request_url
 
-    # Send the output to the main process
-    sys.stdout.write(output_data)
-    sys.stdout.flush()
+            logging.info("Finished: " + request_url)
+        else:
+            # Process the input and produce output
+            output_data = f"Failed: {input_data}"
 
-    # # Simulate an error message
-    # sys.stderr.write("This is an error message!\n")
-    # sys.stderr.flush()
+        # Send the output to the main process
+        sys.stdout.write(output_data)
+        sys.stdout.flush()
+
+        # Title and message for the notification
+        title = "Download finished"
+        message = filepath
+
+        # Create and display the notification
+        notification.notify(
+            title=title,
+            message=message,
+            app_name="Lite Youtube Downloader", # Specify your application's name
+            timeout=10,                         # The notification will automatically close after 10 seconds (optional)
+        )
+        
+        # # Simulate an error message
+        # sys.stderr.write("This is an error message!\n")
+        # sys.stderr.flush()
+    except Exception as e:
+        logging.exception(e)
 
 if __name__ == "__main__":
     main()

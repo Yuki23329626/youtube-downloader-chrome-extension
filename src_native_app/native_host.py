@@ -6,14 +6,13 @@ import nativemessaging
 from urllib.parse import urlparse, parse_qs
 import subprocess
 from time import sleep
-from plyer import notification
 
 # Get the path of the current Python script
 script_path = os.path.dirname(os.path.abspath(__file__))
 os.chdir(script_path)
 
 FORMAT = '[%(levelname)s][%(asctime)s] %(message)s'
-logging.basicConfig(handlers=[logging.FileHandler(filename='log.native_host', encoding='utf-8')], format=FORMAT, level=logging.INFO, datefmt = '%Y-%m-%d %H:%M:%S')
+logging.basicConfig(handlers=[logging.FileHandler(filename='log.native_host', encoding='utf-8')], format=FORMAT, level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
 
 def main():
     while True:
@@ -40,24 +39,12 @@ def main():
                 subprocess_obj.wait()
 
                 # It is only recommended to cancel the following comment when debugging
-                # logging.info(output_data)
+                logging.info(output_data)
 
                 result = output_data.split('\n')[-1].split(':')
                 if result[0] == 'Success':
                     nativemessaging.send_message(nativemessaging.encode_message("Finished"))
                     logging.info('Success: ' + message)
-
-                    # Title and message for the notification
-                    title = "Download finished"
-                    message = ':'.join(result[1:])
-
-                    # Create and display the notification
-                    notification.notify(
-                        title=title,
-                        message=message,
-                        app_name="Lite Youtube Downloader",  # Specify your application's name
-                        timeout=10,              # The notification will automatically close after 10 seconds (optional)
-                    )
                 else:
                     nativemessaging.send_message(nativemessaging.encode_message("403 Forbidden: Cannot download"))
                     logging.info('Failed: ' + message)
