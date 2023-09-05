@@ -1,14 +1,10 @@
 import sys
-import json
 import logging
 import os
-import struct
 import yt_dlp
-import logging
 import time
-from pathlib import Path
 from urllib.parse import urlparse, parse_qs
-import subprocess
+import json
 
 filename = ''
 filepath = ''
@@ -31,7 +27,9 @@ def my_hook(d):
         global filename, filepath
         # filename = d['info_dict']['title']
         filename = d['filename'].split('.')[0]
-        filepath = d['filename']
+        filepath = d['info_dict']['filename']
+        with open('log.d','w') as f:
+            f.write(json.dumps(d, indent=4))
 
 # options for the yt-dlp(github project)
 ydl_opts = {
@@ -74,7 +72,6 @@ def main():
         ydl_opts['format'] = 'bestaudio[ext=m4a]/bestaudio'
 
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-        # logging.info("YDL")
         ydl.download([request_url])
 
     if os.path.exists(filepath):
@@ -83,7 +80,8 @@ def main():
         # Update the file's access and modification timestamps to the current time
         os.utime(filepath, (current_time, current_time))
         # Process the input and produce output
-        output_data = f"Success: {input_data}"
+        
+        output_data = f"Success: {filepath}"
         logging.info("Finished: " + request_url)
     else:
         # Process the input and produce output

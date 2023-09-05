@@ -16,3 +16,4 @@ src_native_app/log.native_host
 src_native_app/log.ytd_subprocess
 .gitignore
 log.native_host
+src_native_app/log.native_host
