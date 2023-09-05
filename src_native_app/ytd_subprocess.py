@@ -28,8 +28,8 @@ def my_hook(d):
         # filename = d['info_dict']['title']
         filename = d['filename'].split('.')[0]
         filepath = d['info_dict']['filename']
-        with open('log.d','w') as f:
-            f.write(json.dumps(d, indent=4))
+        # with open('log.d','w') as f:
+        #     f.write(json.dumps(d, indent=4))
 
 # options for the yt-dlp(github project)
 ydl_opts = {
