@@ -9,3 +9,4 @@ ON YOUR MARK - Gundam Unicorn OST - Hiroyuki Sawano.wav
 /v2/native_app/build
 v2/native_app/native_app.spec
 /cache
+src/log.native_host
