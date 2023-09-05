@@ -1,0 +1,16 @@
+[INFO][2023-09-04 15:03:51,240] Start
+[INFO][2023-09-04 15:10:35,621] Start
+[INFO][2023-09-04 15:10:49,700] Start
+[INFO][2023-09-04 15:13:05,985] Start
+[INFO][2023-09-04 15:57:42,281] Start
+[INFO][2023-09-04 16:39:46,743] Start
+[INFO][2023-09-05 11:18:50,006] Start
+[ERROR][2023-09-05 11:18:50,006] 'str' object has no attribute 'startwith'
+Traceback (most recent call last):
+  File "C:\Users\mishen\Documents\youtube-downloader-chrome-extension\src\native_host.py", line 53, in main
+    if message.startwith("hello"):
+       ^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'startwith'
+[INFO][2023-09-05 11:20:28,601] Start
+[INFO][2023-09-05 11:23:46,326] Start
+[INFO][2023-09-05 11:24:39,421] Start
