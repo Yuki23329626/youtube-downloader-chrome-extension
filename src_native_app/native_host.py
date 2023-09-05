@@ -68,7 +68,7 @@ def main():
                 # print(error_data)
                 # break
             else:
-                # nativemessaging.send_message(nativemessaging.encode_message("Invalid URL"))
+                nativemessaging.send_message(nativemessaging.encode_message("Invalid URL"))
                 continue
 
         except Exception as e:
