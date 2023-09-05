@@ -12,9 +12,9 @@ def my_hook(d):
         filename = d['filename'].split('.')[0]
 
 ydl_opts = {
-    'format': 'bestvideo[height<=1080][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best',
+    # 'format': 'bestvideo[height<=1080][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best',
     # 'format': 'bestvideo/best',
-    # 'format': 'bestaudio/best',
+    'format': 'bestaudio/best',
     # 'postprocessors': [{
     #     'key': 'FFmpegExtractAudio',
     #     'preferredcodec': 'mp3',

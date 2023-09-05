@@ -1,9 +1,9 @@
 {
     "name": "com.example.nativeapp",
     "description": "Example Native Messaging Host",
-    "path": "C:\\Users\\mishen\\Documents\\youtube-downloader-chrome-extension\\src\\native_host.py",
+    "path": "C:\\Users\\mishen\\Documents\\youtube-downloader-chrome-extension\\src_native_app\\native_host.py",
     "type": "stdio",
     "allowed_origins": [
-        "chrome-extension://gcakdfabclkjkgimbjbocbjgcooahogd/"
+        "chrome-extension://odpjnifkinoeflcohfepblkdhnjglkpj/"
     ]
 }

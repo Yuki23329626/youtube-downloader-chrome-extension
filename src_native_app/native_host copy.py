@@ -59,42 +59,37 @@ def main():
     #     ydl.download(["https://www.youtube.com/watch?v=dZbU19tD0qA"])
     while True:
         try:
-            # message = nativemessaging.get_message()
+            message = nativemessaging.get_message()
             # logging.info("message: "+message)
-            message = "https://www.youtube.com/watch?v=dZbU19tD0qA&format=bestaudio"
+            # message = "https://www.youtube.com/watch?v=dZbU19tD0qA&format=bestaudio"
             if message.startswith("https://www.youtube.com/watch?v="):
-                # nativemessaging.send_message(nativemessaging.encode_message("Processing..."))
-                logging.info('TEST')
-                # Launch the subprocess
-                subprocess_args = ["python", "ytd_subprocess.py"]  # Command to run the subprocess
-                subprocess_obj = subprocess.Popen(subprocess_args, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+                nativemessaging.send_message(nativemessaging.encode_message("Processing..."))
 
-                # Communicate with the subprocess
-                input_data = message
-                subprocess_obj.stdin.write(input_data)
-                subprocess_obj.stdin.flush()
+                # Parse the URL
+                parsed_url = urlparse(message)
 
-                output_data = subprocess_obj.stdout.read()
-                error_data = subprocess_obj.stderr.read()
+                # Extract the query parameters as a dictionary using parse_qs
+                query_parameters = parse_qs(parsed_url.query)
+                # logging.info(query_parameters['v'])
 
-                # Wait for the subprocess to finish
-                subprocess_obj.wait()
-                if output_data.split('\n')[-1].split(':')[0] == 'Success':
-                    logging.info('OK')
-                else:
-                    logging.info('SHIT')
+                # Get the value of a specific parameter
+                format_value = query_parameters['format'][0]
+                # v_value = query_parameters.get('v', None)
+                request_url = "https://www.youtube.com/watch?v=" + query_parameters['v'][0]
+                logging.info("request_url: " + request_url)
 
-                # # Print the output and error from the subprocess
-                # print("Output from subprocess:")
-                # print('output_data:', output_data.split('\n')[-1].split(':')[0])
+                # choose the file format you want, some versions of python3 cannot use match function
+                if format_value == 'mp4':
+                    ydl_opts['format'] = 'bestvideo*[ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio'
+                elif format_value == 'bestaudio':
+                    ydl_opts['format'] = 'bestaudio[ext=m4a]/bestaudio'
 
-                # print("Error from subprocess:")
-                # print(error_data)
-                break
-
+                with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+                    ydl.download([request_url])
+                    break
         except Exception as e:
             logging.exception(e)
-            break
+            # break
 
 if __name__ == "__main__":
     main()
