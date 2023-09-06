@@ -6,10 +6,21 @@ Feel free to report them.
 ## How to use - Local version(Native Messaging)
 
 1. Install necessary python packages
+```cmd
+PS D:\git> python --version
+Python 3.11.5
+PS D:\git> pip --version
+pip 23.2.1 from C:\Users\micha\AppData\Local\Programs\Python\Python311\Lib\site-packages\pip (python 3.11)
+```
+```bash
+pip install nativemessaging
+pip install plyer
+pip install yt_dlp
+```
 
-2. Execute src/install.bat on Windows, and remember the directory path you install the native app
+3. Execute src/install.bat on Windows, and remember the directory path you install the native app
 
-3. Load the unpacked Chrome extension(directory) on your Chrome browser  
+4. Load the unpacked Chrome extension(directory) on your Chrome browser  
    The path of the source code is the path you install the native app
    <img src="https://i.imgur.com/ruBCZAm.png" alt="chrome extension" width="800">  
 
