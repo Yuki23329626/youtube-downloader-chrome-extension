@@ -90,7 +90,7 @@ def add_reg(dir_path):
 def submit():
     try:
         global dir_installation
-        print('submit:', dir_installation)
+        logging.info('Submit, dir_installation:', dir_installation)
         # Get the name of the source directory
         source_directory_name = os.path.basename(script_path)
         dir_shutil = os.path.join(dir_installation, source_directory_name)
@@ -99,8 +99,10 @@ def submit():
             if not confirm_removal(dir_shutil):
                 exit(0)
         # print(dir_shutil)
-        shutil.copytree(script_path, dir_shutil, dirs_exist_ok=True)
         add_reg(dir_shutil)
+        if script_path == dir_shutil:
+            exit(0)
+        shutil.copytree(script_path, dir_shutil, dirs_exist_ok=True)
         exit(0)
     except Exception as e:
         logging.exception(e)
