@@ -3,6 +3,14 @@ Based on the GitHub project [yt-dlp](https://github.com/yt-dlp/yt-dlp)
 Note that this project is under development, so you may encounter several bugs.  
 Feel free to report them.  
 
+## How to use - Local version(Native Messaging)
+
+1. Execute src/install.bat on Windows, and remember the path you install the native app
+
+2. 1. Load the unpacked Chrome extension(directory) on your Chrome browser  
+   The path of the source code is the path you install the native app
+   <img src="https://i.imgur.com/ruBCZAm.png" alt="chrome extension" width="800">  
+
 ## How to use - Client-Server version
 
 1. Load the unpacked Chrome extension(directory) on your Chrome browser  
