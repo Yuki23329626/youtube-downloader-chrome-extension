@@ -5,7 +5,7 @@ Feel free to report them.
 
 ## How to use - Local version(Native Messaging)
 
-1. Execute src/install.bat on Windows, and remember the path you install the native app
+1. Execute src/install.bat on Windows, and remember the directory path you install the native app
 
 2. Load the unpacked Chrome extension(directory) on your Chrome browser  
    The path of the source code is the path you install the native app
