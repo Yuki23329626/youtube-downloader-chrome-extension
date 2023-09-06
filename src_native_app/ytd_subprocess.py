@@ -93,7 +93,7 @@ def main():
 
         # Send the output to the main process
         logging.info('output_data: ' + output_data)
-        sys.stdout.buffer.write(output_data.encode('UTF-8'))
+        sys.stdout.buffer.write(output_data.encode('utf-8'))
         sys.stdout.flush()
 
     except Exception as e:

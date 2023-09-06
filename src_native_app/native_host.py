@@ -26,14 +26,15 @@ def main():
                 logging.info('Processing: ' + message)
                 # Launch the subprocess
                 subprocess_args = ["python", "ytd_subprocess.py"]  # Command to run the subprocess
+                # subprocess_args = ["ytd_subprocess.exe"]  # Command to run the subprocess
                 subprocess_obj = subprocess.Popen(subprocess_args, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=False)
 
                 # Communicate with the subprocess
                 stdout_byte, stderr_byte = subprocess_obj.communicate(input=message.encode('utf-8'))
-                output_data = stdout_byte.decode("utf-8")
+                output_data = stdout_byte.decode('utf-8')
 
                 # It is only recommended to cancel the following comment when debugging
-                logging.info(' ===== output_data: ===== \n', output_data)
+                logging.info(' ===== output_data: ===== \n' + output_data)
 
                 result = output_data.split('\n')[-1].split(':')
                 if result[0] == 'Success':
@@ -62,7 +63,7 @@ def main():
 
                 # print("Error from subprocess:")
                 # print(error_data)
-                # break
+                break
             else:
                 nativemessaging.send_message(nativemessaging.encode_message("Invalid URL"))
                 continue

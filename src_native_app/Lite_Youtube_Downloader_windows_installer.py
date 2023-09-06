@@ -75,6 +75,7 @@ def add_reg(dir_path):
             
         with open(path_json_file, "w") as json_file:
             data['path'] = dir_path + "\\native_host.py"
+            # data['path'] = dir_path + "\\native_host.exe"
             json.dump(data, json_file, indent=4)
     except Exception as e:
         logging.exception(e)
@@ -90,7 +91,7 @@ def add_reg(dir_path):
 def submit():
     try:
         global dir_installation
-        logging.info('Submit, dir_installation:', dir_installation)
+        logging.info('Submit, dir_installation:' + dir_installation)
         # Get the name of the source directory
         source_directory_name = os.path.basename(script_path)
         dir_shutil = os.path.join(dir_installation, source_directory_name)
@@ -107,34 +108,37 @@ def submit():
     except Exception as e:
         logging.exception(e)
 
-# Create the main tkinter window
-root = tk.Tk()
-root.tk.call('tk', 'scaling', ScaleFactor/75)
-root.title("Lite Youtube Downloader - Setup")
-root.iconbitmap("installer.ico")  # Replace "custom_icon.ico" with the path to your icon file
+try:
+    # Create the main tkinter window
+    root = tk.Tk()
+    root.tk.call('tk', 'scaling', ScaleFactor/75)
+    root.title("Lite Youtube Downloader - Setup")
+    # root.iconbitmap("installer.ico")  # Replace "custom_icon.ico" with the path to your icon file
 
-# Create a frame to hold the label and entry
-frame = tk.Frame(root)
-frame.pack(pady=10)
+    # Create a frame to hold the label and entry
+    frame = tk.Frame(root)
+    frame.pack(pady=10)
 
-# Create a label
-label = tk.Label(frame, text="Custom install location:")
-label.grid(row=0, sticky = 'w', padx=10)
+    # Create a label
+    label = tk.Label(frame, text="Custom install location:")
+    label.grid(row=0, sticky = 'w', padx=10)
 
-# Create an entry field for path input with default text
-DEFAULT_PATH = os.path.normpath(os.path.expanduser("~")).replace("/", "\\")
-dir_installation = DEFAULT_PATH
-entry_path = tk.Entry(frame, width=40)
-entry_path.insert(0, DEFAULT_PATH)
-entry_path.grid(row=1, column=0, padx=12)
+    # Create an entry field for path input with default text
+    DEFAULT_PATH = os.path.normpath(os.path.expanduser("~")).replace("/", "\\")
+    dir_installation = DEFAULT_PATH
+    entry_path = tk.Entry(frame, width=40)
+    entry_path.insert(0, DEFAULT_PATH)
+    entry_path.grid(row=1, column=0, padx=12)
 
-# Create a "Browse" button
-browse_button = tk.Button(frame, text="Browse", command=browse_directory, width=10)
-browse_button.grid(row=1, column=1, padx=12, pady=12)
+    # Create a "Browse" button
+    browse_button = tk.Button(frame, text="Browse", command=browse_directory, width=10)
+    browse_button.grid(row=1, column=1, padx=12, pady=12)
 
-# Create a "Browse" button
-browse_button = tk.Button(frame, text="Install", command=submit, width=10)
-browse_button.grid(row=2, column=1, padx=12, sticky = 'e')
+    # Create a "Browse" button
+    browse_button = tk.Button(frame, text="Install", command=submit, width=10)
+    browse_button.grid(row=2, column=1, padx=12, sticky = 'e')
 
-# Start the tkinter event loop
-root.mainloop()
+    # Start the tkinter event loop
+    root.mainloop()
+except Exception as e:
+    logging.exception(e)
