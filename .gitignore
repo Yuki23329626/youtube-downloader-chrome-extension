@@ -26,3 +26,4 @@ src_native_app.crx
 src_native_app.pem
 src_native_app/log.installer
 src_native_app/native_messaging_host.json
+/src_native_app/build
