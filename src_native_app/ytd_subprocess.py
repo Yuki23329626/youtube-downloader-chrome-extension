@@ -84,7 +84,7 @@ def main():
             os.utime(filepath, (current_time, current_time))
             # Process the input and produce output
             
-            output_data = "Success: " + request_url
+            output_data = "Success:" + filepath
 
             logging.info("Finished: " + request_url)
         else:
@@ -92,24 +92,10 @@ def main():
             output_data = f"Failed: {input_data}"
 
         # Send the output to the main process
-        sys.stdout.write(output_data)
+        logging.info('output_data: ' + output_data)
+        sys.stdout.buffer.write(output_data.encode('UTF-8'))
         sys.stdout.flush()
 
-        # Title and message for the notification
-        title = "Download finished"
-        message = filepath
-
-        # Create and display the notification
-        notification.notify(
-            title=title,
-            message=message,
-            app_name="Lite Youtube Downloader", # Specify your application's name
-            timeout=10,                         # The notification will automatically close after 10 seconds (optional)
-        )
-        
-        # # Simulate an error message
-        # sys.stderr.write("This is an error message!\n")
-        # sys.stderr.flush()
     except Exception as e:
         logging.exception(e)
 
