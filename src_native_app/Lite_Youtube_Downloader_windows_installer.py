@@ -6,6 +6,7 @@ import logging
 from tkinter import messagebox
 import ctypes
 import winreg
+import json
 
 # Get the path of the current Python script
 script_path = os.path.dirname(os.path.abspath(__file__))
@@ -38,15 +39,36 @@ def add_reg(dir_path):
 
     # Specify the value data (e.g., a string)
     value_data = dir_path + "\\native_messaging_host.json"
-    logging.info('value_data: ', value_data)
+    logging.info('value_data: ' + value_data)
 
     # Open the registry key for writing
     try:
         key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, key_path, 0, winreg.KEY_WRITE)
     except FileNotFoundError as e:
         # If the key doesn't exist, create it
-        logging.exception(e)
+        logging.info('key doesn\'t exist, create it')
         key = winreg.CreateKey(winreg.HKEY_LOCAL_MACHINE, key_path)
+
+    # # Open the registry key for writing
+    # try:
+    #     key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, key_path, 0, winreg.KEY_WRITE)
+    # except FileNotFoundError as e:
+    #     # If the key doesn't exist, create it
+    #     logging.info('key doesn\'t exist, create it')
+    #     key = winreg.CreateKey(winreg.HKEY_CURRENT_USER, key_path)
+    
+    try:
+        path_json_file = 'native_messaging_host.json'
+        data = {}
+        with open(path_json_file, "r") as json_file:
+            # Load JSON data from the file into a Python dictionary
+            data = json.load(json_file)
+            
+        with open(path_json_file, "w") as json_file:
+            data['path'] = dir_path + "\\native_host.py"
+            json.dump(data, json_file, indent=4)
+    except FileNotFoundError:
+        logging.error("File " + path_json_file + " not found.")
     
     # Set the registry value
     winreg.SetValueEx(key, value_name, 0, winreg.REG_SZ, value_data)
@@ -65,11 +87,12 @@ def submit():
         dir_shutil = os.path.join(dir_installation, source_directory_name)
         # Delete the destination directory if it exists
         if os.path.exists(dir_shutil):
-            if confirm_removal(dir_shutil):
-                # print(dir_shutil)
-                shutil.copytree(script_path, dir_shutil, dirs_exist_ok=True)
-                add_reg(dir_shutil)
+            if not confirm_removal(dir_shutil):
                 exit(0)
+        # print(dir_shutil)
+        shutil.copytree(script_path, dir_shutil, dirs_exist_ok=True)
+        add_reg(dir_shutil)
+        exit(0)
     except Exception as e:
         logging.exception(e)
 
