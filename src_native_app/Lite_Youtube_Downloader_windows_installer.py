@@ -59,16 +59,25 @@ def add_reg(dir_path):
     
     try:
         path_json_file = 'native_messaging_host.json'
-        data = {}
-        with open(path_json_file, "r") as json_file:
-            # Load JSON data from the file into a Python dictionary
-            data = json.load(json_file)
+        
+        data = {
+            "name": "com.example.nativeapp",
+            "description": "Example Native Messaging Host",
+            "path-origin": "D:\\git\\youtube-downloader-chrome-extension\\src_native_app\\native_host.py",
+            "path": "C:\\Users\\micha\\src_native_app\\native_host.py",
+            "type": "stdio",
+            "allowed_origins": [
+                "chrome-extension://oaabembeldgibjbdkgdnpekfoodledoh/",
+                "chrome-extension://odpjnifkinoeflcohfepblkdhnjglkpj/",
+                "chrome-extension://kbhloehkeldjmihnhinchnkkiajbimek/"
+            ]
+        }
             
         with open(path_json_file, "w") as json_file:
             data['path'] = dir_path + "\\native_host.py"
             json.dump(data, json_file, indent=4)
-    except FileNotFoundError:
-        logging.error("File " + path_json_file + " not found.")
+    except Exception as e:
+        logging.exception(e)
     
     # Set the registry value
     winreg.SetValueEx(key, value_name, 0, winreg.REG_SZ, value_data)
