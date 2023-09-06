@@ -15,7 +15,6 @@ Feel free to report them.
 
 1. Load the unpacked Chrome extension(directory) on your Chrome browser  
    The path of the source code is under the directory src/  
-   <img src="https://i.imgur.com/ruBCZAm.png" alt="chrome extension" width="800">  
 
 
 3. Modify the host URL under the file src/download.js  
