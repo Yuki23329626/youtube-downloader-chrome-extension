@@ -5,9 +5,11 @@ Feel free to report them.
 
 ## How to use - Local version(Native Messaging)
 
-1. Execute src/install.bat on Windows, and remember the directory path you install the native app
+1. Install necessary python packages
 
-2. Load the unpacked Chrome extension(directory) on your Chrome browser  
+2. Execute src/install.bat on Windows, and remember the directory path you install the native app
+
+3. Load the unpacked Chrome extension(directory) on your Chrome browser  
    The path of the source code is the path you install the native app
    <img src="https://i.imgur.com/ruBCZAm.png" alt="chrome extension" width="800">  
 
