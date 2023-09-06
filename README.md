@@ -5,7 +5,7 @@ Feel free to report them.
 
 ## How to use - Local version(Native Messaging)
 
-1. Install necessary python packages
+1. Install necessary python version and packages
 ```cmd
 PS D:\git> python --version
 Python 3.11.5
