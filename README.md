@@ -7,6 +7,15 @@ Feel free to report them.
 
 1. Download application: [LiteYoutubeDownloader](https://mega.nz/file/yg5kkAja#BMsKvFb4oLLZuTO14jd6UtKe8cKoCdIjOxfOnmJov3o)
 
+2. Execute LiteYoutubeDownloader/install.bat on Windows, and remember the directory path you install the native app
+
+3. Enable the Developer mode on your Chrome
+   <img src="https://i.imgur.com/mn5mJ8y.png" alt="Developer mode" width = "800">
+
+4. Load the unpacked Chrome extension(directory) on your Chrome browser  
+   The path of the source code is the path you install the native app
+   <img src="https://i.imgur.com/7kazuX4.png" alt="chrome extension" width="600">  
+
 ## How to use - Local(Need Compile)
 
 1. Install the necessary Python and packages
@@ -22,12 +31,12 @@ pip install plyer
 pip install yt_dlp
 ```
 
-3. Execute src/install.bat on Windows, and remember the directory path you install the native app
+2. Execute src/install.bat on Windows, and remember the directory path you install the native app
 
-4. Enable the Developer mode on your Chrome
+3. Enable the Developer mode on your Chrome
    <img src="https://i.imgur.com/mn5mJ8y.png" alt="Developer mode" width = "800">
 
-5. Load the unpacked Chrome extension(directory) on your Chrome browser  
+4. Load the unpacked Chrome extension(directory) on your Chrome browser  
    The path of the source code is the path you install the native app
    <img src="https://i.imgur.com/7kazuX4.png" alt="chrome extension" width="600">  
 
