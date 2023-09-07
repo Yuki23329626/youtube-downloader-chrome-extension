@@ -32,9 +32,9 @@ pip install plyer
 pip install yt_dlp
 ```
 
-2. Execute src/install.bat on Windows, and remember the directory path you install the native app
+2. Install ffmpeg and add the Path of the ffmpeg on your system
 
-3. Install ffmpeg and add the Path of the ffmpeg on your system
+3. Execute src/install.bat on Windows, and remember the directory path you install the native app
 
 4. Enable the Developer mode on your Chrome
    <img src="https://i.imgur.com/mn5mJ8y.png" alt="Developer mode" width = "800">
