@@ -17,7 +17,7 @@ Feel free to report them.
    The path of the source code is the path you install the native app
    <img src="https://i.imgur.com/7kazuX4.png" alt="chrome extension" width="600">  
 
-## How to use - Local version(Need Compile)
+## How to use - Local version(Need Interpreter)
 
 1. Install the necessary Python and packages
 ```cmd
