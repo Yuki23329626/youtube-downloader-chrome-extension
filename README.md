@@ -3,6 +3,10 @@ Based on the GitHub project [yt-dlp](https://github.com/yt-dlp/yt-dlp)
 Note that this project is under development, so you may encounter several bugs.  
 Feel free to report them.  
 
+## How to use - Local(Windows 10 executable)
+
+1. Download application: [LiteYoutubeDownloader](https://mega.nz/file/yg5kkAja#BMsKvFb4oLLZuTO14jd6UtKe8cKoCdIjOxfOnmJov3o)
+
 ## How to use - Local(Need Compile)
 
 1. Install the necessary Python and packages
