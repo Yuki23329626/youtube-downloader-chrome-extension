@@ -5,7 +5,7 @@ Feel free to report them.
 
 ## How to use - Local version(Windows 10 executable)
 
-1. Download application: [LiteYoutubeDownloader](https://mega.nz/file/y1hjDIpL#0fu_jvq-5gBXH0YrL5xzoNIL_dhcxJ7EtJrWziSKJXA)
+1. Download application: [LiteYoutubeDownloader](https://github.com/Yuki23329626/youtube-downloader-chrome-extension/releases/download/v1.0.0/LiteYoutubeDownloader.zip)
 
 2. Execute LiteYoutubeDownloader/install.bat on Windows,  
    and remember the path of the directory you install the native app
