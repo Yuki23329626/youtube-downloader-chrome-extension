@@ -11,7 +11,7 @@ Feel free to report them.
    and remember the path of the directory you install the native app
 
 3. Enable the Developer mode on your Chrome
-   <img src="https://i.imgur.com/mn5mJ8y.png" alt="Developer mode" width = "800">
+   <img src="https://i.imgur.com/mxTnE6i.png" alt="Developer mode" width = "800">
 
 4. Load the unpacked Chrome extension(directory) on your Chrome browser  
    The path of the source code is the path you install the native app
