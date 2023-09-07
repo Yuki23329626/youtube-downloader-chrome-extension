@@ -17,7 +17,9 @@ script_path = os.path.abspath(sys.argv[0])
 script_dir = os.path.dirname(script_path)
 
 FORMAT = '[%(levelname)s][%(asctime)s] %(message)s'
-logging.basicConfig(handlers=[logging.FileHandler(filename=os.path.join(script_dir, 'log_native_host.log'), encoding='utf-8')], format=FORMAT, level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
+logging.basicConfig(
+    handlers=[logging.FileHandler(filename=os.path.join(script_dir, 'log_native_host.log'), encoding='utf-8')], 
+    format=FORMAT, level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
 
 def main():
     while True:
@@ -68,7 +70,9 @@ def main():
                         timeout=10,              # The notification will automatically close after 10 seconds (optional)
                     )
                 else:
-                    nativemessaging.send_message(nativemessaging.encode_message("ERROR - Please check with the log: \n" + os.path.join(script_dir, 'log_ytd_subprocess.log')))
+                    nativemessaging.send_message(nativemessaging.encode_message(
+                        "ERROR - Please check with the log: \n" + os.path.join(script_dir, 'log_ytd_subprocess.log')
+                        ))
                     logging.info('Failed: ' + message)
 
                 # # Print the output and error from the subprocess
