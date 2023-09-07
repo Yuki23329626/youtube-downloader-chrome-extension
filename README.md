@@ -7,7 +7,8 @@ Feel free to report them.
 
 1. Download application: [LiteYoutubeDownloader](https://mega.nz/file/yg5kkAja#BMsKvFb4oLLZuTO14jd6UtKe8cKoCdIjOxfOnmJov3o)
 
-2. Execute LiteYoutubeDownloader/install.bat on Windows, and remember the directory path you install the native app
+2. Execute LiteYoutubeDownloader/install.bat on Windows,  
+   and remember the directory path you install the native app
 
 3. Enable the Developer mode on your Chrome
    <img src="https://i.imgur.com/mn5mJ8y.png" alt="Developer mode" width = "800">
