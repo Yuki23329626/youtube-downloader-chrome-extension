@@ -23,7 +23,7 @@ pip install yt_dlp
 4. Enable the Developer mode on your Chrome
    <img src="https://i.imgur.com/NBRzmnR.png" alt="Developer mode" width = "800">
 
-4. Load the unpacked Chrome extension(directory) on your Chrome browser  
+5. Load the unpacked Chrome extension(directory) on your Chrome browser  
    The path of the source code is the path you install the native app
    <img src="https://i.imgur.com/ruBCZAm.png" alt="chrome extension" width="800">  
 
