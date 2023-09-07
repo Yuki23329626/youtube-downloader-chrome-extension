@@ -10,10 +10,10 @@ Feel free to report them.
 2. Execute LiteYoutubeDownloader/install.bat on Windows,  
    and remember the path of the directory you install the native app
 
-3. Enable the Developer mode on your Chrome
+3. Enable the Developer mode on your Chrome  
    <img src="https://i.imgur.com/mxTnE6i.png" alt="Developer mode" width = "800">
 
-4. Load the unpacked Chrome extension(directory) on your Chrome browser
+4. Load the unpacked Chrome extension(directory) on your Chrome browser  
    The path of the source code is the path you install the native app
    <img src="https://i.imgur.com/7kazuX4.png" alt="chrome extension" width="600">  
 
