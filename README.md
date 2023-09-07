@@ -3,7 +3,7 @@ Based on the GitHub project [yt-dlp](https://github.com/yt-dlp/yt-dlp)
 Note that this project is under development, so you may encounter several bugs.  
 Feel free to report them.  
 
-## How to use - Local(Windows 10 executable)
+## How to use - Local version(Windows 10 executable)
 
 1. Download application: [LiteYoutubeDownloader](https://mega.nz/file/yg5kkAja#BMsKvFb4oLLZuTO14jd6UtKe8cKoCdIjOxfOnmJov3o)
 
@@ -17,7 +17,7 @@ Feel free to report them.
    The path of the source code is the path you install the native app
    <img src="https://i.imgur.com/7kazuX4.png" alt="chrome extension" width="600">  
 
-## How to use - Local(Need Compile)
+## How to use - Local version(Need Compile)
 
 1. Install the necessary Python and packages
 ```cmd
