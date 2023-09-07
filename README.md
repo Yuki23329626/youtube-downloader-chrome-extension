@@ -34,7 +34,11 @@ pip install yt_dlp
 
 2. Install ffmpeg and add the Path of the ffmpeg on your system
 
-3. Execute src/install.bat on Windows, and remember the directory path you install the native app
+3. Run Lite_Youtube_Downloader_windows_installer.py on Windows, and remember the directory path you install the native app
+
+   ```cmd
+   python Lite_Youtube_Downloader_windows_installer.py
+   ```
 
 4. Enable the Developer mode on your Chrome
    <img src="https://i.imgur.com/mn5mJ8y.png" alt="Developer mode" width = "800">
