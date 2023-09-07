@@ -33,10 +33,12 @@ pip install yt_dlp
 
 2. Execute src/install.bat on Windows, and remember the directory path you install the native app
 
-3. Enable the Developer mode on your Chrome
+3. Install ffmpeg and add the Path of the ffmpeg on your system
+
+4. Enable the Developer mode on your Chrome
    <img src="https://i.imgur.com/mn5mJ8y.png" alt="Developer mode" width = "800">
 
-4. Load the unpacked Chrome extension(directory) on your Chrome browser  
+5. Load the unpacked Chrome extension(directory) on your Chrome browser  
    The path of the source code is the path you install the native app
    <img src="https://i.imgur.com/7kazuX4.png" alt="chrome extension" width="600">  
 
