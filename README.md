@@ -25,7 +25,7 @@ pip install yt_dlp
 
 5. Load the unpacked Chrome extension(directory) on your Chrome browser  
    The path of the source code is the path you install the native app
-   <img src="https://i.imgur.com/ruBCZAm.png" alt="chrome extension" width="800">  
+   <img src="https://i.imgur.com/7kazuX4.png" alt="chrome extension" width="800">  
 
 ## How to use - Client-Server version
 
