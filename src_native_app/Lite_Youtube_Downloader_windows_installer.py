@@ -7,13 +7,16 @@ from tkinter import messagebox
 import ctypes
 import winreg
 import json
+import sys
+import subprocess
 
 # Get the path of the current Python script
-script_path = os.path.dirname(os.path.abspath(__file__))
-os.chdir(script_path)
+script_path = os.path.abspath(sys.argv[0])
+script_dir = os.path.dirname(script_path)
+print('script_dir: ', script_dir)
 
 FORMAT = '[%(levelname)s][%(asctime)s] %(message)s'
-logging.basicConfig(handlers=[logging.FileHandler(filename='log.installer', encoding='utf-8')], format=FORMAT, level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
+logging.basicConfig(handlers=[logging.FileHandler(filename=os.path.join(script_dir, 'log_installer.log'), encoding='utf-8')], format=FORMAT, level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
 
 # Tell system to aware the process DPI
 ctypes.windll.shcore.SetProcessDpiAwareness(1)
@@ -44,6 +47,31 @@ def add_reg(dir_path):
     # Open the registry key for writing
     try:
         key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, key_path, 0, winreg.KEY_WRITE)
+        # Specify the name of the environment variable to append to
+        var_name = "Path"
+        # Specify the value you want to append
+        new_value = os.path.join(dir_path, 'ffmpeg', 'bin')
+        # Retrieve the current value of the environment variable
+        current_value = os.environ.get(var_name, "")
+        # Split the current value into a list of values using semicolon as the separator
+        values_list = current_value.split(';')
+        if new_value not in values_list:
+            # Append the new value (separated by a semicolon) to the current value
+            updated_value = f"{current_value};{new_value}"
+            # Use the 'setx' command to update the environment variable
+            try:
+                subprocess.check_call(['setx', var_name, updated_value])
+                logging.info(f"Appended '{new_value}' to environment variable {var_name}")
+            except Exception as e:
+                logging.exception(e)
+
+    except PermissionError as e:
+        logging.error(e)
+        # Create a message box with text and an OK button
+        message = "Access is denied. In order to register the native application on Windows Registry, please run this executable as admin"
+        title = "Access Required"
+        messagebox.showinfo(title, message)
+        sys.exit(1)
     except FileNotFoundError as e:
         # If the key doesn't exist, create it
         logging.info('key doesn\'t exist, create it')
@@ -74,9 +102,20 @@ def add_reg(dir_path):
         }
             
         with open(path_json_file, "w") as json_file:
-            data['path'] = dir_path + "\\native_host.py"
-            # data['path'] = dir_path + "\\native_host.exe"
+            if getattr(sys, 'frozen', False):
+                # The script is running as an executable (e.g., using PyInstaller or cx_Freeze)
+                print("Running as an executable")
+                executable_path = sys.executable
+                print("Executable path:", executable_path)
+                data['path'] = dir_path + "\\native_host.exe"
+            else:
+                # The script is running as a regular Python script
+                print("Running as a Python script")
+                script_name = sys.argv[0]
+                print("Script name:", script_name)
+                data['path'] = dir_path + "\\native_host.py"
             json.dump(data, json_file, indent=4)
+            # os.system('pause')
     except Exception as e:
         logging.exception(e)
     
@@ -93,18 +132,19 @@ def submit():
         global dir_installation
         logging.info('Submit, dir_installation:' + dir_installation)
         # Get the name of the source directory
-        source_directory_name = os.path.basename(script_path)
+        source_directory_name = os.path.basename(script_dir)
+        print('source_directory_name: ', source_directory_name)
         dir_shutil = os.path.join(dir_installation, source_directory_name)
         # Delete the destination directory if it exists
         if os.path.exists(dir_shutil):
             if not confirm_removal(dir_shutil):
-                exit(0)
+                sys.exit(0)
         # print(dir_shutil)
         add_reg(dir_shutil)
-        if script_path == dir_shutil:
-            exit(0)
-        shutil.copytree(script_path, dir_shutil, dirs_exist_ok=True)
-        exit(0)
+        if script_dir == dir_shutil:
+            sys.exit(0)
+        shutil.copytree(script_dir, dir_shutil, dirs_exist_ok=True)
+        sys.exit(0)
     except Exception as e:
         logging.exception(e)
 

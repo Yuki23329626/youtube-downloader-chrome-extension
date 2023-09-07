@@ -18,11 +18,11 @@ if not os.path.exists(SAVE_PATH):
     os.makedirs(SAVE_PATH)
 
 # Get the path of the current Python script
-script_path = os.path.dirname(os.path.abspath(__file__))
-os.chdir(script_path)
+script_path = os.path.abspath(sys.argv[0])
+script_dir = os.path.dirname(script_path)
 
 FORMAT = '[%(levelname)s][%(asctime)s] %(message)s'
-logging.basicConfig(handlers=[logging.FileHandler(filename='log.ytd_subprocess', encoding='utf-8')], format=FORMAT, level=logging.INFO, datefmt = '%Y-%m-%d %H:%M:%S')
+logging.basicConfig(handlers=[logging.FileHandler(filename=os.path.join(script_dir, 'log_ytd_subprocess.log'), encoding='utf-8')], format=FORMAT, level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
 
 def my_hook(d):
     if d['status'] == 'finished':

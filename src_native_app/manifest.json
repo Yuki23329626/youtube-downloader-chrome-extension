@@ -1,7 +1,7 @@
 {
   "name": "Lite Youtube Downloder - Native App",
   "description": "Base Level Extension",
-  "version": "1.333",
+  "version": "1.385",
   "manifest_version": 3,
   "icons":{
     "128": "youtube-downloader-v2.png"
