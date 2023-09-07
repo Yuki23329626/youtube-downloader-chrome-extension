@@ -5,7 +5,7 @@ Feel free to report them.
 
 ## How to use - Local version(Native Messaging)
 
-1. Install necessary python version and packages
+1. Install the necessary Python and packages
 ```cmd
 PS D:\git> python --version
 Python 3.11.5
@@ -19,6 +19,9 @@ pip install yt_dlp
 ```
 
 3. Execute src/install.bat on Windows, and remember the directory path you install the native app
+
+4. Enable the Developer mode on your Chrome
+   <img src="https://i.imgur.com/NBRzmnR.png" alt="Developer mode" width = "800">
 
 4. Load the unpacked Chrome extension(directory) on your Chrome browser  
    The path of the source code is the path you install the native app
