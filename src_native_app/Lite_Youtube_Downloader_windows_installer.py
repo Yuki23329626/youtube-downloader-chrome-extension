@@ -16,12 +16,15 @@ script_dir = os.path.dirname(script_path)
 print('script_dir: ', script_dir)
 
 FORMAT = '[%(levelname)s][%(asctime)s] %(message)s'
-logging.basicConfig(handlers=[logging.FileHandler(filename=os.path.join(script_dir, 'log_installer.log'), encoding='utf-8')], format=FORMAT, level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
+logging.basicConfig(handlers=[logging.FileHandler(
+    filename=os.path.join(script_dir, 'log_installer.log'), encoding='utf-8')],
+    format=FORMAT, level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
 
 # Tell system to aware the process DPI
 ctypes.windll.shcore.SetProcessDpiAwareness(1)
 # Get scale factor from device
-ScaleFactor=ctypes.windll.shcore.GetScaleFactorForDevice(0)
+ScaleFactor = ctypes.windll.shcore.GetScaleFactorForDevice(0)
+
 
 def browse_directory():
     global dir_installation
@@ -30,10 +33,13 @@ def browse_directory():
     entry_path.delete(0, tk.END)
     entry_path.insert(0, dir_installation)
 
+
 def confirm_removal(directory):
     # Create a confirmation pop-up dialog
-    confirmation = messagebox.askyesno("Confirmation", f"Directory already exist, overwrite '{directory}'?")
+    confirmation = messagebox.askyesno(
+        "Confirmation", f"Directory already exist, overwrite '{directory}'?")
     return confirmation
+
 
 def add_reg(dir_path):
     # Specify the registry key path and name
@@ -46,7 +52,8 @@ def add_reg(dir_path):
 
     # Open the registry key for writing
     try:
-        key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, key_path, 0, winreg.KEY_WRITE)
+        key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE,
+                             key_path, 0, winreg.KEY_WRITE)
         # Specify the name of the environment variable to append to
         var_name = "Path"
         # Specify the value you want to append
@@ -61,7 +68,8 @@ def add_reg(dir_path):
             # Use the 'setx' command to update the environment variable
             try:
                 subprocess.check_call(['setx', var_name, updated_value])
-                logging.info(f"Appended '{new_value}' to environment variable {var_name}")
+                logging.info(
+                    f"Appended '{new_value}' to environment variable {var_name}")
             except Exception as e:
                 logging.exception(e)
 
@@ -84,10 +92,10 @@ def add_reg(dir_path):
     #     # If the key doesn't exist, create it
     #     logging.info('key doesn\'t exist, create it')
     #     key = winreg.CreateKey(winreg.HKEY_CURRENT_USER, key_path)
-    
+
     try:
         path_json_file = 'native_messaging_host.json'
-        
+
         data = {
             "name": "com.example.nativeapp",
             "description": "Example Native Messaging Host",
@@ -100,7 +108,7 @@ def add_reg(dir_path):
                 "chrome-extension://kbhloehkeldjmihnhinchnkkiajbimek/"
             ]
         }
-            
+
         with open(path_json_file, "w") as json_file:
             if getattr(sys, 'frozen', False):
                 # The script is running as an executable (e.g., using PyInstaller or cx_Freeze)
@@ -118,14 +126,16 @@ def add_reg(dir_path):
             # os.system('pause')
     except Exception as e:
         logging.exception(e)
-    
+
     # Set the registry value
     winreg.SetValueEx(key, value_name, 0, winreg.REG_SZ, value_data)
-    
+
     # Close the registry key
     winreg.CloseKey(key)
 
-    logging.info(f"Registry key '{key_path}\\{value_name}' added with value '{value_data}'.")
+    logging.info(
+        f"Registry key '{key_path}\\{value_name}' added with value '{value_data}'.")
+
 
 def submit():
     try:
@@ -148,6 +158,7 @@ def submit():
     except Exception as e:
         logging.exception(e)
 
+
 try:
     # Create the main tkinter window
     root = tk.Tk()
@@ -161,7 +172,7 @@ try:
 
     # Create a label
     label = tk.Label(frame, text="Custom install location:")
-    label.grid(row=0, sticky = 'w', padx=10)
+    label.grid(row=0, sticky='w', padx=10)
 
     # Create an entry field for path input with default text
     DEFAULT_PATH = os.path.normpath(os.path.expanduser("~")).replace("/", "\\")
@@ -171,12 +182,13 @@ try:
     entry_path.grid(row=1, column=0, padx=12)
 
     # Create a "Browse" button
-    browse_button = tk.Button(frame, text="Browse", command=browse_directory, width=10)
+    browse_button = tk.Button(frame, text="Browse",
+                              command=browse_directory, width=10)
     browse_button.grid(row=1, column=1, padx=12, pady=12)
 
     # Create a "Browse" button
     browse_button = tk.Button(frame, text="Install", command=submit, width=10)
-    browse_button.grid(row=2, column=1, padx=12, sticky = 'e')
+    browse_button.grid(row=2, column=1, padx=12, sticky='e')
 
     # Start the tkinter event loop
     root.mainloop()
