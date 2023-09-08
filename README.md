@@ -34,7 +34,7 @@ pip install yt_dlp
 
 2. Install ffmpeg and add the Path of the ffmpeg on your system
 
-3. Run src_native_app/Lite_Youtube_Downloader_windows_installer.py on Windows, and remember the directory path you install the native app
+3. Run src_native_app/Lite_Youtube_Downloader_windows_installer.py as admin on Windows, and remember the directory path you install the native app
 
    ```cmd
    python Lite_Youtube_Downloader_windows_installer.py
