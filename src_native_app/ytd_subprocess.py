@@ -22,7 +22,9 @@ script_path = os.path.abspath(sys.argv[0])
 script_dir = os.path.dirname(script_path)
 
 FORMAT = '[%(levelname)s][%(asctime)s] %(message)s'
-logging.basicConfig(handlers=[logging.FileHandler(filename=os.path.join(script_dir, 'log_ytd_subprocess.log'), encoding='utf-8')], format=FORMAT, level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
+logging.basicConfig(handlers=[logging.FileHandler(filename=os.path.join(
+    script_dir, 'log_ytd_subprocess.log'), encoding='utf-8')], 
+    format=FORMAT, level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
 
 def my_hook(d):
     if d['status'] == 'finished':
@@ -30,8 +32,9 @@ def my_hook(d):
         # filename = d['info_dict']['title']
         filename = d['filename'].split('.')[0]
         filepath = d['info_dict']['filename']
-        with open('log_d.log','w') as f:
+        with open('log_d.log', 'w') as f:
             f.write(json.dumps(d, indent=4))
+
 
 # options for the yt-dlp(github project)
 ydl_opts = {
@@ -47,6 +50,7 @@ ydl_opts = {
     'outtmpl': SAVE_PATH + '%(title)s.%(ext)s',
     'nooverwrites': False
 }
+
 
 def main():
     try:
@@ -65,25 +69,26 @@ def main():
         # Get the value of a specific parameter
         format_value = query_parameters['format'][0]
         # v_value = query_parameters.get('v', None)
-        request_url = "https://www.youtube.com/watch?v=" + query_parameters['v'][0]
+        request_url = "https://www.youtube.com/watch?v=" + \
+            query_parameters['v'][0]
         logging.info("request_url: " + request_url)
 
         # choose the file format you want, some versions of python3 cannot use match function
         if format_value == 'mp4':
-            ydl_opts['format'] = 'bestvideo*[ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio'
+            ydl_opts['format'] = 'bestvideo*[ext=mp4][height<=1080]+bestaudio[ext=m4a]/bestvideo+bestaudio'
         elif format_value == 'bestaudio':
             ydl_opts['format'] = 'bestaudio[ext=m4a]/bestaudio'
 
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             ydl.download([request_url])
-        
+
         if os.path.exists(filepath):
             # Get the current time
             current_time = time.time()
             # Update the file's access and modification timestamps to the current time
             os.utime(filepath, (current_time, current_time))
             # Process the input and produce output
-            
+
             output_data = "Success:" + filepath
 
             logging.info("Finished: " + request_url)
@@ -98,6 +103,7 @@ def main():
 
     except Exception as e:
         logging.exception(e)
+
 
 if __name__ == "__main__":
     main()
