@@ -73,10 +73,12 @@ pip install yt_dlp
    ```
    This script will start the server and make sure the other Python packages are installed:  
    ```bash
+   # under root directory
    sh run_wsgi_ws.sh
    ```
    If you want to stop the server, run the following bash script:
    ```bash
+   # under root directory
    sh kill_gunicorn.sh
    ```
 6. Open the page of the YouTube video you want to download,  
