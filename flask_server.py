@@ -9,11 +9,13 @@ import random
 from threading import Thread
 import sys
 from pathlib import Path
+import shutil
 
 filename = ''
-SAVE_PATH = 'cache/' # may replace by random number in future
-if not os.path.exists(SAVE_PATH):
-    os.makedirs(SAVE_PATH)
+BASE_PATH = 'cache/' # may replace by random number in future
+target_path = ''
+if not os.path.exists(BASE_PATH):
+    os.makedirs(BASE_PATH)
 # print('SAVE_PATH', SAVE_PATH)
 
 logging.basicConfig(level=logging.DEBUG,
@@ -36,12 +38,13 @@ app = Flask(__name__)
 
 def remove_file(list_files):
     # time.sleep(20)
-    for file in list_files:
-        try:
-            logging.info('removing files: ' + SAVE_PATH)
-            os.remove(SAVE_PATH+file)
-        except Exception as e:
-            logging.error(e)
+    directory_path = BASE_PATH + target_path
+    try:
+        logging.info('removing files: ' + directory_path)
+        if os.path.exists(directory_path) and os.path.isdir(directory_path):
+            shutil.rmtree(directory_path)
+    except Exception as e:
+        logging.error(e)
 
 @app.route('/api/file')
 async def get_file():
@@ -51,7 +54,8 @@ async def get_file():
     random.seed(current_time)
     # Generate a random value, e.g., between 0 and 1
     random_value = hash(random.random())
-    SAVE_PATH = 'cache/' + str(random_value) + '/'
+    target_path = str(random_value) + '/'
+    SAVE_PATH = BASE_PATH + target_path
     if not os.path.exists(SAVE_PATH):
         os.makedirs(SAVE_PATH)
 
