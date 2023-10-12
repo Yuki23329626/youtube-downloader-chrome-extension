@@ -7,7 +7,7 @@ import os
 import time
 import random
 from threading import Thread
-# import re
+import sys
 from pathlib import Path
 
 filename = ''
@@ -50,7 +50,7 @@ async def get_file():
     # Use the current time as a seed for the random number generator
     random.seed(current_time)
     # Generate a random value, e.g., between 0 and 1
-    random_value = random.random()
+    random_value = hash(random.random())
     SAVE_PATH = str(random_value)
     if not os.path.exists(SAVE_PATH):
         os.makedirs(SAVE_PATH)
