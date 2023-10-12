@@ -51,7 +51,7 @@ async def get_file():
     random.seed(current_time)
     # Generate a random value, e.g., between 0 and 1
     random_value = hash(random.random())
-    SAVE_PATH = str(random_value) + '/'
+    SAVE_PATH = 'cache/' + str(random_value) + '/'
     if not os.path.exists(SAVE_PATH):
         os.makedirs(SAVE_PATH)
 
