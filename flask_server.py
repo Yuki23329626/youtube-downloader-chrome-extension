@@ -5,6 +5,7 @@ import logging
 import glob
 import os
 import time
+import random
 from threading import Thread
 # import re
 from pathlib import Path
@@ -18,10 +19,9 @@ if not os.path.exists(SAVE_PATH):
 logging.basicConfig(level=logging.INFO,
                     format='%(levelname)-8s %(asctime)s %(message)s',
                     datefmt='%Y-%m-%d %H:%M:%S',
-                    handlers=[logging.FileHandler(SAVE_PATH + 'log.ytdlp_lite', 'w', 'utf-8'),])
+                    handlers=[logging.FileHandler('log_ytdlp_lite.log', 'w', 'utf-8'),])
 
 # get the final filename after downloading the file
-
 
 def my_hook(d):
     if d['status'] == 'finished':
@@ -29,22 +29,6 @@ def my_hook(d):
         # filename = d['info_dict']['title']
         filename = d['filename'].split('.')[0]
         print("\nfilename1:", filename)
-
-
-# options for the yt-dlp(github project)
-ydl_opts = {
-    # 'format': 'bestaudio/best',
-    # 'postprocessors': [{
-    #     'key': 'FFmpegExtractAudio',
-    #     'preferredcodec': 'mp3',
-    #     'preferredquality': '192',
-    # }],
-    # 'skip_download': False,
-    'writesubtitles': False,
-    'progress_hooks': [my_hook],
-    'outtmpl': SAVE_PATH + '%(title)s.%(ext)s',
-    'nooverwrites': False
-}
 
 app = Flask(__name__)
 
@@ -54,13 +38,23 @@ def remove_file(list_files):
     # time.sleep(20)
     for file in list_files:
         try:
-            logging.info('removing files: ' + SAVE_PATH+file)
+            logging.info('removing files: ' + SAVE_PATH)
             os.remove(SAVE_PATH+file)
         except Exception as e:
             logging.error(e)
 
 @app.route('/api/file')
 async def get_file():
+    # Get the current time as an integer
+    current_time = int(time.time())
+    # Use the current time as a seed for the random number generator
+    random.seed(current_time)
+    # Generate a random value, e.g., between 0 and 1
+    random_value = random.random()
+    SAVE_PATH = random_value
+    if not os.path.exists(SAVE_PATH):
+        os.makedirs(SAVE_PATH)
+        
     # try:
     # pop the parameters from the url
     parameters = request.args.to_dict()
@@ -71,6 +65,21 @@ async def get_file():
     file_format = parameters.get('format')
     url = parameters.get('url')
     print('url', url)
+
+    # options for the yt-dlp(github project)
+    ydl_opts = {
+        # 'format': 'bestaudio/best',
+        # 'postprocessors': [{
+        #     'key': 'FFmpegExtractAudio',
+        #     'preferredcodec': 'mp3',
+        #     'preferredquality': '192',
+        # }],
+        # 'skip_download': False,
+        'writesubtitles': False,
+        'progress_hooks': [my_hook],
+        'outtmpl': SAVE_PATH + '%(title)s.%(ext)s',
+        'nooverwrites': False
+    }
 
     # choose the file format you want, some versions of python3 cannot use match function
     if file_format == 'bestaudio':
