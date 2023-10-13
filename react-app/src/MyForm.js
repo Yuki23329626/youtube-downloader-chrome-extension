@@ -1,6 +1,7 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
-import React, { Component , useState, useEffect } from 'react';
+import React, { Component} from 'react';
+// import axios from 'axios'; // Import Axios if you're using it
 
 class MyForm extends Component {
   constructor(props) {
@@ -8,6 +9,7 @@ class MyForm extends Component {
     this.state = {
       yt_url: '',
       format: '',
+      responseData: null,
     };
   }
 
@@ -18,11 +20,24 @@ class MyForm extends Component {
   };
 
   // Event handler for the "Save" button
-  clickDownloadAudio = (event) => {
+  clickDownloadAudio = async (event) => {
     event.preventDefault();
     // Perform save or submit action
     console.log('click:', this.state);
     // You can add your save logic here
+    try {
+      const param_yt_url = this.state.yt_url;
+      const param_format = 'bestaudio';
+
+      // Build the URL with parameters
+      const url = `http://nxshen.csie.io:5000/api/file?url=${param_yt_url}&format=${param_format}`; // Replace with your API endpoint and parameters
+
+      const response = await fetch(url);
+      const data = await response.json();
+      this.setState({ responseData: data });
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
 
   // Event handler for the "Clear" button
@@ -42,35 +57,20 @@ class MyForm extends Component {
 
   render() {
     return (
-      <div className="App">
-        <img src={logo} className="App-logo" alt="logo" />
-
-        {/* <h2>Lite YouTube Downloader</h2> */}
-        <br/>
-        <form>
-          <h2>YouTube URL:</h2>
-          <label>
-            <input
-              type="text"
-              name="yt_url"
-              value={this.state.yt_url}
-              onChange={this.handleInputChange}
-            />
-          </label>
-          <br />
-          <button onClick={this.clickDownloadAudio}>Download Audio</button>
-          <button type="button" onClick={this.clickDownloadVideo}>Download Video</button>
-        </form>
-
-        <footer id="footer">
-          <div class="contact_informations">
-          </div>
-          <div class="copyright">
-            &copy; 2023 LiteYTD All right reserved
-          </div>
-        </footer>
-
-      </div>
+      <form>
+        <h2>YouTube URL:</h2>
+        <label>
+          <input
+            type="text"
+            name="yt_url"
+            value={this.state.yt_url}
+            onChange={this.handleInputChange}
+          />
+        </label>
+        <br />
+        <button onClick={this.clickDownloadAudio}>Download Audio</button>
+        <button onClick={this.clickDownloadVideo}>Download Video</button>
+      </form>
     );
   }
 }
