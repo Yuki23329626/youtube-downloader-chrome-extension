@@ -31,25 +31,22 @@ class MyForm extends Component {
       // Build the URL with parameters
       const apiUrl = `http://localhost:5000/api/file?url=${param_yt_url}&format=bestaudio`; // Replace with your API endpoint and parameters
 
-      // Send a GET request using Axios
-      axios
-        .get(apiUrl, {
-          responseType: 'blob', // This tells Axios to expect binary data (e.g., a file)
-        })
+      const config = {
+        method: 'get',
+        url: apiUrl,
+        headers: {
+          'responseType': 'blob',
+          'maxContentLength': Infinity,
+          'maxBodyLength': Infinity
+        }
+      };
+
+      axios(config)
         .then((response) => {
-          // Create a Blob object from the response data
-          const blob = new Blob([response.data], { type: response.headers['content-type'] });
-
-          // Create a temporary URL for the Blob
-          const url = window.URL.createObjectURL(blob);
-
-          // Create a link element to trigger the download
-          const a = document.createElement('a');
-          a.href = url;
-          a.click();
-
-          // Clean up by revoking the Blob URL
-          window.URL.revokeObjectURL(url);
+          const link = document.createElement('a');
+          link.target = '_blank';
+          link.href = URL.createObjectURL(new Blob([response.data], { type: "audio" }));
+          link.click();
         })
 
     } catch (error) {
