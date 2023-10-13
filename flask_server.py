@@ -10,6 +10,7 @@ from threading import Thread
 import sys
 from pathlib import Path
 import shutil
+from flask_cors import CORS
 
 filename = ''
 BASE_PATH = 'cache/' # may replace by random number in future
@@ -33,6 +34,7 @@ def my_hook(d):
         print("\nfilename1:", filename)
 
 app = Flask(__name__)
+CORS(app)
 
 # Remove downloaded file after serve the target file to the client
 

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # List of package names to check
-package_names="flask yt_dlp gunicorn"
+package_names="flask yt_dlp gunicorn Flask-Cors"
 
 for package_name in $package_names; do
     if pip3 show "$package_name" > /dev/null 2>&1; then
