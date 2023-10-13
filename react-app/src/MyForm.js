@@ -60,7 +60,7 @@ class MyForm extends Component {
 
           if (contentDispositionHeader) {
             // Extract the filename from the header
-            console.log('contentDispositionHeader', contentDispositionHeader)
+            console.log('response.headers', response.headers)
             const match = /filename=["']?([^"']+)/.exec(contentDispositionHeader);
             if (match && match[1]) {
               const filename = match[1];
