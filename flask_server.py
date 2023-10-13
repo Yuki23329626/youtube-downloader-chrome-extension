@@ -180,4 +180,5 @@ async def get_file():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host="0.0.0.0",ssl_context=('/etc/letsencrypt/archive/nxshen.csie.io-0002/cert1.pem', '/etc/letsencrypt/archive/nxshen.csie.io-0002/privkey1.pem'))
+    # app.run(debug=True, host="0.0.0.0",ssl_context=('/etc/letsencrypt/archive/nxshen.csie.io-0002/cert1.pem', '/etc/letsencrypt/archive/nxshen.csie.io-0002/privkey1.pem'))
+    app.run(debug=True, host="0.0.0.0")
