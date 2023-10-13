@@ -31,20 +31,34 @@ class MyForm extends Component {
     // Perform save or submit action
     try {
       const yt_url = this.state.yt_url;
-      // Create a URL object
-      const src_url = new URL(yt_url);
-      // Use URLSearchParams to access the parameters
-      const params = new URLSearchParams(src_url.search);
-      // Get specific parameter values
-      const v = params.get("v");
-      console.log('click:', this.state);
-      // You can add your save logic here
 
-      // Build the URL with parameters
-      const apiUrl = `https://nxshen.csie.io:5000/api/file?v=${v}&format=bestaudio`; // Replace with your API endpoint and parameters
-      this.setState({ full_request_url: apiUrl });
+      if (yt_url.startsWith("https://www.youtube.com")) {
+        // Create a URL object
+        const src_url = new URL(yt_url);
+        // Use URLSearchParams to access the parameters
+        const params = new URLSearchParams(src_url.search);
+        // Get specific parameter values
+        const v = params.get("v");
 
-      axios.get(apiUrl, { responseType: 'blob' })
+        // Build the URL with parameters
+        const apiUrl = `https://nxshen.csie.io:5000/api/file?v=${v}&format=mp4`; // Replace with your API endpoint and parameters
+        this.setState({ full_request_url: apiUrl });
+      }
+      else if (yt_url.startsWith("https://youtu.be")) {
+        // Split the URL using '/' as the delimiter and get the last part
+        const parts = yt_url.split('/');
+        const lastPart = parts[parts.length - 1];
+
+        // Split the last part using '?' as the delimiter and get the first part
+        const finalParts = lastPart.split('?');
+        const v = finalParts[0];
+
+        // Build the URL with parameters
+        const apiUrl = `https://nxshen.csie.io:5000/api/file?v=${v}&format=mp4`; // Replace with your API endpoint and parameters
+        this.setState({ full_request_url: apiUrl });
+      }
+
+      axios.get(this.state.full_request_url, { responseType: 'blob' })
         .then(response => {
 
           // Create a Blob from the response data
@@ -117,8 +131,6 @@ class MyForm extends Component {
         const apiUrl = `https://nxshen.csie.io:5000/api/file?v=${v}&format=mp4`; // Replace with your API endpoint and parameters
         this.setState({ full_request_url: apiUrl });
       }
-
-
 
       axios.get(this.state.full_request_url, { responseType: 'blob' })
         .then(response => {
