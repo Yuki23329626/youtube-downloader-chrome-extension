@@ -13,7 +13,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start-origin": "react-scripts start",
+    "start": "export HTTPS=true&&export PORT=443&&SSL_CRT_FILE=/etc/letsencrypt/archive/nxshen.csie.io-0002/cert1.pem&&SSL_KEY_FILE=/etc/letsencrypt/archive/nxshen.csie.io-0002/privkey1.pem react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -37,3 +38,4 @@
     ]
   }
 }
+
