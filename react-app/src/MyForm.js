@@ -58,7 +58,7 @@ class MyForm extends Component {
         apiUrl = `https://nxshen.csie.io:5000/api/file?v=${v}&format=bestaudio`; // Replace with your API endpoint and parameters
         this.setState({ full_request_url: apiUrl });
       }
-      else{
+      else {
         return 'error url'
       }
 
@@ -85,7 +85,7 @@ class MyForm extends Component {
               const filename = match2[1];
               a.download = decodeURIComponent(filename)
               console.log('Downloaded Filename:', filename);
-            } else if (match1 && match1[1]){
+            } else if (match1 && match1[1]) {
               const filename = match1[1]
               a.download = filename
               console.log('Downloaded Filename:', filename);
@@ -141,7 +141,7 @@ class MyForm extends Component {
         apiUrl = `https://nxshen.csie.io:5000/api/file?v=${v}&format=mp4`; // Replace with your API endpoint and parameters
         this.setState({ full_request_url: apiUrl });
       }
-      else{
+      else {
         return 'error url'
       }
 
@@ -207,11 +207,11 @@ class MyForm extends Component {
             onChange={this.handleInputChange}
           />
         </label>
-        <button onClick={this.paste} style={{marginTop: '1rem'}}>Paste</button>
+        <button onClick={this.paste} style={{ alignItems: 'center', justifyContent: 'center', textAlign: 'center', }}>Paste</button>
         <br />
         <button onClick={this.clickDownloadAudio}>Download Audio</button>
         <button onClick={this.clickDownloadVideo}>Download Video</button>
-      </form>
+      </form >
     );
   }
 }
