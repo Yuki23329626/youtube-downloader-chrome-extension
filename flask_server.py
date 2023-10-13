@@ -65,7 +65,7 @@ async def get_file():
     file_format = request.args.get('format')
     print('v', v)
     print('file_format', file_format)
-    url = 'https://www.youtube.com/watch?' + str(v)
+    url = 'https://www.youtube.com/watch?v=' + v
 
     # options for the yt-dlp(github project)
     ydl_opts = {
