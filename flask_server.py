@@ -131,7 +131,7 @@ async def get_file():
     #     error_message = "An error occurred."
     #     return jsonify({'error': error_message}), 400
     
-    return send_file(SAVE_PATH+list_files[0], as_attachment=True, download_name=filename_)
+    return send_file(SAVE_PATH+list_files[0], as_attachment=True, attachment_filename=filename_)
 
     # # Create a response object
     # response = make_response(send_file(list_files[0], as_attachment=True, download_name=filename_))
