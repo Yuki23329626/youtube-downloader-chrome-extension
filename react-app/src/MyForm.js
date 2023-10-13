@@ -21,8 +21,6 @@ class MyForm extends Component {
 
   // Event handler for the "Save" button
   clickDownloadAudio = async (event) => {
-    event.preventDefault();
-    // Perform save or submit action
     try {
       const param_yt_url = this.state.yt_url;
       console.log('click:', this.state);
@@ -31,26 +29,22 @@ class MyForm extends Component {
       // Build the URL with parameters
       const apiUrl = `http://localhost:5000/api/file?url=${param_yt_url}&format=bestaudio`; // Replace with your API endpoint and parameters
 
-      // Send a GET request using Axios
-      axios
-        .get(apiUrl, {
-          responseType: 'blob', // This tells Axios to expect binary data (e.g., a file)
-        })
-        .then((response) => {
-          // Create a Blob object from the response data
-          const blob = new Blob([response.data], { type: response.headers['content-type'] });
+      fetch(apiUrl, {
+        method: 'GET'
+      })
+        .then(response => response.blob())
+        .then(blob => {
+          const url = window.URL.createObjectURL(new Blob([blob]));
 
-          // Create a temporary URL for the Blob
-          const url = window.URL.createObjectURL(blob);
+          const link = document.createElement('a');
+          link.href = url;
 
-          // Create a link element to trigger the download
-          const a = document.createElement('a');
-          a.href = url;
-          a.click();
+          document.body.appendChild(link);
 
-          // Clean up by revoking the Blob URL
-          window.URL.revokeObjectURL(url);
-        })
+          link.click();
+
+          link.parentNode.removeChild(link);
+        });
 
     } catch (error) {
       console.error('Error downloading file:', error);
