@@ -87,7 +87,7 @@ class MyForm extends Component {
               console.log('Downloaded Filename:', filename);
             } else if (match1 && match1[1]){
               const filename = match1[1];
-              a.download = filename
+              a.download = decodeURIComponent(filename);
               console.log('Downloaded Filename:', filename);
             } else {
               console.log('Content-Disposition header does not contain a filename');
