@@ -57,10 +57,10 @@ class MyForm extends Component {
           const a = document.createElement('a');
           a.href = url;
           const contentDispositionHeader = response.headers.get('Content-Disposition');
+          console.log('response.headers', response.headers)
 
           if (contentDispositionHeader) {
             // Extract the filename from the header
-            console.log('response.headers', response.headers)
             const match = /filename=["']?([^"']+)/.exec(contentDispositionHeader);
             if (match && match[1]) {
               const filename = match[1];
