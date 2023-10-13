@@ -46,15 +46,12 @@ class MyForm extends Component {
           // Create a link element to trigger the download
           const a = document.createElement('a');
           a.href = url;
-          a.download = 'downloaded-file.txt'; // Specify the filename
           a.click();
 
           // Clean up by revoking the Blob URL
           window.URL.revokeObjectURL(url);
         })
-        .catch((error) => {
-          console.error('Error downloading file:', error);
-        });
+
     } catch (error) {
       console.error('Error downloading file:', error);
     }
