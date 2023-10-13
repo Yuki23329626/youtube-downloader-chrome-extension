@@ -8,7 +8,7 @@ class MyForm extends Component {
     super(props);
     this.state = {
       yt_url: '',
-      format: '',
+      // format: '',
       responseData: null,
     };
   }
@@ -24,14 +24,12 @@ class MyForm extends Component {
     event.preventDefault();
     // Perform save or submit action
     try {
-      this.setState({ format: 'bestaudio' });
       const param_yt_url = this.state.yt_url;
-      const param_format = 'bestaudio';
       console.log('click:', this.state);
       // You can add your save logic here
 
       // Build the URL with parameters
-      const apiUrl = `http://localhost:5000/api/file?url=${param_yt_url}&format=${param_format}`; // Replace with your API endpoint and parameters
+      const apiUrl = `http://localhost:5000/api/file?url=${param_yt_url}&format=bestaudio`; // Replace with your API endpoint and parameters
 
       // Send a GET request using Axios
       axios
