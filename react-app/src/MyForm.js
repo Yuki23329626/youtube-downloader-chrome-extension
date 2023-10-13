@@ -35,7 +35,7 @@ class MyForm extends Component {
       // You can add your save logic here
 
       // Build the URL with parameters
-      const apiUrl = `http://localhost:5000/api/file?v=${v}&format=bestaudio`; // Replace with your API endpoint and parameters
+      const apiUrl = `http://127.0.0.1:5000/api/file?v=${v}&format=bestaudio`; // Replace with your API endpoint and parameters
 
       axios.get(apiUrl, { responseType: 'blob' })
         .then(response => {
