@@ -26,7 +26,7 @@ class MyForm extends Component {
     try {
       this.setState({ format: 'bestaudio' });
       const param_yt_url = this.state.yt_url;
-      const param_format = this.state.format;
+      const param_format = 'bestaudio';
       console.log('click:', this.state);
       // You can add your save logic here
 
