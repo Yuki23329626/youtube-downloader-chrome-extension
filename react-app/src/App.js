@@ -42,7 +42,7 @@ function App() {
       <img src={logo} className="App-logo" alt="logo" />
       <br />
 
-      <div className='fill-page'>
+      <div className='fill-screen'>
         <MyForm></MyForm>
       </div>
 
