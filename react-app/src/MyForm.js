@@ -29,11 +29,11 @@ class MyForm extends Component {
       // You can add your save logic here
 
       // Build the URL with parameters
-      const apiUrl = `http://127.0.0.1:5000/api/file?url=${param_yt_url}&format=bestaudio`; // Replace with your API endpoint and parameters
+      const apiUrl = `http://localhost:5000/api/file?url=${param_yt_url}&format=bestaudio`; // Replace with your API endpoint and parameters
 
       // Send a GET request using Axios
       axios
-        .post(apiUrl, {
+        .get(apiUrl, {
           responseType: 'blob', // This tells Axios to expect binary data (e.g., a file)
         })
         .then((response) => {
@@ -52,6 +52,9 @@ class MyForm extends Component {
           // Clean up by revoking the Blob URL
           window.URL.revokeObjectURL(url);
         })
+        .catch((error) => {
+          console.error('Error downloading file:', error);
+        });
     } catch (error) {
       console.error('Error downloading file:', error);
     }
