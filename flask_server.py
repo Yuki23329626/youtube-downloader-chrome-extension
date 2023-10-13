@@ -34,7 +34,7 @@ def my_hook(d):
         print("\nfilename1:", filename)
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, expose_headers=["Content-Disposition"])
 
 # Remove downloaded file after serve the target file to the client
 
