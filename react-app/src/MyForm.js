@@ -56,7 +56,21 @@ class MyForm extends Component {
           // Create a temporary anchor element to trigger the download
           const a = document.createElement('a');
           a.href = url;
-          a.download = 'test.m4a'
+          const contentDispositionHeader = response.headers.get('Content-Disposition');
+
+          if (contentDispositionHeader) {
+            // Extract the filename from the header
+            const match = /filename=["']?([^"']+)/.exec(contentDispositionHeader);
+            if (match && match[1]) {
+              const filename = match[1];
+              a.download = filename
+              console.log('Downloaded Filename:', filename);
+            } else {
+              console.log('Content-Disposition header does not contain a filename');
+            }
+          } else {
+            console.log('Content-Disposition header not found in the response');
+          }
 
           // Trigger a click event on the anchor to initiate the download
           a.click();
