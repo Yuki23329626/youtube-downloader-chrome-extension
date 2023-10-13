@@ -1,6 +1,6 @@
 // import logo from './logo.svg';
 import './App.css';
-import React, { Component, useEffect } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import axios from 'axios'; // Import Axios if you're using it
 
 class MyForm extends Component {
@@ -37,33 +37,33 @@ class MyForm extends Component {
       // Build the URL with parameters
       const apiUrl = `http://localhost:5000/api/file?v=${v}&format=bestaudio`; // Replace with your API endpoint and parameters
 
+      const [data, setData] = useState(null);
+
       axios.get(apiUrl, { responseType: 'blob' })
         .then(response => {
-          const url = window.URL.createObjectURL(new Blob([response.data]));
+          // Extract the filename from the response headers
+          const filename = response.headers['content-disposition']
+            .split(';')
+            .find(param => param.trim().startsWith('filename='))
+            .split('=')[1];
+
+          // Create a Blob from the response data
+          const blob = new Blob([response.data]);
+
+          // Create an object URL for the Blob
+          const url = window.URL.createObjectURL(blob);
+
+          // Create a temporary anchor element to trigger the download
           const a = document.createElement('a');
           a.href = url;
-          const disposition = response.headers['content-disposition'];
-          const match = /filename="(.*)"/.exec(disposition);
-          if (match && match[1]) {
-            // Extract the download name from the content-disposition header
-            const downloadName = match[1];
+          a.download = filename; // Set the filename
 
-            // Create a Blob from the response data
-            const url = window.URL.createObjectURL(new Blob([response.data]));
+          // Trigger a click event on the anchor to initiate the download
+          a.click();
 
-            // Create a link element to trigger the download
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = downloadName; // Set the download name from the header
-            a.click();
-
-            // Revoke the Blob URL
-            window.URL.revokeObjectURL(url);
-          }
+          // Revoke the object URL to free up resources
+          window.URL.revokeObjectURL(url);
         })
-        .catch(error => {
-          console.error('Error downloading file:', error);
-        });
 
     } catch (error) {
       console.error('Error downloading file:', error);
