@@ -23,11 +23,11 @@ class MyForm extends Component {
   clickDownloadAudio = async (event) => {
     event.preventDefault();
     // Perform save or submit action
-    console.log('click:', this.state);
-    // You can add your save logic here
     try {
       const param_yt_url = this.state.yt_url;
       const param_format = 'bestaudio';
+      console.log('click:', this.state);
+      // You can add your save logic here
 
       // Build the URL with parameters
       const url = `http://nxshen.csie.io:5000/api/file?url=${param_yt_url}&format=${param_format}`; // Replace with your API endpoint and parameters
