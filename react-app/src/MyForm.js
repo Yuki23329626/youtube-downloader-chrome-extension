@@ -1,7 +1,8 @@
 // import logo from './logo.svg';
 import './App.css';
-import React, { Component } from 'react';
+import React, { Component, useEffect} from 'react';
 import axios from 'axios'; // Import Axios if you're using it
+import { useEffect } from "react";
 
 class MyForm extends Component {
   constructor(props) {
@@ -31,23 +32,14 @@ class MyForm extends Component {
       // Build the URL with parameters
       const apiUrl = `http://localhost:5000/api/file?url=${param_yt_url}&format=bestaudio`; // Replace with your API endpoint and parameters
 
-      const config = {
-        method: 'get',
-        url: apiUrl,
-        headers: {
-          'responseType': 'blob',
-          'maxContentLength': Infinity,
-          'maxBodyLength': Infinity
-        }
-      };
+      const fetchData = () => {
+        return fetch(apiUrl)
+          .then((response) => initiateDownload(responseData))
+      }
 
-      axios(config)
-        .then((response) => {
-          const link = document.createElement('a');
-          link.target = '_blank';
-          link.href = URL.createObjectURL(new Blob([response.data], { type: "audio" }));
-          link.click();
-        })
+      useEffect(() => {
+        fetchData();
+      }, []);
 
     } catch (error) {
       console.error('Error downloading file:', error);
