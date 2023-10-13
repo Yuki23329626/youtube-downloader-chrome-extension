@@ -61,9 +61,9 @@ async def get_file():
         os.makedirs(SAVE_PATH)
 
     print('request', request)
-    url = request.args.get('url')
+    v = request.args.get('v')
     file_format = request.args.get('format')
-    print('url', url)
+    print('v', v)
     print('file_format', file_format)
 
     # options for the yt-dlp(github project)
