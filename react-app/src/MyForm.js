@@ -25,10 +25,48 @@ class MyForm extends Component {
     this.setState({ [name]: value });
   };
 
+  sendRequest(apiUrl) {
+    axios.get(apiUrl, { responseType: 'blob' })
+      .then(response => {
+
+        // Create a Blob from the response data
+        const blob = new Blob([response.data]);
+
+        // Create an object URL for the Blob
+        const url = window.URL.createObjectURL(blob);
+
+        // Create a temporary anchor element to trigger the download
+        const a = document.createElement('a');
+        a.href = url;
+        const contentDispositionHeader = response.headers.get('Content-Disposition');
+        console.log('response.headers', response.headers)
+
+        if (contentDispositionHeader) {
+          // Extract the filename from the header
+          const match = /filename=["']?([^"']+)/.exec(contentDispositionHeader);
+          if (match && match[1]) {
+            const filename = match[1];
+            a.download = filename
+            console.log('Downloaded Filename:', filename);
+          } else {
+            console.log('Content-Disposition header does not contain a filename');
+          }
+        } else {
+          console.log('Content-Disposition header not found in the response');
+        }
+
+        // Trigger a click event on the anchor to initiate the download
+        a.click();
+
+        // Revoke the object URL to free up resources
+        window.URL.revokeObjectURL(url);
+      }).catch(error => {
+        console.error('Error:', error);
+      });
+  }
+
   // Event handler for the "Save" button
   clickDownloadAudio = async (event) => {
-    event.preventDefault();
-    // Perform save or submit action
     try {
       const yt_url = this.state.yt_url;
       // Create a URL object
@@ -43,52 +81,32 @@ class MyForm extends Component {
       // Build the URL with parameters
       const apiUrl = `https://nxshen.csie.io:5000/api/file?v=${v}&format=bestaudio`; // Replace with your API endpoint and parameters
       this.setState({ full_request_url: apiUrl });
-
-      axios.get(apiUrl, { responseType: 'blob' })
-        .then(response => {
-
-          // Create a Blob from the response data
-          const blob = new Blob([response.data]);
-
-          // Create an object URL for the Blob
-          const url = window.URL.createObjectURL(blob);
-
-          // Create a temporary anchor element to trigger the download
-          const a = document.createElement('a');
-          a.href = url;
-          const contentDispositionHeader = response.headers.get('Content-Disposition');
-          console.log('response.headers', response.headers)
-
-          if (contentDispositionHeader) {
-            // Extract the filename from the header
-            const match = /filename=["']?([^"']+)/.exec(contentDispositionHeader);
-            if (match && match[1]) {
-              const filename = match[1];
-              a.download = filename
-              console.log('Downloaded Filename:', filename);
-            } else {
-              console.log('Content-Disposition header does not contain a filename');
-            }
-          } else {
-            console.log('Content-Disposition header not found in the response');
-          }
-
-          // Trigger a click event on the anchor to initiate the download
-          a.click();
-
-          // Revoke the object URL to free up resources
-          window.URL.revokeObjectURL(url);
-        })
-
+      this.sendRequest(apiUrl);
     } catch (error) {
-      console.error('Error downloading file:', error);
+      console.error('Error clickDownloadAudio:', error);
     }
   };
 
   // Event handler for the "Clear" button
-  clickDownloadVideo = () => {
-    // Clear the form fields
-    console.log('click:', this.state);
+  clickDownloadVideo = async (event) => {
+    try {
+      const yt_url = this.state.yt_url;
+      // Create a URL object
+      const src_url = new URL(yt_url);
+      // Use URLSearchParams to access the parameters
+      const params = new URLSearchParams(src_url.search);
+      // Get specific parameter values
+      const v = params.get("v");
+      console.log('click:', this.state);
+      // You can add your save logic here
+
+      // Build the URL with parameters
+      const apiUrl = `https://nxshen.csie.io:5000/api/file?v=${v}&format=mp4`; // Replace with your API endpoint and parameters
+      this.setState({ full_request_url: apiUrl });
+      this.sendRequest(apiUrl);
+    } catch (error) {
+      console.error('Error clickDownloadVideo:', error);
+    }
   };
 
   componentDidMount() {
