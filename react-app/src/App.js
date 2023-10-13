@@ -5,7 +5,7 @@ import MyForm from './MyForm';
 import axios from 'axios'; // Import Axios if you're using it
 
 function App() {
-  
+
   // const [data, setData] = useState(null);
 
   // axios.get(apiUrl, { responseType: 'blob' })
@@ -41,7 +41,10 @@ function App() {
     <div className="App">
       <img src={logo} className="App-logo" alt="logo" />
       <br />
-      <MyForm></MyForm>
+      
+      <div>
+        <MyForm></MyForm>
+      </div>
 
       <footer id="footer">
         <div class="contact_informations">
