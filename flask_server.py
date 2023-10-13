@@ -70,6 +70,7 @@ async def get_file():
     file_format = parameters.get('format')
     url = parameters.get('url')
     print('url', url)
+    print('format', file_format)
 
     # options for the yt-dlp(github project)
     ydl_opts = {
