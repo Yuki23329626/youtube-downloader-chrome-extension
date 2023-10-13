@@ -206,8 +206,8 @@ class MyForm extends Component {
             value={this.state.yt_url}
             onChange={this.handleInputChange}
           />
-          <button onClick={this.paste} style={{marginTop: '1rem'}}>Paste</button>
         </label>
+        <button onClick={this.paste} style={{marginTop: '1rem'}}>Paste</button>
         <br />
         <button onClick={this.clickDownloadAudio}>Download Audio</button>
         <button onClick={this.clickDownloadVideo}>Download Video</button>
