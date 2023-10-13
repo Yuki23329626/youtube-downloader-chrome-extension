@@ -58,6 +58,9 @@ class MyForm extends Component {
         apiUrl = `https://nxshen.csie.io:5000/api/file?v=${v}&format=bestaudio`; // Replace with your API endpoint and parameters
         this.setState({ full_request_url: apiUrl });
       }
+      else{
+        return 'error url'
+      }
 
       axios.get(apiUrl, { responseType: 'blob' })
         .then(response => {
@@ -133,6 +136,9 @@ class MyForm extends Component {
         apiUrl = `https://nxshen.csie.io:5000/api/file?v=${v}&format=mp4`; // Replace with your API endpoint and parameters
         this.setState({ full_request_url: apiUrl });
       }
+      else{
+        return 'error url'
+      }
 
       axios.get(apiUrl, { responseType: 'blob' })
         .then(response => {
@@ -188,6 +194,7 @@ class MyForm extends Component {
     return (
       <form>
         <h2>YouTube URL:</h2>
+        <br/>
         <label>
           <input
             type="text"
