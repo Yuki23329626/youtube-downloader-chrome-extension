@@ -2027,6 +2027,7 @@ input,
 select,
 textarea {
 	color: #555;
+	margin: '.5rem';
 }
 
 a {
