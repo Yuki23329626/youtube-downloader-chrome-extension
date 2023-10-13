@@ -42,7 +42,7 @@ function App() {
       <img src={logo} className="App-logo" alt="logo" />
       <br />
 
-      <div style={{maxHeight: 100%}}>
+      <div style={{maxHeight: '100%'}}>
         <MyForm></MyForm>
       </div>
 
