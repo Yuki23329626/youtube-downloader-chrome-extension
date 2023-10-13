@@ -79,9 +79,14 @@ class MyForm extends Component {
 
           if (contentDispositionHeader) {
             // Extract the filename from the header
-            const match = /filename=["']?([^"']+)/.exec(contentDispositionHeader);
-            if (match && match[1]) {
-              const filename = match[1];
+            const match1 = /filename=["']?([^"']+)/.exec(contentDispositionHeader);
+            const match2 = /filename\*=UTF-8''([^"]+)/.exec(contentDispositionHeader);
+            if (match2 && match2[1]) {
+              const filename = match2[1];
+              a.download = filename
+              console.log('Downloaded Filename:', filename);
+            } else if (match1 && match1[1]){
+              const filename = match1[1];
               a.download = filename
               console.log('Downloaded Filename:', filename);
             } else {

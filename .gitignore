@@ -33,3 +33,6 @@ src_native_app/ytd_subprocess.spec
 src_native_app/native_host.spec
 /src_native_app/*.log
 *.log
+LiteYoutubeDownloader
+/*.zip
+src_native_app/Lite_Youtube_Downloader_windows_installer.spec
