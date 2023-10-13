@@ -32,9 +32,13 @@ class MyForm extends Component {
       // Build the URL with parameters
       const url = `http://localhost:5000/api/file?url=${param_yt_url}&format=${param_format}`; // Replace with your API endpoint and parameters
 
-      const response = await fetch(url);
-      const data = await response.json();
-      this.setState({ responseData: data });
+      fetch(url)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.blob();
+      })
     } catch (error) {
       console.error('Error:', error);
     }
