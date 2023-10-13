@@ -206,6 +206,7 @@ class MyForm extends Component {
             value={this.state.yt_url}
             onChange={this.handleInputChange}
           />
+          <button onClick={this.clickDownloadAudio}>Download Audio</button>
         </label>
         <br />
         <button onClick={this.clickDownloadAudio}>Download Audio</button>
