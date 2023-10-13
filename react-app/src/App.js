@@ -42,9 +42,7 @@ function App() {
       <img src={logo} className="App-logo" alt="logo" />
       <br />
 
-      <div style={{
-        height: '100%',
-      }}>
+      <div className='fill-page'>
         <MyForm></MyForm>
       </div>
 
