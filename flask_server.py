@@ -60,6 +60,7 @@ async def get_file():
     if not os.path.exists(SAVE_PATH):
         os.makedirs(SAVE_PATH)
 
+    print('request', request)
     url = request.args.get('url')
     file_format = request.args.get('format')
     print('url', url)
