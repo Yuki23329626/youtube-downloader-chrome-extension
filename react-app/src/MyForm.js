@@ -31,7 +31,7 @@ class MyForm extends Component {
       // Build the URL with parameters
       const apiUrl = `http://localhost:5000/api/file?url=${param_yt_url}&format=bestaudio`; // Replace with your API endpoint and parameters
 
-      axios.get('http://your-api-endpoint.com/data')
+      axios.get(apiUrl)
         .then((response) => {
           // Handle the data from the response
           const responseData = response.data;
