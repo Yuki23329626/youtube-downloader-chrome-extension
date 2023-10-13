@@ -8,9 +8,15 @@ class MyForm extends Component {
     super(props);
     this.state = {
       yt_url: '',
+      full_request_url: '',
       // format: '',
       responseData: null,
     };
+  }
+
+  getFullReqeustUrl() {
+    // Access the component's state or calculate the value
+    return this.state.full_request_url; // Example: accessing a value from the state
   }
 
   // Event handler for form input changes
@@ -37,8 +43,6 @@ class MyForm extends Component {
       // Build the URL with parameters
       const apiUrl = `http://localhost:5000/api/file?v=${v}&format=bestaudio`; // Replace with your API endpoint and parameters
 
-      const [data, setData] = useState(null);
-
       axios.get(apiUrl, { responseType: 'blob' })
         .then(response => {
           // Extract the filename from the response headers
@@ -64,6 +68,9 @@ class MyForm extends Component {
           // Revoke the object URL to free up resources
           window.URL.revokeObjectURL(url);
         })
+        .catch(error => {
+          console.error('Error:', error);
+        });
 
     } catch (error) {
       console.error('Error downloading file:', error);
