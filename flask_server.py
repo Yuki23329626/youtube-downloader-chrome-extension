@@ -65,7 +65,7 @@ async def get_file():
     parameters = request.args.to_dict()
     # link = parameters.pop('url')
     request_string = request.url
-    print('request_string', request_string)
+    print('parameters', parameters)
     logging.info('\n[Success]: ' + request_string)
     file_format = parameters.get('format')
     url = parameters.get('url')
