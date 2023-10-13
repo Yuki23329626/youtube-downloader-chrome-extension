@@ -2,7 +2,6 @@
 import './App.css';
 import React, { Component, useEffect} from 'react';
 import axios from 'axios'; // Import Axios if you're using it
-import { useEffect } from "react";
 
 class MyForm extends Component {
   constructor(props) {
