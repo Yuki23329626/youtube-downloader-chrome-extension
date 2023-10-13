@@ -86,7 +86,7 @@ class MyForm extends Component {
               a.download = decodeURIComponent(filename)
               console.log('Downloaded Filename:', filename);
             } else if (match1 && match1[1]){
-              const filename = match1[1];
+              const filename = match1[1]
               a.download = filename
               console.log('Downloaded Filename:', filename);
             } else {
