@@ -37,12 +37,16 @@ function App() {
   //     console.error('Error:', error);
   //   });
 
+  const divStyle = {
+    height: 100%
+  };
+
   return (
     <div className="App">
       <img src={logo} className="App-logo" alt="logo" />
       <br />
-      
-      <div>
+
+      <div style={divStyle}>
         <MyForm></MyForm>
       </div>
 
