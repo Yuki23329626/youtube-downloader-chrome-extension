@@ -113,11 +113,11 @@ async def get_file():
 
     logging.info('list_files: ' + str(list_files))
     
-    @after_this_request
-    def after_request(response):
-        t = Thread(target=remove_file, args=(list_files,))
-        t.start()
-        return response
+    # @after_this_request
+    # def after_request(response):
+    #     t = Thread(target=remove_file, args=(list_files,))
+    #     t.start()
+    #     return response
     
     # Create a Path object
     path_obj = Path(list_files[0])
