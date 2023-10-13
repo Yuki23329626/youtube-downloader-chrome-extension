@@ -54,45 +54,45 @@ class MyForm extends Component {
           // Clean up by revoking the Blob URL
           window.URL.revokeObjectURL(url);
         })
-        .catch((error) => {
-          console.error('Error downloading file:', error);
-        });
-    };
-
-    // Event handler for the "Clear" button
-    clickDownloadVideo = () => {
-      // Clear the form fields
-      console.log('click:', this.state);
-    };
-
-    componentDidMount() {
-      // Access the clipboard and set the form fields with the clipboard data
-      navigator.clipboard.readText().then((clipboardText) => {
-        this.setState({ yt_url: clipboardText });
-      }).catch((error) => {
-        console.error('Error reading clipboard content:', error);
-      });
+    } catch (error) {
+      console.error('Error downloading file:', error);
     }
+  };
 
-    render() {
-      return (
-        <form>
-          <h2>YouTube URL:</h2>
-          <label>
-            <input
-              type="text"
-              name="yt_url"
-              value={this.state.yt_url}
-              onChange={this.handleInputChange}
-            />
-          </label>
-          <br />
-          <button onClick={this.clickDownloadAudio}>Download Audio</button>
-          <button onClick={this.clickDownloadVideo}>Download Video</button>
-        </form>
-      );
-    }
+  // Event handler for the "Clear" button
+  clickDownloadVideo = () => {
+    // Clear the form fields
+    console.log('click:', this.state);
+  };
+
+  componentDidMount() {
+    // Access the clipboard and set the form fields with the clipboard data
+    navigator.clipboard.readText().then((clipboardText) => {
+      this.setState({ yt_url: clipboardText });
+    }).catch((error) => {
+      console.error('Error reading clipboard content:', error);
+    });
   }
+
+  render() {
+    return (
+      <form>
+        <h2>YouTube URL:</h2>
+        <label>
+          <input
+            type="text"
+            name="yt_url"
+            value={this.state.yt_url}
+            onChange={this.handleInputChange}
+          />
+        </label>
+        <br />
+        <button onClick={this.clickDownloadAudio}>Download Audio</button>
+        <button onClick={this.clickDownloadVideo}>Download Video</button>
+      </form>
+    );
+  }
+}
 
 
 // function App() {
