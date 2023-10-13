@@ -1,6 +1,6 @@
 // import logo from './logo.svg';
 import './App.css';
-import React, { Component, useState, useEffect } from 'react';
+import React, { Component } from 'react';
 import axios from 'axios'; // Import Axios if you're using it
 
 class MyForm extends Component {
