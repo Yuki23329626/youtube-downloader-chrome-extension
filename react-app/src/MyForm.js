@@ -1,6 +1,6 @@
 // import logo from './logo.svg';
 import './App.css';
-import React, { Component, useEffect} from 'react';
+import React, { Component, useEffect } from 'react';
 import axios from 'axios'; // Import Axios if you're using it
 
 class MyForm extends Component {
@@ -31,14 +31,16 @@ class MyForm extends Component {
       // Build the URL with parameters
       const apiUrl = `http://localhost:5000/api/file?url=${param_yt_url}&format=bestaudio`; // Replace with your API endpoint and parameters
 
-      const fetchData = () => {
-        return fetch(apiUrl)
-          .then((response) => initiateDownload(responseData))
-      }
-
-      useEffect(() => {
-        fetchData();
-      }, []);
+      axios.get('http://your-api-endpoint.com/data')
+        .then((response) => {
+          // Handle the data from the response
+          const responseData = response.data;
+          // Call a function to initiate the download
+          axios.initiateDownload(responseData);
+        })
+        .catch((error) => {
+          console.error('Error fetching data:', error);
+        });
 
     } catch (error) {
       console.error('Error downloading file:', error);
