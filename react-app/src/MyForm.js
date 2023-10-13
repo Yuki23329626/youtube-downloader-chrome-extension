@@ -33,7 +33,7 @@ class MyForm extends Component {
 
       // Send a GET request using Axios
       axios
-        .get(apiUrl, {
+        .post(apiUrl, {
           responseType: 'blob', // This tells Axios to expect binary data (e.g., a file)
         })
         .then((response) => {
