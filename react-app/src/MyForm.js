@@ -35,6 +35,7 @@ class MyForm extends Component {
         .then((response) => {
           // Handle the data from the response
           const responseData = response.data;
+          console.log('response', response)
           // Call a function to initiate the download
           axios.initiateDownload(responseData);
         })
