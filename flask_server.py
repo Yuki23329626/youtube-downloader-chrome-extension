@@ -98,7 +98,7 @@ async def get_file():
     elif file_format == 'mp4':
         print('file_format', file_format)
         # ydl_opts['format'] = 'bestvideo[height<=1080][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best'
-        ydl_opts['format'] = 'bestvideo*[ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio'
+        ydl_opts['format'] = 'bestvideo*[height<=1080][ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio'
 
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
         ydl.download(url)
