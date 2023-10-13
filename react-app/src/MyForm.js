@@ -56,6 +56,7 @@ class MyForm extends Component {
           // Create a temporary anchor element to trigger the download
           const a = document.createElement('a');
           a.href = url;
+          a.download = 'test.m4a'
 
           // Trigger a click event on the anchor to initiate the download
           a.click();
