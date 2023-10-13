@@ -195,6 +195,15 @@ class MyForm extends Component {
     });
   }
 
+  paste(){
+    // Access the clipboard and set the form fields with the clipboard data
+    navigator.clipboard.readText().then((clipboardText) => {
+      this.setState({ yt_url: clipboardText });
+    }).catch((error) => {
+      console.error('Error reading clipboard content:', error);
+    });
+  }
+
   render() {
     return (
       <form>
