@@ -14,7 +14,7 @@
   },
   "scripts": {
     "start-origin": "react-scripts start",
-    "start": "export HTTPS=true&&export PORT=443&&SSL_CRT_FILE=/etc/letsencrypt/archive/nxshen.csie.io-0002/cert1.pem&&SSL_KEY_FILE=/etc/letsencrypt/archive/nxshen.csie.io-0002/privkey1.pem react-scripts start",
+    "start": "set HTTPS=true&&set SSL_CRT_FILE=/etc/letsencrypt/archive/nxshen.csie.io-0002/cert2.pem&&set SSL_KEY_FILE=/etc/letsencrypt/archive/nxshen.csie.io-0002/privkey2.pem&&react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
