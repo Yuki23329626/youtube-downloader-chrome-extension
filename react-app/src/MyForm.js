@@ -207,7 +207,7 @@ class MyForm extends Component {
             onChange={this.handleInputChange}
           />
         </label>
-        <button onClick={this.paste} style={{ verticalAlign: 'center'}}>Paste</button>
+        <button onClick={this.paste} style={{ verticalAlign: 'middle'}}>Paste</button>
         <br />
         <button onClick={this.clickDownloadAudio}>Download Audio</button>
         <button onClick={this.clickDownloadVideo}>Download Video</button>
