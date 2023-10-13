@@ -29,7 +29,7 @@ class MyForm extends Component {
       // You can add your save logic here
 
       // Build the URL with parameters
-      const apiUrl = `http://localhost:5000/api/file?url=${param_yt_url}&format=bestaudio`; // Replace with your API endpoint and parameters
+      const apiUrl = `http://127.0.0.1:5000/api/file?url=${param_yt_url}&format=bestaudio`; // Replace with your API endpoint and parameters
 
       // Send a GET request using Axios
       axios
