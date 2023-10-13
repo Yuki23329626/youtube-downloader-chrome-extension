@@ -1,5 +1,8 @@
 .App {
 	text-align: center;
+	width: 100%; /* Make the div full width of the viewport */
+	height: 100vh; /* Make the div full viewport height */
+	min-height: 100%; /* Ensure the div covers at least the entire viewport height */
 }
 
 .fill-screen {

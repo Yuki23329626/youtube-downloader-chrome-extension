@@ -47,9 +47,9 @@ function App() {
       </div>
 
       <footer id="footer">
-        <div class="contact_informations">
+        <div className="contact_informations">
         </div>
-        <div class="copyright">
+        <div className="copyright">
           &copy; 2023 LiteYTD All right reserved
         </div>
       </footer>
