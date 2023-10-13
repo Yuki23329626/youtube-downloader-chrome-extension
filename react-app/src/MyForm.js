@@ -46,11 +46,6 @@ class MyForm extends Component {
 
       axios.get(apiUrl, { responseType: 'blob' })
         .then(response => {
-          // Extract the filename from the response headers
-          const filename = response.headers['content-disposition']
-            .split(';')
-            .find(param => param.trim().startsWith('filename='))
-            .split('=')[1];
 
           // Create a Blob from the response data
           const blob = new Blob([response.data]);
@@ -61,7 +56,6 @@ class MyForm extends Component {
           // Create a temporary anchor element to trigger the download
           const a = document.createElement('a');
           a.href = url;
-          a.download = filename; // Set the filename
 
           // Trigger a click event on the anchor to initiate the download
           a.click();
