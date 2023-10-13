@@ -199,14 +199,14 @@ class MyForm extends Component {
     return (
       <form>
         <h2>YouTube URL:</h2>
-        <label>
+        <label className='custom-input'>
           <input
             type="text"
             name="yt_url"
             value={this.state.yt_url}
             onChange={this.handleInputChange}
           />
-          <button onClick={this.clickDownloadAudio}>Download Audio</button>
+          <button type="button" className="custom-button">Button</button>
         </label>
         <br />
         <button onClick={this.clickDownloadAudio}>Download Audio</button>
