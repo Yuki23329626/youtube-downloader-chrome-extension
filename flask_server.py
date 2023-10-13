@@ -60,17 +60,10 @@ async def get_file():
     if not os.path.exists(SAVE_PATH):
         os.makedirs(SAVE_PATH)
 
-    # try:
-    # pop the parameters from the url
-    parameters = request.args.to_dict()
-    # link = parameters.pop('url')
-    request_string = request.url
-    print('parameters', parameters)
-    logging.info('\n[Success]: ' + request_string)
-    file_format = parameters.get('format')
-    url = parameters.get('url')
+    url = request.args.get('url')
+    file_format = request.args.get('format')
     print('url', url)
-    print('format', file_format)
+    print('file_format', file_format)
 
     # options for the yt-dlp(github project)
     ydl_opts = {
