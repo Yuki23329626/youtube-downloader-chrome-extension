@@ -24,8 +24,9 @@ class MyForm extends Component {
     event.preventDefault();
     // Perform save or submit action
     try {
+      this.setState({ format: 'bestaudio' });
       const param_yt_url = this.state.yt_url;
-      const param_format = 'bestaudio';
+      const param_format = this.state.format;
       console.log('click:', this.state);
       // You can add your save logic here
 
