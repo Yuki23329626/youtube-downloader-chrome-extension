@@ -44,33 +44,31 @@ class MyForm extends Component {
       const apiUrl = `http://localhost:5000/api/file?v=${v}&format=bestaudio`; // Replace with your API endpoint and parameters
       this.setState({ full_request_url: apiUrl });
 
-      useEffect(() => {
-        axios.get(apiUrl, { responseType: 'blob' })
-          .then(response => {
-            // Extract the filename from the response headers
-            const filename = response.headers['content-disposition']
-              .split(';')
-              .find(param => param.trim().startsWith('filename='))
-              .split('=')[1];
+      axios.get(apiUrl, { responseType: 'blob' })
+        .then(response => {
+          // Extract the filename from the response headers
+          const filename = response.headers['content-disposition']
+            .split(';')
+            .find(param => param.trim().startsWith('filename='))
+            .split('=')[1];
 
-            // Create a Blob from the response data
-            const blob = new Blob([response.data]);
+          // Create a Blob from the response data
+          const blob = new Blob([response.data]);
 
-            // Create an object URL for the Blob
-            const url = window.URL.createObjectURL(blob);
+          // Create an object URL for the Blob
+          const url = window.URL.createObjectURL(blob);
 
-            // Create a temporary anchor element to trigger the download
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = filename; // Set the filename
+          // Create a temporary anchor element to trigger the download
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = filename; // Set the filename
 
-            // Trigger a click event on the anchor to initiate the download
-            a.click();
+          // Trigger a click event on the anchor to initiate the download
+          a.click();
 
-            // Revoke the object URL to free up resources
-            window.URL.revokeObjectURL(url);
-          })
-      });
+          // Revoke the object URL to free up resources
+          window.URL.revokeObjectURL(url);
+        })
 
     } catch (error) {
       console.error('Error downloading file:', error);
