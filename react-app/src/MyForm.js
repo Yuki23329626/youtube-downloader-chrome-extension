@@ -1,7 +1,7 @@
 // import logo from './logo.svg';
 import './App.css';
-import React, { Component} from 'react';
-// import axios from 'axios'; // Import Axios if you're using it
+import React, { Component } from 'react';
+import axios from 'axios'; // Import Axios if you're using it
 
 class MyForm extends Component {
   constructor(props) {
@@ -31,54 +31,68 @@ class MyForm extends Component {
       // You can add your save logic here
 
       // Build the URL with parameters
-      const url = `http://localhost:5000/api/file?url=${param_yt_url}&format=${param_format}`; // Replace with your API endpoint and parameters
+      const apiUrl = `http://localhost:5000/api/file?url=${param_yt_url}&format=${param_format}`; // Replace with your API endpoint and parameters
 
-      await fetch(url)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.blob();
-      })
-    } catch (error) {
-      console.error('Error:', error);
+      // Send a GET request using Axios
+      axios
+        .get(apiUrl, {
+          responseType: 'blob', // This tells Axios to expect binary data (e.g., a file)
+        })
+        .then((response) => {
+          // Create a Blob object from the response data
+          const blob = new Blob([response.data], { type: response.headers['content-type'] });
+
+          // Create a temporary URL for the Blob
+          const url = window.URL.createObjectURL(blob);
+
+          // Create a link element to trigger the download
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = 'downloaded-file.txt'; // Specify the filename
+          a.click();
+
+          // Clean up by revoking the Blob URL
+          window.URL.revokeObjectURL(url);
+        })
+        .catch((error) => {
+          console.error('Error downloading file:', error);
+        });
+    };
+
+    // Event handler for the "Clear" button
+    clickDownloadVideo = () => {
+      // Clear the form fields
+      console.log('click:', this.state);
+    };
+
+    componentDidMount() {
+      // Access the clipboard and set the form fields with the clipboard data
+      navigator.clipboard.readText().then((clipboardText) => {
+        this.setState({ yt_url: clipboardText });
+      }).catch((error) => {
+        console.error('Error reading clipboard content:', error);
+      });
     }
-  };
 
-  // Event handler for the "Clear" button
-  clickDownloadVideo = () => {
-    // Clear the form fields
-    console.log('click:', this.state);
-  };
-
-  componentDidMount() {
-    // Access the clipboard and set the form fields with the clipboard data
-    navigator.clipboard.readText().then((clipboardText) => {
-      this.setState({ yt_url: clipboardText });
-    }).catch((error) => {
-      console.error('Error reading clipboard content:', error);
-    });
+    render() {
+      return (
+        <form>
+          <h2>YouTube URL:</h2>
+          <label>
+            <input
+              type="text"
+              name="yt_url"
+              value={this.state.yt_url}
+              onChange={this.handleInputChange}
+            />
+          </label>
+          <br />
+          <button onClick={this.clickDownloadAudio}>Download Audio</button>
+          <button onClick={this.clickDownloadVideo}>Download Video</button>
+        </form>
+      );
+    }
   }
-
-  render() {
-    return (
-      <form>
-        <h2>YouTube URL:</h2>
-        <label>
-          <input
-            type="text"
-            name="yt_url"
-            value={this.state.yt_url}
-            onChange={this.handleInputChange}
-          />
-        </label>
-        <br />
-        <button onClick={this.clickDownloadAudio}>Download Audio</button>
-        <button onClick={this.clickDownloadVideo}>Download Video</button>
-      </form>
-    );
-  }
-}
 
 
 // function App() {
