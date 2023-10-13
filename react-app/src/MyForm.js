@@ -24,12 +24,18 @@ class MyForm extends Component {
     event.preventDefault();
     // Perform save or submit action
     try {
-      const param_yt_url = this.state.yt_url;
+      const yt_url = this.state.yt_url;
+      // Create a URL object
+      const src_url = new URL(yt_url);
+      // Use URLSearchParams to access the parameters
+      const params = new URLSearchParams(src_url.search);
+      // Get specific parameter values
+      const v = params.get("v");
       console.log('click:', this.state);
       // You can add your save logic here
 
       // Build the URL with parameters
-      const apiUrl = `http://localhost:5000/api/file?url=${param_yt_url}&format=bestaudio`; // Replace with your API endpoint and parameters
+      const apiUrl = `http://localhost:5000/api/file?v=${v}&format=bestaudio`; // Replace with your API endpoint and parameters
 
       axios.get(apiUrl, { responseType: 'blob' })
         .then(response => {
