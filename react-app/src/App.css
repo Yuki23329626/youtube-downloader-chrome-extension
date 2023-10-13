@@ -4620,10 +4620,11 @@ body.is-mobile .banner>article {
 
 #footer {
 	position: fixed;
-	padding: 4rem 0 2rem 0;
-	background: #000;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	background-color: #000000;
 	text-align: center;
-	margin-top: 1rem;
 }
 
 #footer a {
