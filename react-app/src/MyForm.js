@@ -25,11 +25,10 @@ class MyForm extends Component {
     this.setState({ [name]: value });
   };
 
-  sendRequest(apiUrl) {
-  }
-
   // Event handler for the "Save" button
   clickDownloadAudio = async (event) => {
+    event.preventDefault();
+    // Perform save or submit action
     try {
       const yt_url = this.state.yt_url;
       // Create a URL object
@@ -44,7 +43,6 @@ class MyForm extends Component {
       // Build the URL with parameters
       const apiUrl = `https://nxshen.csie.io:5000/api/file?v=${v}&format=bestaudio`; // Replace with your API endpoint and parameters
       this.setState({ full_request_url: apiUrl });
-      this.sendRequest(apiUrl);
 
       axios.get(apiUrl, { responseType: 'blob' })
         .then(response => {
@@ -80,16 +78,17 @@ class MyForm extends Component {
 
           // Revoke the object URL to free up resources
           window.URL.revokeObjectURL(url);
-        }).catch(error => {
-          console.error('Error Downloading:', error);
-        });
+        })
+
     } catch (error) {
-      console.error('Error clickDownloadAudio:', error);
+      console.error('Error downloading file:', error);
     }
   };
 
-  // Event handler for the "Clear" button
+  // Event handler for the "Save" button
   clickDownloadVideo = async (event) => {
+    event.preventDefault();
+    // Perform save or submit action
     try {
       const yt_url = this.state.yt_url;
       // Create a URL object
@@ -104,7 +103,6 @@ class MyForm extends Component {
       // Build the URL with parameters
       const apiUrl = `https://nxshen.csie.io:5000/api/file?v=${v}&format=mp4`; // Replace with your API endpoint and parameters
       this.setState({ full_request_url: apiUrl });
-      this.sendRequest(apiUrl);
 
       axios.get(apiUrl, { responseType: 'blob' })
         .then(response => {
@@ -140,11 +138,10 @@ class MyForm extends Component {
 
           // Revoke the object URL to free up resources
           window.URL.revokeObjectURL(url);
-        }).catch(error => {
-          console.error('Error Downloading:', error);
-        });
+        })
+
     } catch (error) {
-      console.error('Error clickDownloadVideo:', error);
+      console.error('Error downloading file:', error);
     }
   };
 
