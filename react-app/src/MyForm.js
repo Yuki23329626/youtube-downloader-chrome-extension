@@ -194,7 +194,6 @@ class MyForm extends Component {
     return (
       <form>
         <h2>YouTube URL:</h2>
-        <br/>
         <label>
           <input
             type="text"
