@@ -31,16 +31,32 @@ class MyForm extends Component {
       // Build the URL with parameters
       const apiUrl = `http://localhost:5000/api/file?url=${param_yt_url}&format=bestaudio`; // Replace with your API endpoint and parameters
 
-      axios.get(apiUrl)
-        .then((response) => {
-          // Handle the data from the response
-          const responseData = response.data;
-          console.log('response', response)
-          // Call a function to initiate the download
-          axios.initiateDownload(responseData);
+      axios.get(apiUrl, { responseType: 'blob' })
+        .then(response => {
+          const url = window.URL.createObjectURL(new Blob([response.data]));
+          const a = document.createElement('a');
+          a.href = url;
+          const disposition = response.headers['content-disposition'];
+          const match = /filename="(.*)"/.exec(disposition);
+          if (match && match[1]) {
+            // Extract the download name from the content-disposition header
+            const downloadName = match[1];
+
+            // Create a Blob from the response data
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+
+            // Create a link element to trigger the download
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = downloadName; // Set the download name from the header
+            a.click();
+
+            // Revoke the Blob URL
+            window.URL.revokeObjectURL(url);
+          }
         })
-        .catch((error) => {
-          console.error('Error fetching data:', error);
+        .catch(error => {
+          console.error('Error downloading file:', error);
         });
 
     } catch (error) {
