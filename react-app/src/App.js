@@ -37,16 +37,12 @@ function App() {
   //     console.error('Error:', error);
   //   });
 
-  const divStyle = {
-    height: 100%
-  };
-
   return (
     <div className="App">
       <img src={logo} className="App-logo" alt="logo" />
       <br />
 
-      <div style={divStyle}>
+      <div style={{maxHeight: 100%}}>
         <MyForm></MyForm>
       </div>
 
