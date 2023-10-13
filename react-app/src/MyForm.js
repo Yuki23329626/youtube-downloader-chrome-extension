@@ -31,6 +31,7 @@ class MyForm extends Component {
     // Perform save or submit action
     try {
       const yt_url = this.state.yt_url;
+      var apiUrl = ''
 
       if (yt_url.startsWith("https://www.youtube.com")) {
         // Create a URL object
@@ -41,7 +42,7 @@ class MyForm extends Component {
         const v = params.get("v");
 
         // Build the URL with parameters
-        const apiUrl = `https://nxshen.csie.io:5000/api/file?v=${v}&format=mp4`; // Replace with your API endpoint and parameters
+        apiUrl = `https://nxshen.csie.io:5000/api/file?v=${v}&format=mp4`; // Replace with your API endpoint and parameters
         this.setState({ full_request_url: apiUrl });
       }
       else if (yt_url.startsWith("https://youtu.be")) {
@@ -54,11 +55,11 @@ class MyForm extends Component {
         const v = finalParts[0];
 
         // Build the URL with parameters
-        const apiUrl = `https://nxshen.csie.io:5000/api/file?v=${v}&format=mp4`; // Replace with your API endpoint and parameters
+        apiUrl = `https://nxshen.csie.io:5000/api/file?v=${v}&format=mp4`; // Replace with your API endpoint and parameters
         this.setState({ full_request_url: apiUrl });
       }
 
-      axios.get(this.state.full_request_url, { responseType: 'blob' })
+      axios.get(apiUrl, { responseType: 'blob' })
         .then(response => {
 
           // Create a Blob from the response data
@@ -105,6 +106,7 @@ class MyForm extends Component {
     // Perform save or submit action
     try {
       const yt_url = this.state.yt_url;
+      var apiUrl = ''
 
       if (yt_url.startsWith("https://www.youtube.com")) {
         // Create a URL object
@@ -115,7 +117,7 @@ class MyForm extends Component {
         const v = params.get("v");
 
         // Build the URL with parameters
-        const apiUrl = `https://nxshen.csie.io:5000/api/file?v=${v}&format=mp4`; // Replace with your API endpoint and parameters
+        apiUrl = `https://nxshen.csie.io:5000/api/file?v=${v}&format=mp4`; // Replace with your API endpoint and parameters
         this.setState({ full_request_url: apiUrl });
       }
       else if (yt_url.startsWith("https://youtu.be")) {
@@ -128,11 +130,11 @@ class MyForm extends Component {
         const v = finalParts[0];
 
         // Build the URL with parameters
-        const apiUrl = `https://nxshen.csie.io:5000/api/file?v=${v}&format=mp4`; // Replace with your API endpoint and parameters
+        apiUrl = `https://nxshen.csie.io:5000/api/file?v=${v}&format=mp4`; // Replace with your API endpoint and parameters
         this.setState({ full_request_url: apiUrl });
       }
 
-      axios.get(this.state.full_request_url, { responseType: 'blob' })
+      axios.get(apiUrl, { responseType: 'blob' })
         .then(response => {
 
           // Create a Blob from the response data
