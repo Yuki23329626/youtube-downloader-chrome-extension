@@ -38,6 +38,7 @@ def confirm_removal(directory):
         "Confirmation", f"Directory already exist, overwrite '{directory}'?")
     return confirmation
 
+
 def add_reg(dir_path):
     # Specify the registry key path and name
     key_path = r"SOFTWARE\Google\Chrome\NativeMessagingHosts\com.example.nativeapp"
@@ -141,7 +142,8 @@ def submit():
         # Get the name of the source directory
         source_directory_name = os.path.basename(script_dir)
         print('source_directory_name: ', source_directory_name)
-        dir_shutil = os.path.join(dir_installation, source_directory_name)
+        DEFAULT_DIRNAME = 'LiteYTD'
+        dir_shutil = os.path.join(dir_installation, DEFAULT_DIRNAME)
         # Delete the destination directory if it exists
         if os.path.exists(dir_shutil):
             if not confirm_removal(dir_shutil):
