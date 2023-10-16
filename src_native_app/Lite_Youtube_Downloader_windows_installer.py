@@ -13,6 +13,7 @@ import subprocess
 # Get the path of the current Python script
 script_path = os.path.abspath(sys.argv[0])
 script_dir = os.path.dirname(script_path)
+DEFAULT_DIRNAME = 'LiteYoutubeDownloader'
 print('script_dir: ', script_dir)
 
 FORMAT = '[%(levelname)-5s][%(asctime)s] %(message)s'
@@ -25,7 +26,6 @@ ctypes.windll.shcore.SetProcessDpiAwareness(1)
 # Get scale factor from device
 ScaleFactor = ctypes.windll.shcore.GetScaleFactorForDevice(0)
 
-
 def browse_directory():
     global dir_installation
     dir_installation = filedialog.askdirectory(title="Select a Directory")
@@ -33,13 +33,48 @@ def browse_directory():
     entry_path.delete(0, tk.END)
     entry_path.insert(0, dir_installation)
 
-
 def confirm_removal(directory):
     # Create a confirmation pop-up dialog
     confirmation = messagebox.askyesno(
         "Confirmation", f"Directory already exist, overwrite '{directory}'?")
     return confirmation
 
+def del_reg():
+    # Specify the registry key path and name
+    key_path = r"SOFTWARE\Google\Chrome\NativeMessagingHosts\com.example.nativeapp"
+
+    # Open the registry key for deletion
+    try:
+        with winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, key_path, 0, winreg.KEY_ALL_ACCESS) as registry_key:
+            winreg.DeleteKey(registry_key, '')  # The second argument should be an empty string to delete the key
+            logging.info(f"Registry key '{key_path}' has been removed.")
+
+        var_name = "Path"
+        # Specify the value you want to remove from the Path
+        value_to_remove = "ffmpeg"  # Replace with the actual value you want to remove
+        # Retrieve the current value of the environment variable
+        current_value = os.environ.get(var_name, "")
+        
+        # Split the current value into a list of values using semicolon as the separator
+        values_list = current_value.split(os.pathsep)
+        # Use a list comprehension to find values containing 'ffmpeg'
+        filtered_list = [item for item in values_list if value_to_remove in item]
+
+        for item in filtered_list:
+            values_list.remove(item)
+        
+        # Reconstruct the Path with the modified components
+        new_path = os.pathsep.join(values_list)
+        # Update the Path environment variable
+        os.environ["Path"] = new_path
+        subprocess.check_call(['setx', var_name, new_path])
+
+        logging.info(f"Value '{value_to_remove}' removed from Path.")
+
+    except FileNotFoundError:
+        logging.error(f"Registry key '{key_path}' not found.")
+    except Exception as e:
+        logging.error(e)
 
 def add_reg(dir_path):
     # Specify the registry key path and name
@@ -52,8 +87,7 @@ def add_reg(dir_path):
 
     # Open the registry key for writing
     try:
-        key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE,
-                             key_path, 0, winreg.KEY_WRITE)
+        key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, key_path, 0, winreg.KEY_WRITE)
         # Specify the name of the environment variable to append to
         var_name = "Path"
         # Specify the value you want to append
@@ -144,7 +178,7 @@ def submit():
         # Get the name of the source directory
         source_directory_name = os.path.basename(script_dir)
         print('source_directory_name: ', source_directory_name)
-        dir_shutil = os.path.join(dir_installation, source_directory_name)
+        dir_shutil = dir_installation
         # Delete the destination directory if it exists
         if os.path.exists(dir_shutil):
             if not confirm_removal(dir_shutil):
@@ -164,7 +198,7 @@ try:
     root = tk.Tk()
     root.tk.call('tk', 'scaling', ScaleFactor/75)
     root.title("Lite Youtube Downloader - Setup")
-    # root.iconbitmap("installer.ico")  # Replace "custom_icon.ico" with the path to your icon file
+    root.iconbitmap(os.path.join(script_dir, 'installer.ico'))  # Replace "custom_icon.ico" with the path to your icon file
 
     # Create a frame to hold the label and entry
     frame = tk.Frame(root)
@@ -175,8 +209,8 @@ try:
     label.grid(row=0, sticky='w', padx=10)
 
     # Create an entry field for path input with default text
-    DEFAULT_PATH = os.path.normpath(os.path.expanduser("~")).replace("/", "\\")
-    dir_installation = DEFAULT_PATH
+    DEFAULT_HOME = os.path.normpath(os.path.expanduser("~")).replace("/", "\\")
+    DEFAULT_PATH = os.path.join(DEFAULT_HOME, DEFAULT_DIRNAME)
     entry_path = tk.Entry(frame, width=40)
     entry_path.insert(0, DEFAULT_PATH)
     entry_path.grid(row=1, column=0, padx=12)
