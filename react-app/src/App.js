@@ -43,13 +43,13 @@ function App() {
       <br />
       <MyForm></MyForm>
 
-      <footer id="footer">
+      {/* <footer id="footer">
         <div class="contact_informations">
         </div>
         <div class="copyright">
           &copy; 2023 LiteYTD All right reserved
         </div>
-      </footer>
+      </footer> */}
 
     </div>
   );
