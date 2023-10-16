@@ -77,6 +77,7 @@ def del_reg():
         logging.error(e)
 
 def add_reg(dir_path):
+    logging.info('dir_path:'+ dir_path)
     # Specify the registry key path and name
     key_path = r"SOFTWARE\Google\Chrome\NativeMessagingHosts\com.example.nativeapp"
     value_name = None
@@ -184,7 +185,7 @@ def submit():
             if not confirm_removal(dir_shutil):
                 sys.exit(0)
         # print(dir_shutil)
-        del_reg()
+        # del_reg()
         add_reg(dir_shutil)
         if script_dir == dir_shutil:
             sys.exit(0)
