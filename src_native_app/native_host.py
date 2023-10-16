@@ -16,7 +16,7 @@ import sys
 script_path = os.path.abspath(sys.argv[0])
 script_dir = os.path.dirname(script_path)
 
-FORMAT = '[%(levelname)s][%(asctime)s] %(message)s'
+FORMAT = '[%(levelname)-5s][%(asctime)s] %(message)s'
 logging.basicConfig(
     handlers=[logging.FileHandler(filename=os.path.join(
         script_dir, 'log_native_host.log'), encoding='utf-8')],

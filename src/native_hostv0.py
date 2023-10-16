@@ -20,7 +20,7 @@ if not os.path.exists(SAVE_PATH):
 script_path = os.path.dirname(os.path.abspath(__file__))
 os.chdir(script_path)
 
-FORMAT = '[%(levelname)s][%(asctime)s] %(message)s'
+FORMAT = '[%(levelname)-5s][%(asctime)s] %(message)s'
 logging.basicConfig(handlers=[logging.FileHandler(filename='log.native_host', encoding='utf-8')], format=FORMAT, level=logging.INFO)
 logging.info("Start")
 

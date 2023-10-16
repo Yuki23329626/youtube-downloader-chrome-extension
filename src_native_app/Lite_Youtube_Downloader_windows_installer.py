@@ -15,7 +15,7 @@ script_path = os.path.abspath(sys.argv[0])
 script_dir = os.path.dirname(script_path)
 print('script_dir: ', script_dir)
 
-FORMAT = '[%(levelname)s][%(asctime)s] %(message)s'
+FORMAT = '[%(levelname)-5s][%(asctime)s] %(message)s'
 logging.basicConfig(handlers=[logging.FileHandler(
     filename=os.path.join(script_dir, 'log_installer.log'), encoding='utf-8')],
     format=FORMAT, level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
