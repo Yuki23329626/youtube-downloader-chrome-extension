@@ -100,3 +100,6 @@ See [description_about_yt-dlp](https://github.com/yt-dlp/yt-dlp#compile)
 ```bash
 pyinstaller.exe -F youtube-downloader-v2.py
 ```
+
+## Python - setx
+If a directory name is longer than a value, it may lose some path.
