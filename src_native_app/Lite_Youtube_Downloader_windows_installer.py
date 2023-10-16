@@ -184,6 +184,7 @@ def submit():
             if not confirm_removal(dir_shutil):
                 sys.exit(0)
         # print(dir_shutil)
+        del_reg()
         add_reg(dir_shutil)
         if script_dir == dir_shutil:
             sys.exit(0)
