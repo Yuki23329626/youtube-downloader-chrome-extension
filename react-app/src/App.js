@@ -1,11 +1,10 @@
 import logo from './logo.svg';
 import './App.css';
-import React, { Component, useState, useEffect } from 'react';
 import MyForm from './MyForm';
-import axios from 'axios'; // Import Axios if you're using it
+// import axios from 'axios'; // Import Axios if you're using it
 
 function App() {
-  
+
   // const [data, setData] = useState(null);
 
   // axios.get(apiUrl, { responseType: 'blob' })
@@ -41,12 +40,15 @@ function App() {
     <div className="App">
       <img src={logo} className="App-logo" alt="logo" />
       <br />
-      <MyForm></MyForm>
+
+      <div>
+        <MyForm></MyForm>
+      </div>
 
       {/* <footer id="footer">
         <div class="contact_informations">
         </div>
-        <div class="copyright">
+        <div className="copyright">
           &copy; 2023 LiteYTD All right reserved
         </div>
       </footer> */}

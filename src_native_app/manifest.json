@@ -4,11 +4,11 @@
   "version": "1.385",
   "manifest_version": 3,
   "icons":{
-    "128": "youtube-downloader-v2.png"
+    "128": "youtube-downloader-v3.png"
   },
   "action": {
     "default_popup": "index.html",
-    "default_icon": "youtube-downloader-v2.png"
+    "default_icon": "youtube-downloader-v3.png"
   },
   "permissions": [
     "identity",
