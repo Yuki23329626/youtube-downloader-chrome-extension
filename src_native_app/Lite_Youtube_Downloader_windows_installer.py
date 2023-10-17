@@ -209,6 +209,7 @@ def submit():
     except Exception as e:
         handleException(e)
 
+
 def main():
     try:
         # Tell system to aware the process DPI
