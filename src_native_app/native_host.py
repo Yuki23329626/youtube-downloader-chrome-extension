@@ -22,10 +22,6 @@ logging.basicConfig(
         script_dir, 'log_native_host.log'), encoding='utf-8')],
     format=FORMAT, level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
 
-def handleException(e):
-    logging.exception(e)
-    sys.exit(1)
-
 def main():
     while True:
         try:
@@ -101,9 +97,13 @@ def main():
                 nativemessaging.send_message(
                     nativemessaging.encode_message("Invalid URL"))
                 continue
-
+        except NotImplementedError as e:
+            logging.exception('Please compile native_host.py in \'pyinstaller.exe -F --hidden-import plyer.platforms.win.notification native_host.py\'')
+            sys.exit(1)
         except Exception as e:
-            handleException(e)
+            logging.exception(e)
+            sys.exit(1)
+
 
 if __name__ == "__main__":
     main()

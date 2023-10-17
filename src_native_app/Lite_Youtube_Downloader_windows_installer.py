@@ -24,12 +24,14 @@ REG_KEY_PATH = r"SOFTWARE\Google\Chrome\NativeMessagingHosts\com.example.nativea
 DEFAULT_HOME = os.path.normpath(os.path.expanduser("~")).replace("/", "\\")
 dir_installation = DEFAULT_HOME
 
+
 def handleException(e):
     logging.exception(e)
     # Create a message box with text and an OK button
     title = "Error"
     messagebox.showinfo(title, e)
     sys.exit(1)
+
 
 def browse_directory():
     global dir_installation
@@ -38,16 +40,19 @@ def browse_directory():
     entry_path.delete(0, tk.END)
     entry_path.insert(0, dir_installation)
 
+
 def confirm_removal(title, content):
     # Create a confirmation pop-up dialog
     confirmation = messagebox.askyesno(title, content)
     return confirmation
 
+
 def del_reg():
     # Open the registry key for deletion
     try:
         with winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, REG_KEY_PATH, 0, winreg.KEY_ALL_ACCESS) as registry_key:
-            winreg.DeleteKey(registry_key, '')  # The second argument should be an empty string to delete the key
+            # The second argument should be an empty string to delete the key
+            winreg.DeleteKey(registry_key, '')
             logging.info(f"Registry key '{REG_KEY_PATH}' has been removed.")
 
         var_name = "Path"
@@ -55,15 +60,16 @@ def del_reg():
         value_to_remove = "ffmpeg"  # Replace with the actual value you want to remove
         # Retrieve the current value of the environment variable
         current_value = os.environ.get(var_name, "")
-        
+
         # Split the current value into a list of values using semicolon as the separator
         values_list = current_value.split(os.pathsep)
         # Use a list comprehension to find values containing 'ffmpeg'
-        filtered_list = [item for item in values_list if value_to_remove in item]
+        filtered_list = [
+            item for item in values_list if value_to_remove in item]
 
         for item in filtered_list:
             values_list.remove(item)
-        
+
         # Reconstruct the Path with the modified components
         new_path = os.pathsep.join(values_list)
         # Update the Path environment variable
@@ -72,7 +78,7 @@ def del_reg():
 
         logging.info(f"Value '{value_to_remove}' removed from Path.")
         logging.info(f"new_path: '{new_path}'")
-    
+
     except PermissionError as e:
         logging.exception(e)
         # Create a message box with text and an OK button
@@ -82,6 +88,7 @@ def del_reg():
         sys.exit(1)
     except Exception as e:
         handleException(e)
+
 
 def add_reg(dir_path):
     # Specify the registry key path and name
@@ -175,6 +182,7 @@ def add_reg(dir_path):
     logging.info(
         f"Registry key '{REG_KEY_PATH}\\{value_name}' added with value '{value_data}'.")
 
+
 def submit():
     try:
         global dir_installation
@@ -191,8 +199,12 @@ def submit():
         # print(dir_shutil)
         add_reg(dir_shutil)
         if script_dir == dir_shutil:
+            messagebox.showinfo('Installation Info',
+                                'Installation finished at ' + dir_installation)
             sys.exit(0)
         shutil.copytree(script_dir, dir_shutil, dirs_exist_ok=True)
+        messagebox.showinfo('Installation Info',
+                            'Installation finished at ' + dir_installation)
         sys.exit(0)
     except Exception as e:
         handleException(e)
@@ -208,7 +220,8 @@ try:
     root = tk.Tk()
     root.tk.call('tk', 'scaling', ScaleFactor/75)
     root.title("Lite Youtube Downloader - Setup")
-    root.iconbitmap(os.path.join(script_dir, 'installer.ico'))  # Replace "custom_icon.ico" with the path to your icon file
+    # Replace "custom_icon.ico" with the path to your icon file
+    root.iconbitmap(os.path.join(script_dir, 'installer.ico'))
 
     # Create a frame to hold the label and entry
     frame = tk.Frame(root)
@@ -233,7 +246,8 @@ try:
     browse_button.grid(row=2, column=1, padx=12, sticky='e')
 
     # Create a "Browse" button
-    browse_button = tk.Button(frame, text="Uninstall", command=del_reg, width=10)
+    browse_button = tk.Button(frame, text="Uninstall",
+                              command=del_reg, width=10)
     browse_button.grid(row=2, column=0, padx=12, sticky='e')
 
     # Start the tkinter event loop
