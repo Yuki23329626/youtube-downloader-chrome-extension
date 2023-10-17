@@ -72,7 +72,14 @@ def del_reg():
 
         logging.info(f"Value '{value_to_remove}' removed from Path.")
         logging.info(f"new_path: '{new_path}'")
-
+    
+    except PermissionError as e:
+        logging.exception(e)
+        # Create a message box with text and an OK button
+        message = "Access is denied. In order to deregister the native application on Windows Registry, please run this script as admin."
+        title = "Access Required"
+        messagebox.showinfo(title, message)
+        sys.exit(1)
     except Exception as e:
         handleException(e)
 
@@ -110,7 +117,7 @@ def add_reg(dir_path):
     except PermissionError as e:
         logging.exception(e)
         # Create a message box with text and an OK button
-        message = "Access is denied. In order to register the native application on Windows Registry, please run this as admin"
+        message = "Access is denied. In order to register the native application on Windows Registry, please run this script as admin."
         title = "Access Required"
         messagebox.showinfo(title, message)
         sys.exit(1)
@@ -224,6 +231,10 @@ try:
     # Create a "Browse" button
     browse_button = tk.Button(frame, text="Install", command=submit, width=10)
     browse_button.grid(row=2, column=1, padx=12, sticky='e')
+
+    # Create a "Browse" button
+    browse_button = tk.Button(frame, text="Uninstall", command=del_reg, width=10)
+    browse_button.grid(row=2, column=0, padx=12, sticky='e')
 
     # Start the tkinter event loop
     root.mainloop()
