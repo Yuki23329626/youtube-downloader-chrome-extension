@@ -20,6 +20,10 @@ logging.basicConfig(handlers=[logging.FileHandler(
     filename=os.path.join(script_dir, 'log_installer.log'), encoding='utf-8')],
     format=FORMAT, level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
 
+REG_KEY_PATH = r"SOFTWARE\Google\Chrome\NativeMessagingHosts\com.example.nativeapp"
+DEFAULT_HOME = os.path.normpath(os.path.expanduser("~")).replace("/", "\\")
+dir_installation = DEFAULT_HOME
+
 def handleException(e):
     logging.error(e)
     # Create a message box with text and an OK button
@@ -34,15 +38,46 @@ def browse_directory():
     entry_path.delete(0, tk.END)
     entry_path.insert(0, dir_installation)
 
-def confirm_removal(directory):
+def confirm_removal(title, content):
     # Create a confirmation pop-up dialog
-    confirmation = messagebox.askyesno(
-        "Confirmation", f"Directory already exist, overwrite '{directory}'?")
+    confirmation = messagebox.askyesno(title, content)
     return confirmation
+
+def del_reg():
+    # Open the registry key for deletion
+    try:
+        with winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, REG_KEY_PATH, 0, winreg.KEY_ALL_ACCESS) as registry_key:
+            winreg.DeleteKey(registry_key, '')  # The second argument should be an empty string to delete the key
+            logging.info(f"Registry key '{REG_KEY_PATH}' has been removed.")
+
+        var_name = "Path"
+        # Specify the value you want to remove from the Path
+        value_to_remove = "ffmpeg"  # Replace with the actual value you want to remove
+        # Retrieve the current value of the environment variable
+        current_value = os.environ.get(var_name, "")
+        
+        # Split the current value into a list of values using semicolon as the separator
+        values_list = current_value.split(os.pathsep)
+        # Use a list comprehension to find values containing 'ffmpeg'
+        filtered_list = [item for item in values_list if value_to_remove in item]
+
+        for item in filtered_list:
+            values_list.remove(item)
+        
+        # Reconstruct the Path with the modified components
+        new_path = os.pathsep.join(values_list)
+        # Update the Path environment variable
+        os.environ["Path"] = new_path
+        subprocess.check_call(['setx', var_name, new_path])
+
+        logging.info(f"Value '{value_to_remove}' removed from Path.")
+        logging.info(f"new_path: '{new_path}'")
+
+    except Exception as e:
+        handleException(e)
 
 def add_reg(dir_path):
     # Specify the registry key path and name
-    key_path = r"SOFTWARE\Google\Chrome\NativeMessagingHosts\com.example.nativeapp"
     value_name = None
 
     # Specify the value data (e.g., a string)
@@ -52,7 +87,7 @@ def add_reg(dir_path):
     # Open the registry key for writing
     try:
         key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE,
-                             key_path, 0, winreg.KEY_WRITE)
+                             REG_KEY_PATH, 0, winreg.KEY_WRITE)
         # Specify the name of the environment variable to append to
         var_name = "Path"
         # Specify the value you want to append
@@ -82,15 +117,15 @@ def add_reg(dir_path):
     except FileNotFoundError as e:
         # If the key doesn't exist, create it
         logging.info('key doesn\'t exist, create it')
-        key = winreg.CreateKey(winreg.HKEY_LOCAL_MACHINE, key_path)
+        key = winreg.CreateKey(winreg.HKEY_LOCAL_MACHINE, REG_KEY_PATH)
 
     # # Open the registry key for writing
     # try:
-    #     key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, key_path, 0, winreg.KEY_WRITE)
+    #     key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, REG_KEY_PATH, 0, winreg.KEY_WRITE)
     # except FileNotFoundError as e:
     #     # If the key doesn't exist, create it
     #     logging.info('key doesn\'t exist, create it')
-    #     key = winreg.CreateKey(winreg.HKEY_CURRENT_USER, key_path)
+    #     key = winreg.CreateKey(winreg.HKEY_CURRENT_USER, REG_KEY_PATH)
 
     try:
         path_json_file = 'native_messaging_host.json'
@@ -102,8 +137,6 @@ def add_reg(dir_path):
             "path": "C:\\Users\\micha\\src_native_app\\native_host.py",
             "type": "stdio",
             "allowed_origins": [
-                "chrome-extension://oaabembeldgibjbdkgdnpekfoodledoh/",
-                "chrome-extension://odpjnifkinoeflcohfepblkdhnjglkpj/",
                 "chrome-extension://kbhloehkeldjmihnhinchnkkiajbimek/"
             ]
         }
@@ -133,7 +166,7 @@ def add_reg(dir_path):
     winreg.CloseKey(key)
 
     logging.info(
-        f"Registry key '{key_path}\\{value_name}' added with value '{value_data}'.")
+        f"Registry key '{REG_KEY_PATH}\\{value_name}' added with value '{value_data}'.")
 
 def submit():
     try:
@@ -146,7 +179,7 @@ def submit():
         dir_shutil = os.path.join(dir_installation, DEFAULT_DIRNAME)
         # Delete the destination directory if it exists
         if os.path.exists(dir_shutil):
-            if not confirm_removal(dir_shutil):
+            if not confirm_removal("Confirmation", f"Directory already exist, overwrite '{dir_shutil}'?"):
                 sys.exit(0)
         # print(dir_shutil)
         add_reg(dir_shutil)
@@ -179,10 +212,8 @@ try:
     label.grid(row=0, sticky='w', padx=10)
 
     # Create an entry field for path input with default text
-    DEFAULT_PATH = os.path.normpath(os.path.expanduser("~")).replace("/", "\\")
-    dir_installation = DEFAULT_PATH
     entry_path = tk.Entry(frame, width=40)
-    entry_path.insert(0, DEFAULT_PATH)
+    entry_path.insert(0, DEFAULT_HOME)
     entry_path.grid(row=1, column=0, padx=12)
 
     # Create a "Browse" button
