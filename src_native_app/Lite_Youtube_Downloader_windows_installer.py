@@ -20,10 +20,12 @@ logging.basicConfig(handlers=[logging.FileHandler(
     filename=os.path.join(script_dir, 'log_installer.log'), encoding='utf-8')],
     format=FORMAT, level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
 
-# Tell system to aware the process DPI
-ctypes.windll.shcore.SetProcessDpiAwareness(1)
-# Get scale factor from device
-ScaleFactor = ctypes.windll.shcore.GetScaleFactorForDevice(0)
+def handleException(e):
+    logging.error(e)
+    # Create a message box with text and an OK button
+    title = "Error"
+    messagebox.showinfo(title, e)
+    sys.exit(1)
 
 def browse_directory():
     global dir_installation
@@ -37,7 +39,6 @@ def confirm_removal(directory):
     confirmation = messagebox.askyesno(
         "Confirmation", f"Directory already exist, overwrite '{directory}'?")
     return confirmation
-
 
 def add_reg(dir_path):
     # Specify the registry key path and name
@@ -69,12 +70,12 @@ def add_reg(dir_path):
                 logging.info(
                     f"Appended '{new_value}' to environment variable {var_name}")
             except Exception as e:
-                logging.exception(e)
+                handleException(e)
 
     except PermissionError as e:
-        logging.error(e)
+        logging.exception(e)
         # Create a message box with text and an OK button
-        message = "Access is denied. In order to register the native application on Windows Registry, please run this executable as admin"
+        message = "Access is denied. In order to register the native application on Windows Registry, please run this as admin"
         title = "Access Required"
         messagebox.showinfo(title, message)
         sys.exit(1)
@@ -123,7 +124,7 @@ def add_reg(dir_path):
             json.dump(data, json_file, indent=4)
             # os.system('pause')
     except Exception as e:
-        logging.exception(e)
+        handleException(e)
 
     # Set the registry value
     winreg.SetValueEx(key, value_name, 0, winreg.REG_SZ, value_data)
@@ -133,7 +134,6 @@ def add_reg(dir_path):
 
     logging.info(
         f"Registry key '{key_path}\\{value_name}' added with value '{value_data}'.")
-
 
 def submit():
     try:
@@ -155,10 +155,15 @@ def submit():
         shutil.copytree(script_dir, dir_shutil, dirs_exist_ok=True)
         sys.exit(0)
     except Exception as e:
-        logging.exception(e)
+        handleException(e)
 
 
 try:
+    # Tell system to aware the process DPI
+    ctypes.windll.shcore.SetProcessDpiAwareness(1)
+    # Get scale factor from device
+    ScaleFactor = ctypes.windll.shcore.GetScaleFactorForDevice(0)
+
     # Create the main tkinter window
     root = tk.Tk()
     root.tk.call('tk', 'scaling', ScaleFactor/75)
@@ -192,4 +197,4 @@ try:
     # Start the tkinter event loop
     root.mainloop()
 except Exception as e:
-    logging.exception(e)
+    handleException(e)
