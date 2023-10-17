@@ -210,51 +210,47 @@ def submit():
         handleException(e)
 
 
-def main():
-    try:
-        # Tell system to aware the process DPI
-        ctypes.windll.shcore.SetProcessDpiAwareness(1)
-        # Get scale factor from device
-        ScaleFactor = ctypes.windll.shcore.GetScaleFactorForDevice(0)
+try:
+    # Tell system to aware the process DPI
+    ctypes.windll.shcore.SetProcessDpiAwareness(1)
+    # Get scale factor from device
+    ScaleFactor = ctypes.windll.shcore.GetScaleFactorForDevice(0)
 
-        # Create the main tkinter window
-        root = tk.Tk()
-        root.tk.call('tk', 'scaling', ScaleFactor/75)
-        root.title("Lite Youtube Downloader - Setup")
-        # Replace "custom_icon.ico" with the path to your icon file
-        root.iconbitmap(os.path.join(script_dir, 'installer.ico'))
+    # Create the main tkinter window
+    root = tk.Tk()
+    root.tk.call('tk', 'scaling', ScaleFactor/75)
+    root.title("Lite Youtube Downloader - Setup")
+    # Replace "custom_icon.ico" with the path to your icon file
+    root.iconbitmap(os.path.join(script_dir, 'installer.ico'))
 
-        # Create a frame to hold the label and entry
-        frame = tk.Frame(root)
-        frame.pack(pady=10)
+    # Create a frame to hold the label and entry
+    frame = tk.Frame(root)
+    frame.pack(pady=10)
 
-        # Create a label
-        label = tk.Label(frame, text="Custom install location:")
-        label.grid(row=0, sticky='w', padx=10)
+    # Create a label
+    label = tk.Label(frame, text="Custom install location:")
+    label.grid(row=0, sticky='w', padx=10)
 
-        # Create an entry field for path input with default text
-        entry_path = tk.Entry(frame, width=40)
-        entry_path.insert(0, DEFAULT_HOME)
-        entry_path.grid(row=1, column=0, padx=12)
+    # Create an entry field for path input with default text
+    entry_path = tk.Entry(frame, width=40)
+    entry_path.insert(0, DEFAULT_HOME)
+    entry_path.grid(row=1, column=0, padx=12)
 
-        # Create a "Browse" button
-        browse_button = tk.Button(frame, text="Browse",
-                                command=browse_directory, width=10)
-        browse_button.grid(row=1, column=1, padx=12, pady=12)
+    # Create a "Browse" button
+    browse_button = tk.Button(frame, text="Browse",
+                              command=browse_directory, width=10)
+    browse_button.grid(row=1, column=1, padx=12, pady=12)
 
-        # Create a "Browse" button
-        browse_button = tk.Button(frame, text="Install", command=submit, width=10)
-        browse_button.grid(row=2, column=1, padx=12, sticky='e')
+    # Create a "Browse" button
+    browse_button = tk.Button(frame, text="Install", command=submit, width=10)
+    browse_button.grid(row=2, column=1, padx=12, sticky='e')
 
-        # Create a "Browse" button
-        browse_button = tk.Button(frame, text="Uninstall",
-                                command=del_reg, width=10)
-        browse_button.grid(row=2, column=0, padx=12, sticky='e')
+    # Create a "Browse" button
+    browse_button = tk.Button(frame, text="Uninstall",
+                              command=del_reg, width=10)
+    browse_button.grid(row=2, column=0, padx=12, sticky='e')
 
-        # Start the tkinter event loop
-        root.mainloop()
-    except Exception as e:
-        handleException(e)
-
-if __name__ == "__main__":
-    main()
+    # Start the tkinter event loop
+    root.mainloop()
+except Exception as e:
+    handleException(e)
