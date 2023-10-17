@@ -103,6 +103,7 @@ def main():
 
     except Exception as e:
         logging.exception(e)
+        sys.exit(1)
 
 
 if __name__ == "__main__":

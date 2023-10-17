@@ -25,7 +25,7 @@ DEFAULT_HOME = os.path.normpath(os.path.expanduser("~")).replace("/", "\\")
 dir_installation = DEFAULT_HOME
 
 def handleException(e):
-    logging.error(e)
+    logging.exception(e)
     # Create a message box with text and an OK button
     title = "Error"
     messagebox.showinfo(title, e)

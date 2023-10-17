@@ -22,6 +22,10 @@ logging.basicConfig(
         script_dir, 'log_native_host.log'), encoding='utf-8')],
     format=FORMAT, level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
 
+def handleException(e):
+    logging.exception(e)
+    sys.exit(1)
+
 def main():
     while True:
         try:
@@ -99,9 +103,7 @@ def main():
                 continue
 
         except Exception as e:
-            logging.exception(e)
-            break
-
+            handleException(e)
 
 if __name__ == "__main__":
     main()
