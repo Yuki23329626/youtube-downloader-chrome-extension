@@ -22,6 +22,7 @@ logging.basicConfig(handlers=[logging.FileHandler(
 
 REG_KEY_PATH = r"SOFTWARE\Google\Chrome\NativeMessagingHosts\com.example.nativeapp"
 DEFAULT_HOME = os.path.normpath(os.path.expanduser("~")).replace("/", "\\")
+DEFAULT_DIRNAME = 'LiteYTD'
 dir_installation = DEFAULT_HOME
 
 
@@ -190,7 +191,6 @@ def submit():
         # Get the name of the source directory
         source_directory_name = os.path.basename(script_dir)
         print('source_directory_name: ', source_directory_name)
-        DEFAULT_DIRNAME = 'LiteYTD'
         dir_shutil = os.path.join(dir_installation, DEFAULT_DIRNAME)
         # Delete the destination directory if it exists
         if os.path.exists(dir_shutil):
