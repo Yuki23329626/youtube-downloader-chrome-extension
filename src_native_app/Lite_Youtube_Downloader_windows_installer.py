@@ -79,6 +79,9 @@ def del_reg():
 
         logging.info(f"Value '{value_to_remove}' removed from Path.")
         logging.info(f"new_path: '{new_path}'")
+        
+        messagebox.showinfo('Uninstallation Info',
+                            'Uninstallation finished, system parameters has removed. \nPlease delete the installatoin direcoty manually if needed.')
 
     except PermissionError as e:
         logging.exception(e)
@@ -200,11 +203,11 @@ def submit():
         add_reg(dir_shutil)
         if script_dir == dir_shutil:
             messagebox.showinfo('Installation Info',
-                                'Installation finished at ' + os.join(dir_installation, DEFAULT_DIRNAME))
+                                'Installation finished at ' + os.path.join(dir_installation, DEFAULT_DIRNAME))
             sys.exit(0)
         shutil.copytree(script_dir, dir_shutil, dirs_exist_ok=True)
         messagebox.showinfo('Installation Info',
-                            'Installation finished at ' + dir_installation)
+                            'Installation finished at ' + os.path.join(dir_installation, DEFAULT_DIRNAME))
         sys.exit(0)
     except Exception as e:
         handleException(e)
