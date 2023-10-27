@@ -241,11 +241,11 @@ try:
                               command=browse_directory, width=10)
     browse_button.grid(row=1, column=1, padx=12, pady=12)
 
-    # Create a "Browse" button
+    # Create a "Install" button
     browse_button = tk.Button(frame, text="Install", command=submit, width=10)
     browse_button.grid(row=2, column=1, padx=12, sticky='e')
 
-    # Create a "Browse" button
+    # Create a "Uninstall" button
     browse_button = tk.Button(frame, text="Uninstall",
                               command=del_reg, width=10)
     browse_button.grid(row=2, column=0, padx=12, sticky='e')
