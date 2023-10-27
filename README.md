@@ -8,7 +8,7 @@ Feel free to report them.
 
 1. Download application: [LiteYTD](https://github.com/Yuki23329626/youtube-downloader-chrome-extension/releases/download/v1.0.1/LiteYTD.zip)
 
-2. Unzip and execute LiteYoutubeDownloader/install.bat on Windows,  
+2. Unzip and execute LiteYTD/install.bat on Windows,  
    and remember the path of the directory you install the native app
 
 3. Enable the Developer mode on your Chrome  
