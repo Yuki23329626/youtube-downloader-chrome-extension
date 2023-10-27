@@ -200,7 +200,7 @@ def submit():
         add_reg(dir_shutil)
         if script_dir == dir_shutil:
             messagebox.showinfo('Installation Info',
-                                'Installation finished at ' + dir_installation)
+                                'Installation finished at ' + os.join(dir_installation, DEFAULT_DIRNAME))
             sys.exit(0)
         shutil.copytree(script_dir, dir_shutil, dirs_exist_ok=True)
         messagebox.showinfo('Installation Info',
