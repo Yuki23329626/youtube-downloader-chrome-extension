@@ -20,7 +20,7 @@ Feel free to report them.
    <img src="https://i.imgur.com/7kazuX4.png" alt="chrome extension" width="600">
 
 5. Enjoy  
-   <img src="https://i.imgur.com/OvVgQAq.png" alt="chrome extension" width="600">
+   <img src="https://i.imgur.com/OvVgQAq.png" alt="chrome extension" width="400">
 
 ## How to use - Local version(Need Interpreter)
 
