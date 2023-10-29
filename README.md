@@ -19,7 +19,7 @@ Feel free to report them.
    The path of the source code is the path you install the native app
    <img src="https://i.imgur.com/7kazuX4.png" alt="chrome extension" width="600">
 
-5. Enjoy  
+5. Extension  
    <img src="https://i.imgur.com/OvVgQAq.png" alt="chrome extension">
 
 ## How to use - Local version(Need Interpreter)
