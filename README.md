@@ -35,6 +35,7 @@ pip 23.2.1 from C:\Users\micha\AppData\Local\Programs\Python\Python311\Lib\site-
 pip install nativemessaging
 pip install plyer
 pip install yt_dlp
+pip install Flask-Cors
 ```
 
 2. Install ffmpeg and add the Path of the ffmpeg on your system
