@@ -21,7 +21,7 @@ if not os.path.exists(SAVE_PATH):
 script_path = os.path.abspath(sys.argv[0])
 script_dir = os.path.dirname(script_path)
 
-FORMAT = '[%(levelname)s][%(asctime)s] %(message)s'
+FORMAT = '[%(levelname)-5s][%(asctime)s] %(message)s'
 logging.basicConfig(handlers=[logging.FileHandler(filename=os.path.join(
     script_dir, 'log_ytd_subprocess.log'), encoding='utf-8')], 
     format=FORMAT, level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
@@ -103,6 +103,7 @@ def main():
 
     except Exception as e:
         logging.exception(e)
+        sys.exit(1)
 
 
 if __name__ == "__main__":

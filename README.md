@@ -1,13 +1,15 @@
 # Lite Youtube Downloader - Chrome Extension
-Based on the GitHub project [yt-dlp](https://github.com/yt-dlp/yt-dlp)  
-Note that this project is under development, so you may encounter several bugs.  
+Based on the GitHub project [yt-dlp](https://github.com/yt-dlp/yt-dlp).  
+Note that YouTube will update from time to time(about half a year?),  
+thus the yt-dlp may need to update its tools.  
+Also, this project is under development, so you may encounter several bugs.  
 Feel free to report them.  
 
 ## How to use - Local version(Windows 10 executable)
 
-1. Download application: [LiteYoutubeDownloader](https://github.com/Yuki23329626/youtube-downloader-chrome-extension/releases/download/v1.0.0/LiteYoutubeDownloader.zip)
+1. Download application: [LiteYTD](https://github.com/Yuki23329626/youtube-downloader-chrome-extension/releases/download/v1.0.1/LiteYTD.zip)
 
-2. Unzip and execute LiteYoutubeDownloader/install.bat on Windows,  
+2. Unzip and execute LiteYTD/install.bat on Windows,  
    and remember the path of the directory you install the native app
 
 3. Enable the Developer mode on your Chrome  
@@ -15,7 +17,10 @@ Feel free to report them.
 
 4. Load the unpacked Chrome extension(directory) on your Chrome browser  
    The path of the source code is the path you install the native app
-   <img src="https://i.imgur.com/7kazuX4.png" alt="chrome extension" width="600">  
+   <img src="https://i.imgur.com/7kazuX4.png" alt="chrome extension" width="600">
+
+5. Extension  
+   <img src="https://i.imgur.com/OvVgQAq.png" alt="chrome extension">
 
 ## How to use - Local version(Need Interpreter)
 
@@ -30,6 +35,7 @@ pip 23.2.1 from C:\Users\micha\AppData\Local\Programs\Python\Python311\Lib\site-
 pip install nativemessaging
 pip install plyer
 pip install yt_dlp
+pip install Flask-Cors
 ```
 
 2. Install ffmpeg and add the Path of the ffmpeg on your system
@@ -100,3 +106,6 @@ See [description_about_yt-dlp](https://github.com/yt-dlp/yt-dlp#compile)
 ```bash
 pyinstaller.exe -F youtube-downloader-v2.py
 ```
+
+## Python - setx
+If a directory name is longer than a value, it may lose some path.
