@@ -1,4 +1,29 @@
 
+document.addEventListener('yt-navigate-start', function () {
+})
+
+function process(){
+  const startingString = "https://www.youtube.com/shorts/";
+  var currentUrl = window.location.href;
+  console.log("content-url: ", currentUrl)
+
+  if (currentUrl.startsWith(startingString)) {
+    // Modify the URL to redirect
+    // Original string
+    const originalString = details.url;
+
+    // String to replace
+    const replacementString = "https://www.youtube.com/watch?v=";
+
+    // Use regular expression to replace startingString with replacementString
+    const modifiedString = originalString.replace(new RegExp(`^${startingString}`), replacementString);
+    console.log("modifiedString: ", modifiedString)
+
+    // Redirect the page
+    chrome.tabs.update(details.tabId, { url: modifiedString });
+  }
+}
+
 // // This function will be executed on every click event within the YouTube page.
 // function handleClick(event) {
 //   console.log('----- handleClick start -----')
