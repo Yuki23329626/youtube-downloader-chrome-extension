@@ -10,5 +10,5 @@ gunicorn -D\
 	--threads=4 \
 	wsgi:app \
 	-b 0.0.0.0:5000 \
-	--certfile="/etc/letsencrypt/archive/$DOMAIN_NAME/fullchain1.pem" \
-	--keyfile="/etc/letsencrypt/archive/$DOMAIN_NAME/privkey1.pem"
+	--certfile="/etc/letsencrypt/archive/$DOMAIN_NAME-0003/fullchain1.pem" \
+	--keyfile="/etc/letsencrypt/archive/$DOMAIN_NAME-0003/privkey1.pem"
