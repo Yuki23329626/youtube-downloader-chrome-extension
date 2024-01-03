@@ -39,3 +39,4 @@ src_native_app/Lite_Youtube_Downloader_windows_installer.spec
 src_native_app/LiteYoutubeDownloader.zip
 Lite_Youtube_Downloader_windows_installer.spec
 /LiteYTD
+nohup.out
