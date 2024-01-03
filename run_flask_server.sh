@@ -17,9 +17,9 @@ for package_name in $package_names; do
 done
 
 #python3 -m gunicorn -D --workers=1 --threads=1 wsgi:app -b 0.0.0.0:5000
-nohup python3 flask_server.py > log_flask_server.log 2>&1 &
+nohup python3 flask_server.py > log_flask_server.log &
 
 #echo "python3 -m gunicorn -D --workers=1 --threads=1 wsgi:app -b 0.0.0.0:5000"
-echo "nohup python3 flask_server.py > log_flask_server.log 2>&1 &"
+echo "nohup python3 flask_server.py > log_flask_server.log &"
 
 echo "flask server has started"
