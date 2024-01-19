@@ -32,7 +32,6 @@ PS D:\git> pip --version
 pip 23.2.1 from C:\Users\micha\AppData\Local\Programs\Python\Python311\Lib\site-packages\pip (python 3.11)
 ```
 ```bash
-sudo apt-get install ffmpeg
 pip install nativemessaging
 pip install plyer
 pip install yt_dlp
