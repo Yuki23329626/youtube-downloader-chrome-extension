@@ -2,6 +2,7 @@
 import './App.css';
 import React, { Component } from 'react';
 import axios from 'axios'; // Import Axios if you're using it
+import config from './config.json'
 
 class MyForm extends Component {
   constructor(props) {
@@ -42,7 +43,7 @@ class MyForm extends Component {
         const v = params.get("v");
 
         // Build the URL with parameters
-        apiUrl = `https://nxshen.csie.io:5000/api/file?v=${v}&format=bestaudio`; // Replace with your API endpoint and parameters
+        apiUrl = config.apiEndpoint + `/file?v=${v}&format=bestaudio`; // Replace with your API endpoint and parameters
         this.setState({ full_request_url: apiUrl });
       }
       else if (yt_url.startsWith("https://youtu.be")) {
@@ -55,7 +56,7 @@ class MyForm extends Component {
         const v = finalParts[0];
 
         // Build the URL with parameters
-        apiUrl = `https://nxshen.csie.io:5000/api/file?v=${v}&format=bestaudio`; // Replace with your API endpoint and parameters
+        apiUrl = config.apiEndpoint + `/file?v=${v}&format=bestaudio`; // Replace with your API endpoint and parameters
         this.setState({ full_request_url: apiUrl });
       }
       else {
@@ -125,7 +126,7 @@ class MyForm extends Component {
         const v = params.get("v");
 
         // Build the URL with parameters
-        apiUrl = `https://nxshen.csie.io:5000/api/file?v=${v}&format=mp4`; // Replace with your API endpoint and parameters
+        apiUrl = config.apiEndpoint + `/file?v=${v}&format=mp4`; // Replace with your API endpoint and parameters
         this.setState({ full_request_url: apiUrl });
       }
       else if (yt_url.startsWith("https://youtu.be")) {
@@ -138,7 +139,7 @@ class MyForm extends Component {
         const v = finalParts[0];
 
         // Build the URL with parameters
-        apiUrl = `https://nxshen.csie.io:5000/api/file?v=${v}&format=mp4`; // Replace with your API endpoint and parameters
+        apiUrl = config.apiEndpoint + `/file?v=${v}&format=mp4`; // Replace with your API endpoint and parameters
         this.setState({ full_request_url: apiUrl });
       }
       else {
