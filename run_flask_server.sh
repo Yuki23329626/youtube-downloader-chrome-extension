@@ -16,10 +16,10 @@ for package_name in $package_names; do
     fi
 done
 
-#python3 -m gunicorn -D --workers=1 --threads=1 wsgi:app -b 0.0.0.0:5000
-nohup python3 flask_server.py > log_flask_server.log &
+python3 -m gunicorn -D --workers=1 --threads=1 --certfile="/etc/letsencrypt/archive/$DOMAIN_NAME-0003/fullchain1.pem" --keyfile="/etc/letsencrypt/archive/$DOMAIN_NAME-0003/privkey1.pem" wsgi:app -b 0.0.0.0:5000
+#nohup python3 flask_server.py > log_flask_server.log &
 
 #echo "python3 -m gunicorn -D --workers=1 --threads=1 wsgi:app -b 0.0.0.0:5000"
-echo "nohup python3 flask_server.py > log_flask_server.log &"
+#echo "nohup python3 flask_server.py > log_flask_server.log &"
 
 echo "flask server has started"

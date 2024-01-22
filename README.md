@@ -70,12 +70,14 @@ pip install Flask-Cors
    We are going the run the Python server on this device with port 5000  
 
 4. Run a Python server on your host with the script:  
-   Make sure your device has Python3 and pip3 installed
+   Make sure your device has Python3, pip3 and ffmpeg installed
    ```bash
    admin@host:~$ python3 --version
    Python 3.8.10
    admin@host:~$ pip3 --version
    pip 20.0.2 from /usr/lib/python3/dist-packages/pip (python 3.8)
+   admin@host:~$ ffmpeg --version
+   ffmpeg version 4.2.7-0ubuntu0.1 Copyright (c) 2000-2022 the FFmpeg developers...
    ```
    This script will start the server and make sure the other Python packages are installed:  
    ```bash
