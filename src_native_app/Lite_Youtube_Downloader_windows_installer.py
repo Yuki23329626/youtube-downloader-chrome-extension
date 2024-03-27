@@ -106,24 +106,6 @@ def add_reg(dir_path):
     try:
         key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE,
                              REG_KEY_PATH, 0, winreg.KEY_WRITE)
-        # Specify the name of the environment variable to append to
-        var_name = "Path"
-        # Specify the value you want to append
-        new_value = os.path.join(dir_path, 'ffmpeg', 'bin')
-        # Retrieve the current value of the environment variable
-        current_value = os.environ.get(var_name, "")
-        # Split the current value into a list of values using semicolon as the separator
-        values_list = current_value.split(';')
-        if new_value not in values_list:
-            # Append the new value (separated by a semicolon) to the current value
-            updated_value = f"{current_value};{new_value}"
-            # Use the 'setx' command to update the environment variable
-            try:
-                subprocess.check_call(['setx', var_name, updated_value])
-                logging.info(
-                    f"Appended '{new_value}' to environment variable {var_name}")
-            except Exception as e:
-                handleException(e)
 
     except PermissionError as e:
         logging.exception(e)
@@ -144,6 +126,28 @@ def add_reg(dir_path):
     #     # If the key doesn't exist, create it
     #     logging.info('key doesn\'t exist, create it')
     #     key = winreg.CreateKey(winreg.HKEY_CURRENT_USER, REG_KEY_PATH)
+    
+    # Specify the name of the environment variable to append to
+    var_name = "Path"
+    # Specify the value you want to append
+    new_value = os.path.join(dir_path, 'ffmpeg', 'bin')
+    # Retrieve the current value of the environment variable
+    current_value = os.environ.get(var_name, "")
+    # Split the current value into a list of values using semicolon as the separator
+    values_list = current_value.split(';')
+    print("new_value:", new_value)
+    print("values_list:", values_list)
+    if new_value not in values_list:
+        # Append the new value (separated by a semicolon) to the current value
+        updated_value = f"{current_value};{new_value}"
+        # Use the 'setx' command to update the environment variable
+        try:
+            print("SHITSHITSHIT")
+            subprocess.check_call(['setx', var_name, updated_value])
+            logging.info(
+                f"Appended '{new_value}' to environment variable {var_name}")
+        except Exception as e:
+            handleException(e)
 
     try:
         path_json_file = 'native_messaging_host.json'
