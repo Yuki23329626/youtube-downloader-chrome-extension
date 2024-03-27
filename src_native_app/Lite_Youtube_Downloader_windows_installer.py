@@ -142,7 +142,6 @@ def add_reg(dir_path):
         updated_value = f"{current_value};{new_value}"
         # Use the 'setx' command to update the environment variable
         try:
-            print("SHITSHITSHIT")
             subprocess.check_call(['setx', var_name, updated_value])
             logging.info(
                 f"Appended '{new_value}' to environment variable {var_name}")
